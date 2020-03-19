@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreModule", "CoreModule\CoreModule.csproj", "{97B8815E-507F-4CC8-8B5D-3061D95F8703}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreModule", "CoreModule\CoreModule.csproj", "{97B8815E-507F-4CC8-8B5D-3061D95F8703}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SigninController", "SigninController\SigninController.csproj", "{71FFDEFA-1544-4569-A9C9-E6822CFA5E1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SigninController", "SigninController\SigninController.csproj", "{71FFDEFA-1544-4569-A9C9-E6822CFA5E1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignupController", "SignupController\SignupController.csproj", "{91EE0DA0-0A92-4FCC-9688-6AF4E57DE1A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignupController", "SignupController\SignupController.csproj", "{91EE0DA0-0A92-4FCC-9688-6AF4E57DE1A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalletController", "WalletController\WalletController.csproj", "{7CC31817-7709-4FBB-8E14-F7965FAD93AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalletController", "WalletController\WalletController.csproj", "{7CC31817-7709-4FBB-8E14-F7965FAD93AD}"
+EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "FE-Login", "FE-Login\FE-Login.njsproj", "{802F8F83-C7DA-471D-8280-AB648857DE5D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{7CC31817-7709-4FBB-8E14-F7965FAD93AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CC31817-7709-4FBB-8E14-F7965FAD93AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CC31817-7709-4FBB-8E14-F7965FAD93AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{802F8F83-C7DA-471D-8280-AB648857DE5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{802F8F83-C7DA-471D-8280-AB648857DE5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{802F8F83-C7DA-471D-8280-AB648857DE5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{802F8F83-C7DA-471D-8280-AB648857DE5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
