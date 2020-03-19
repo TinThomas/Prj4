@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignupController", "SignupC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalletController", "WalletController\WalletController.csproj", "{7CC31817-7709-4FBB-8E14-F7965FAD93AD}"
 EndProject
-Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "FE-Login", "FE-Login\FE-Login.njsproj", "{802F8F83-C7DA-471D-8280-AB648857DE5D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FE-Login", "FE-Login\FE-Login.csproj", "{59717937-94D7-4DD7-BF81-4DBEA000AC9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{7CC31817-7709-4FBB-8E14-F7965FAD93AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CC31817-7709-4FBB-8E14-F7965FAD93AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CC31817-7709-4FBB-8E14-F7965FAD93AD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{802F8F83-C7DA-471D-8280-AB648857DE5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{802F8F83-C7DA-471D-8280-AB648857DE5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{802F8F83-C7DA-471D-8280-AB648857DE5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{802F8F83-C7DA-471D-8280-AB648857DE5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59717937-94D7-4DD7-BF81-4DBEA000AC9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59717937-94D7-4DD7-BF81-4DBEA000AC9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59717937-94D7-4DD7-BF81-4DBEA000AC9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59717937-94D7-4DD7-BF81-4DBEA000AC9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
