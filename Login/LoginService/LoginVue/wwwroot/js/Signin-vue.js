@@ -41,6 +41,9 @@
             let login = {};
             login.username = this.username;
             login.password = this.password;
+        },
+        sendPageChange: function() {
+            location.href = 'Signup/Signup';
         }
     }
 })

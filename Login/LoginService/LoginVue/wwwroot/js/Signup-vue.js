@@ -55,9 +55,10 @@
             userData.email = this.email;
             userData.password = this.password;
         },
-        annuller() {
-            let data = {
+        annuller: function() {
 
-            }
+            location.href = '../Home/Index';
+
+        }
     }
 })
