@@ -1,0 +1,46 @@
+﻿@model LoginVue.Models.Login
+
+@{
+    ViewData["Title"] = "Signin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="vueSignin">
+    <p><center>{{introText}}</center></p>
+
+    <center>
+        <div>
+            <div>
+                <form>
+                    <div class="form-group">
+                        <label for="username">Username: </label>
+                        <input type="text"
+                               v-model="Username"
+                               placeholder="Please enter username">*
+                        <span class="text-danger">{{UsernameValidationMsg}}</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" style="padding: 3px">Password:</label>
+                        <input type="text"
+                               v-model="Passowrd"
+                               placeholder="Please enter password">*
+                        <span class="text-danger">{{PasswordValidationMsg}}</span>
+                    </div>
+                    <div class="form-group">
+                        <center>
+                            <button type="button" class="button"
+                                    v-on:click="sendApplication"
+                                    :disabled="sendDisabled">
+                                Signin
+                            </button>&nbsp;&nbsp;
+                        </center>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </center></div>
+
+@section Scripts
+{
+    <script src="~/js/Signin-vue.js" asp-append-version="true"></script>
+}

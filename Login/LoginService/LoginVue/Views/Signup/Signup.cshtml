@@ -1,0 +1,56 @@
+﻿@model LoginVue.Models.Login
+
+@{
+    ViewData["Title"] = "Signup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="vueSignin">
+    <p><center>{{introText}}</center></p>
+
+    <center>
+        <div>
+            <div>
+                <form>
+                    <div class="form-group">
+                        <label for="username">Username: </label>
+                        <input type="text"
+                               v-model="Username"
+                               placeholder="Please enter username">*
+                        <span class="text-danger">{{UsernameValidationMsg}}</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" style="padding: 19px">Email:</label>
+                        <input type="text"
+                               v-model="Email"
+                               placeholder="Please enter email">*
+                        <span class="text-danger">{{EmailValidationMsg}}</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" style="padding: 3px">Password:</label>
+                        <input type="text"
+                               v-model="Passowrd"
+                               placeholder="Please enter password">*
+                        <span class="text-danger">{{PasswordValidationMsg}}</span>
+                    </div>
+                    <div class="form-group">
+                        <center>
+                            <button type="button" class="button"
+                                    v-on:click="sendApplication"
+                                    :disabled="sendDisabled">
+                                Signup
+                            </button>&nbsp;&nbsp;
+                            <button type="button" class="button"
+                                   onclick="{asp-controller="Home"}" asp-action="Index">Annuller</button>
+                        </center>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </center>
+</div>
+
+@section Scripts
+{
+    <script src="~/js/Signup-vue.js" asp-append-version="true"></script>
+}

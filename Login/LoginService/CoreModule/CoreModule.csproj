@@ -14,4 +14,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SigninController\SigninController.csproj" />
+    <ProjectReference Include="..\WalletController\WalletController.csproj" />
+  </ItemGroup>
+
 </Project>

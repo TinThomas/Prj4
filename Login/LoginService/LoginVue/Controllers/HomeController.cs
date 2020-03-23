@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using FE_Login.Models;
+using LoginVue.Models;
 
-namespace FE_Login.Controllers
+namespace LoginVue.Controllers
 {
     public class HomeController : Controller
     {
@@ -26,6 +27,16 @@ namespace FE_Login.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult Signup()
+        {
+            return PartialView();
+        }
+
+        public IActionResult Wallet()
+        {
+            return PartialView();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

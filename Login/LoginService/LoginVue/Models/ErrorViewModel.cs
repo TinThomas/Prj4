@@ -1,6 +1,6 @@
 using System;
 
-namespace FE_Login.Models
+namespace LoginVue.Models
 {
     public class ErrorViewModel
     {
