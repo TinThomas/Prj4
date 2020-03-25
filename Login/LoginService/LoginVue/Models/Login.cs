@@ -6,11 +6,9 @@ namespace LoginVue.Models
     {
         public long loginRequest { get; set; }
 
-        [Required]
         [MaxLength(254)]
         public string username { get; set; }
 
-        [Required]
         [MaxLength(254)]
         public string email { get; set; }
 

@@ -10,9 +10,9 @@
         PasswordValidationMsg: ''
     },
     watch: {
-        name: function(newValue) {
+        Username: function(newValue) {
             if (newValue == '') {
-                this.UsernameValidationMsg = "This field cannot be empty";
+                this.UsernameValidationMsg = "*This field cannot be empty*";
                 this.UsernameInputOk = false;
             } else {
                 this.UsernameValidationMsg = '';
@@ -21,7 +21,7 @@
         },
         Password: function(newValue) {
             if (newValue == '') {
-                this.PasswordValidationMsg = 'This field cannot be empty';
+                this.PasswordValidationMsg = '*This field cannot be empty*';
                 this.PasswordInputOk = false;
             } else {
                 this.PasswordValidationMsg = '';
@@ -33,14 +33,35 @@
         sendDisabled: function() {
             if (this.isSend)
                 return true;
-            return !this.UsernameInputOk;
+            return (!this.PasswordInputOk && !this.UsernameInputOk);
         }
     },
     methods: {
         sendApplication() {
             let login = {};
-            login.username = this.username;
-            login.password = this.password;
+            login.username = this.Username;
+            login.password = this.Password;
+            fetch('/api/Signin/', {
+                method: 'POST',
+                body: JSON.stringify(login),
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                })
+            }).then(function (response) {
+                if (response.status !== 200) {
+                    vm.message = 'Looks like there was a problem. Status Code: ' + response.status;
+                    return;
+                }
+                // Build the html
+                response.json().then(function (application) {
+                        vm.isSend = true;
+                    vm.introText = 'We have now received your job application - thank you';
+                    location.href = "../Home/Index";
+                })
+                    .catch(function (err) {
+                        vm.message = 'Fetch Error: ' + err;
+                    });
+            });
         },
         sendPageChange: function() {
             location.href = 'Signup/Signup';

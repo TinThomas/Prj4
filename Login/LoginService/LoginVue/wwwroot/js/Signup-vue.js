@@ -33,7 +33,7 @@
         },
         password: function (newValue) {
             if (newValue == '') {
-                this.PasswordValidationMsg = 'This field cannot be empty';
+                this.PasswordValidationMsg = '*This field cannot be empty*';
                 this.PasswordInputOk = false;
             } else {
                 this.PasswordValidationMsg = '';
