@@ -35,23 +35,17 @@ namespace LoginVue.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostSignin([FromBody] Login val)
+        public async Task<IActionResult> PostSignin([FromBody] internalMessage val)
         {
-            if (!ModelState.IsValid)
+            bool check;
+            check = await _a.incomming(1,val.id,val.msg);
+            if (check)
             {
-                return BadRequest(ModelState);
-            }
-
-            bool mystring;
-            mystring = await _a.incomming(1,1,JsonSerializer.Serialize(val));
-
-            if (mystring)
-            {
-                return Ok(val);
+                return Ok(200);
             }
             else
             {
-                return BadRequest(ModelState);
+                return BadRequest(400);
             }
         }
 

@@ -20,5 +20,14 @@ namespace SigninController
             }
             else return false;
         }
+
+        public bool validatePassword(string a)
+        {
+            if (string.Compare(a, "world") == 0)
+            {
+                return true;
+            }
+            else return false;
+        }
     }
 }

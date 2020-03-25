@@ -7,7 +7,7 @@
         UsernameValidationMsg: '',
         Password: '',
         PasswordInputOk: false,
-        PasswordValidationMsg: ''
+        PasswordValidationMsg: '',
     },
     watch: {
         Username: function(newValue) {
@@ -39,32 +39,61 @@
     methods: {
         sendApplication() {
             let login = {};
-            login.username = this.Username;
-            login.password = this.Password;
-            fetch('/api/Signin/', {
-                method: 'POST',
-                body: JSON.stringify(login),
-                headers: new Headers({
-                    'Content-Type': 'application/json'
-                })
-            }).then(function (response) {
+            login.id = 1;
+            login.msg = this.Username;
+            fetch('/api/Signin/',
+                {
+                    method: 'POST',
+                    body: JSON.stringify(login),
+                    headers: new Headers({
+                        'Content-Type': 'application/json'
+                    })
+                }).then(function(response) {
                 if (response.status !== 200) {
                     vm.message = 'Looks like there was a problem. Status Code: ' + response.status;
                     return;
                 }
-                // Build the html
                 response.json().then(function (application) {
-                        vm.isSend = true;
-                    vm.introText = 'We have now received your job application - thank you';
-                    location.href = "../Home/Index";
-                })
+                        vm.sendPassword();
+                    })
                     .catch(function (err) {
                         vm.message = 'Fetch Error: ' + err;
                     });
             });
+
         },
+        sendPassword() {3
+            let login = {};
+            login.id = 2;
+            login.msg = this.Password;
+            fetch('/api/Signin/',
+                {
+                    method: 'POST',
+                    body: JSON.stringify(login),
+                    headers: new Headers({
+                        'Content-Type': 'application/json'
+                    })
+                    }).then(function(response) {
+                        if (response.status !== 200) {
+                            vm.message = 'Looks like there was a problem. Status Code: ' + response.status;
+                            return;
+                        }
+                        response.json().then(function (application) {
+                                vm.isSend = true;
+                                vm.introText = 'We have now received your job application - thank you';
+                                location.href = "../Home/Index";
+                            })
+                            .catch(function(err) {
+                                vm.message = 'Fetch Error: ' + err;
+                            });
+                    });
+        
+
+    },
+
         sendPageChange: function() {
-            location.href = 'Signup/Signup';
-        }
+                    location.href = 'Signup/Signup';
+                }
+
     }
 })

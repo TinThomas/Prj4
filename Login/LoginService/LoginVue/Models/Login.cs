@@ -15,4 +15,10 @@ namespace LoginVue.Models
         public string password { get; set; }
 
     }
+
+    public class internalMessage
+    {
+        public int id { get; set; }
+        public string msg { get; set; }
+    }
 }

@@ -32,8 +32,12 @@ namespace CoreModule
                     {
                         case 1:
                         {
-                            userInfo hey = JsonSerializer.Deserialize<userInfo>(msg);
-                            return myLogin.validateUsername(hey.username);
+                            return myLogin.validateUsername(msg);
+                            break;
+                        }
+                        case 2:
+                        {
+                            return myLogin.validatePassword(msg);
                             break;
                         }
                         default:
