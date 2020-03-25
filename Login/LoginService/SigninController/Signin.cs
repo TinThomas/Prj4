@@ -1,4 +1,8 @@
-﻿using SQLitePCL;
+﻿using System.Linq;
+using SignupController;
+using SignupController.Models;
+using SQLitePCL;
+
 
 namespace SigninController
 {
@@ -19,6 +23,20 @@ namespace SigninController
                 return true;
             }
             else return false;
+        }
+
+        public int FindUserByName(UserNContext context, string userName)
+        {
+            var user = context.UserNs.Single(p => p.UserName.Equals(userName));
+
+            return user.UserNId;
+        }
+
+        public int FindUserByEmail(UserNContext context, string email)
+        {
+            var user = context.UserNs.Single(p => p.Email.Equals(email));
+
+            return user.UserNId;
         }
     }
 }

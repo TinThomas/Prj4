@@ -14,10 +14,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\CoreModule\CoreModule.csproj" />
-    <ProjectReference Include="..\SigninController\SigninController.csproj" />
-    <ProjectReference Include="..\WalletController\WalletController.csproj" />
-  </ItemGroup>
-
 </Project>
