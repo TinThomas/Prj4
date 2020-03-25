@@ -4,7 +4,7 @@
     {
         private UserName username;
         private Password pw;
-        Signin()
+        public Signin()
         {
             username = new UserName();
             pw = new Password();

@@ -7,25 +7,35 @@
 
 <div id="vueSignin">
     <p><center>{{introText}}</center></p>
-
+    <br/>
     <center>
         <div>
             <div>
                 <form>
                     <div class="form-group">
+                        <label />
+                        <span class="text-danger">
+                            <font color="red" size="1">
+                                {{UsernameValidationMsg}}
+                            </font>
+                        </span><br/>
                         <label for="username">Username: </label>
                         <input type="text"
                                v-model="Username"
                                placeholder="Please enter username">*
-                        <span class="text-danger">{{UsernameValidationMsg}}</span>
                     </div>
                     <div class="form-group">
+                        <label/>
+                        <span class="text-danger">
+                            <font color="red" size="1">
+                                {{PasswordValidationMsg}}
+                            </font>
+                        </span><br/>
                         <label for="password" style="padding: 3px">Password:</label>
                         <input type="text"
-                               v-model="Passowrd"
+                               v-model="Password"
                                placeholder="Please enter password">*
-                        <span class="text-danger">{{PasswordValidationMsg}}</span>
-                    </div>
+                    </div><br/>
                     <div class="form-group">
                         <center>
                             <button type="button" class="button"
