@@ -14,31 +14,38 @@ namespace CoreModule
             database
         };
 
-
-        public void incomming(test a, string msg)
+        public async Task<string> incomming(int a, string msg)
         {
             switch (a)
             {
-                case test.login:
+                case 1:
                 {
-                    if (string.Compare(msg,"") == 0)
-                    {
+
                         Console.WriteLine(msg);
-                        response();
-                    }
-                    break;
+                        return response();
+                        break;
                     }
 
-                case test.database:
+                case 2:
                 {
+                    return "you";
                     break;
                 }
+                default:
+                {
+                    return "b";
+                    break;
+                }
+                
             }
+
+            return "";
         }
 
-        public async Task<string> response()
+        public string response()
         {
             return "Hello";
         }
+
     }
 }

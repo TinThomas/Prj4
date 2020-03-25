@@ -7,6 +7,7 @@ using LoginVue.Models;
 using CoreModule;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 
 namespace LoginVue.Controllers
@@ -33,18 +34,6 @@ namespace LoginVue.Controllers
             return PartialView();
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutSignin([FromRoute] long id, [FromBody] Login val)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            _a.incomming(myState = TestBE.test.login,JsonSerializer.Serialize(val));
-            string msg = await _a.response();
-            return Ok(val);
-        }
-
         [HttpPost]
         public async Task<IActionResult> PostSignin([FromBody] Login val)
         {
@@ -52,9 +41,18 @@ namespace LoginVue.Controllers
             {
                 return BadRequest(ModelState);
             }
-            _a.incomming(myState = TestBE.test.database,JsonSerializer.Serialize(val));
-            Task<string> mymsg = _a.response();
-            return Ok(val);
+
+            string mystring;
+            mystring = await _a.incomming(1,JsonSerializer.Serialize(val));
+
+            if (string.Compare(mystring, "Hello") == 0)
+            {
+                return Ok(val);
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
     }
