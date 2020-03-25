@@ -37,7 +37,7 @@ namespace CoreModule
                         }
                         case 2:
                         {
-                            return myLogin.validatePassword(msg);
+                            return true;
                             break;
                         }
                         default:

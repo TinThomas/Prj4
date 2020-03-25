@@ -31,9 +31,9 @@
     },
     computed: {
         sendDisabled: function() {
-            if (this.isSend)
+            if (!this.PasswordInputOk || !this.UsernameInputOk)
                 return true;
-            return (!this.PasswordInputOk && !this.UsernameInputOk);
+            return false;
         }
     },
     methods: {
@@ -49,9 +49,10 @@
                         'Content-Type': 'application/json'
                     })
                 }).then(function(response) {
-                if (response.status !== 200) {
-                    vm.message = 'Looks like there was a problem. Status Code: ' + response.status;
-                    return;
+                    if (response.status !== 200) {
+                        vm.UsernameValidationMsg = "User / Email doesn't exist";
+                        vm.UsernameInputOk = false;
+                        return;
                 }
                 response.json().then(function (application) {
                         vm.sendPassword();
@@ -75,7 +76,8 @@
                     })
                     }).then(function(response) {
                         if (response.status !== 200) {
-                            vm.message = 'Looks like there was a problem. Status Code: ' + response.status;
+                            vm.PasswordValidationMsg = "No password matching that account";
+                            vm.PasswordInputOk = false;
                             return;
                         }
                         response.json().then(function (application) {
