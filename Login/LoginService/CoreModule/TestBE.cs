@@ -3,49 +3,70 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.VisualBasic;
+using SigninController;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace CoreModule
 {
     public class TestBE
     {
+        private Signin myLogin;
         public enum test
         {
             login,
             database
         };
 
-        public async Task<string> incomming(int a, string msg)
+        public TestBE()
+        {
+            myLogin = new Signin();
+        }
+        public async Task<bool> incomming(int a, int b, string msg)
         {
             switch (a)
             {
                 case 1:
                 {
-
-                        Console.WriteLine(msg);
-                        return response();
-                        break;
+                    switch (b)
+                    {
+                        case 1:
+                        {
+                            userInfo hey = JsonSerializer.Deserialize<userInfo>(msg);
+                            return myLogin.validateUsername(hey.username);
+                            break;
+                        }
+                        default:
+                        {
+                            return false;
+                            break;
+                        }
+                    }
+                    break;
                     }
 
                 case 2:
                 {
-                    return "you";
+                    return false;
                     break;
                 }
                 default:
                 {
-                    return "b";
+                    return false;
                     break;
                 }
                 
             }
 
-            return "";
+            return false;
         }
 
-        public string response()
-        {
-            return "Hello";
-        }
+    }
 
+    public class userInfo
+    {
+        public string username { get; set; }
+        public string email { get; set; }
+        public string password { get; set; }
     }
 }

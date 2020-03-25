@@ -42,10 +42,10 @@ namespace LoginVue.Controllers
                 return BadRequest(ModelState);
             }
 
-            string mystring;
-            mystring = await _a.incomming(1,JsonSerializer.Serialize(val));
+            bool mystring;
+            mystring = await _a.incomming(1,1,JsonSerializer.Serialize(val));
 
-            if (string.Compare(mystring, "Hello") == 0)
+            if (mystring)
             {
                 return Ok(val);
             }
