@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using LoginVue.Models;
+using LoginVue.utilities;
 
 namespace LoginVue.Controllers
 {
@@ -19,8 +20,12 @@ namespace LoginVue.Controllers
             _logger = logger;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
+            if(Request.IsAjaxRequest())
+            return PartialView();
+
             return View();
         }
 
@@ -29,14 +34,13 @@ namespace LoginVue.Controllers
             return View();
         }
 
-        public IActionResult Signup()
-        {
-            return PartialView();
-        }
-
+        [HttpGet]
         public IActionResult Wallet()
         {
+            if(Request.IsAjaxRequest())
             return PartialView();
+
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

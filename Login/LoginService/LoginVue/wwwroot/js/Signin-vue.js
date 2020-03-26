@@ -63,7 +63,7 @@
             });
 
         },
-        sendPassword() {3
+        sendPassword() {
             let login = {};
             login.id = 2;
             login.msg = this.Password;
@@ -81,10 +81,9 @@
                             return;
                         }
                         response.json().then(function (application) {
-                                vm.isSend = true;
-                                vm.introText = 'We have now received your job application - thank you';
-                                location.href = "../Home/Index";
-                            })
+                            location.href = "../Home/Index";
+                            this.isUser = true;
+                        })
                             .catch(function(err) {
                                 vm.message = 'Fetch Error: ' + err;
                             });

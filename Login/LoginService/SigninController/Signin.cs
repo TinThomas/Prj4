@@ -1,15 +1,10 @@
-﻿using System.Linq;
-using SignupController;
-using SignupController.Models;
-using SQLitePCL;
-
-
-namespace SigninController
+﻿namespace SigninController
 {
     public class Signin
     {
         private UserName username;
         private Password pw;
+        private int userId;
         public Signin()
         {
             username = new UserName();
@@ -18,25 +13,16 @@ namespace SigninController
 
         public bool validateUsername(string b)
         {
-            if (string.Compare(b, "Hello") == 0)
-            {
+            userId = username.getUserId(b);
+            if (userId != -1)
                 return true;
-            }
-            else return false;
+            return false;
         }
 
-        public int FindUserByName(UserNContext context, string userName)
+        public bool validatePW(string b)
         {
-            var user = context.UserNs.Single(p => p.UserName.Equals(userName));
-
-            return user.UserNId;
-        }
-
-        public int FindUserByEmail(UserNContext context, string email)
-        {
-            var user = context.UserNs.Single(p => p.Email.Equals(email));
-
-            return user.UserNId;
+            bool check = pw.validatePW(b);
+            return check;
         }
     }
 }

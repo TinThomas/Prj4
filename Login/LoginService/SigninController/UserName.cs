@@ -1,21 +1,25 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Linq;
+using SignupController;
+using SignupController.Models;
+using SQLitePCL;
+
 
 namespace SigninController
 {
     public class UserName
     {
-        
+        UserNContext _context = new UserNContext();
         public int getUserId(string input)
         {
             int id;
             //some fancy db calls.
             if (isUsername(input))
             { 
-                id = 42;
+                id = FindUserByName(_context, input);
             }
             else if (isEmail(input))
             {
-                id = 24;
+                id = FindUserByEmail(_context, input);
             }
             else
             {
@@ -27,28 +31,34 @@ namespace SigninController
 
         public bool isUsername(string input)
         {
-            //fancy compare
-            if (true)
+            if (input.IndexOf('@') == -1)
             {
                 return true;
             }
-
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         public bool isEmail(string input)
         {
-            if (true)
-            {
+            if (input.IndexOf('@')!=-1)
+            { 
                 return true;
             }
-            else
-            {
-                return true;
-            }
+
+            return false;
+        }
+        public int FindUserByName(UserNContext context, string userName)
+        {
+            var user = context.UserNs.Single(p => p.UserName.Equals(userName));
+
+            return user.UserNId;
+        }
+
+        public int FindUserByEmail(UserNContext context, string email)
+        {
+            var user = context.UserNs.Single(p => p.Email.Equals(email));
+
+            return user.UserNId;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.CodeAnalysis
+@using Microsoft.CodeAnalysis.CSharp.Syntax
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -13,32 +15,37 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>
-<body>
+<body onload="checkUser()">
     <div id="wrapper">
         <header>
             <h1>
-                <img src="/images/javalogo.gif" alt="Orctioneer" height="117" width="619">
+
+                <label height="250" width="619">Orctioneer</label>
             </h1>
         </header>
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="https://cdn.lineicons.com/1.0.1/LineIcons.min.css">
-        
-        <div class="navbar">
+
+        <div class="navbar" id="Nav" onload="checkUser()">
             <a asp-controller="Home" asp-action="Index">Home</a>
-            <a href="#news">Coolstuff</a>
+            <a href="#">Coolstuff</a>
             <div class="dropdown">
+
                 <button class="dropbtn">
                     User
                     <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-content">
-                    <a asp-controller="Signin" asp-action="index">Signin</a>
-                    <a asp-controller="Signup" asp-action="Signup">Signup</a>
-                    <a asp-controller="Home" asp-action="Wallet">Wallet</a>
+                    <a v-if="!isUser" asp-controller="Signin" asp-action="index" class="menu doAjax">Signin</a>
+                    <a v-if="!isUser" asp-controller="Signup" asp-action="Signup" class="menu doAjax">Signup</a>
+                    <a v-if="isUser" asp-controller="Home" asp-action="Wallet" class="menu doAjax">Wallet</a>
+                    <a v-if="isUser" href="#" class="menu doAjax">Userinfo</a>
+                    <a v-if="isUser" href="#" class="menu doAjax">Signout</a>
+                    <Signin class="isActive"></Signin>
                 </div>
             </div>
-        
-            </div>
+        </div>
+
         <div>
             <main id="content">
                 @RenderBody()
@@ -53,18 +60,18 @@
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="https://unpkg.com/vue"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
-        </script>
-        <script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
+        </environment>
+        <environment exclude="Development">
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery"
+                    crossorigin="anonymous"
+                    integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+            </script>
+            <script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+            <script src="~/js/site.min.js" asp-append-version="true"></script>
+        </environment>
 
-    @RenderSection("Scripts", required: false)
+        @RenderSection("Scripts", required: false)
 </body>
 </html>

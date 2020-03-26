@@ -11,7 +11,7 @@ namespace CoreModule
 {
     public class TestBE
     {
-        private Signin myLogin;
+        private CoreService myLogin;
         public enum test
         {
             login,
@@ -20,9 +20,9 @@ namespace CoreModule
 
         public TestBE()
         {
-            myLogin = new Signin();
+            myLogin = new CoreService();
         }
-        public async Task<bool> incomming(int a, int b, string msg)
+        public async Task<dynamic> incomming(int a, int b, string msg)
         {
             switch (a)
             {
@@ -38,6 +38,15 @@ namespace CoreModule
                         case 2:
                         {
                             return true;
+                            break;
+                        }
+                        case 3:
+                        {
+                            return true;
+                            break;
+                        }
+                        case 4:
+                        {
                             break;
                         }
                         default:

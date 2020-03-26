@@ -7,6 +7,7 @@ using LoginVue.Models;
 using CoreModule;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using LoginVue.utilities;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 
@@ -17,7 +18,7 @@ namespace LoginVue.Controllers
     public class SigninController : Controller
     {
         private readonly TestBE _a;
-        private readonly Login _myModel;
+        public Login _myModel;
 
         public TestBE.test myState;
 
@@ -29,18 +30,32 @@ namespace LoginVue.Controllers
             _myModel = myModel;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
-            return PartialView();
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView();
+            }
+            return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> PostSignin([FromBody] internalMessage val)
         {
             bool check;
-            check = await _a.incomming(1,val.id,val.msg);
-            if (check)
+            if (val.id == 1)
             {
+                check = await _a.incomming(1, val.id, val.msg);
+                if (check)
+                {
+                    return Ok(200);
+                }
+            }
+
+            if (val.id == 2)
+            {
+                check = await _a.incomming(1, val.id, val.msg);
                 return Ok(200);
             }
             else

@@ -3,10 +3,12 @@
 namespace LoginVue.Models
 {
     public class Login
-    {
+    {   
+        [Required]
         [MaxLength(254)]
         public string username { get; set; }
 
+        [Required]
         [MaxLength(254)]
         public string email { get; set; }
 

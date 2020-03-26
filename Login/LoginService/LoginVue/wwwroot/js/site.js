@@ -1,4 +1,21 @@
-﻿function doFetchCall(eventArg) {
+﻿let obj = document.getElementsByClassName("menu");
+for (i = 0; i < obj.length; i++) {
+    obj[i].addEventListener("mouseover", function (event) {
+        let target = event.target || event.srcElement;
+        target.className = "menuEnhanced";
+    });
+    obj[i].addEventListener("mouseout", function (event) {
+        let target = event.target || event.srcElement;
+        target.className = "menu";
+    });
+}
+
+// Turn menu navigation into AJAX calls 
+let ancors = document.getElementsByClassName("doAjax");
+for (let i = 0; i < ancors.length; i++)
+    ancors[i].addEventListener('click', doFetchCall);
+
+function doFetchCall(eventArg) {
     eventArg.preventDefault();
 
     var url = eventArg.target.href;
@@ -47,3 +64,26 @@ function doAjaxCall(eventArg) {
         mainEl.innerHTML = req.responseText;
     }
 }
+
+vm = new Vue({
+    el: '#Nav',
+    data: function() {
+        return {
+            isUser: false
+        }
+    },
+    computed: {
+        isActive: function() {
+            return {
+                active: this.isUser
+            }
+        }
+    },
+    method: {
+        checkUser: function() {
+            return {
+                isUser
+        }
+        }
+    }
+});
