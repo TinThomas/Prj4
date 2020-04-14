@@ -6,21 +6,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace VareDatabase.Models
 {
-    public class ItemContext : DbContext
-    {
-        public DbSet<ItemDB> Item { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlite("Data Source=Item.db");
-        }
-
-        public class ItemDB
+    public class ItemEntity
         {
             [Key]
             public int ItemId { get; set; }
             public string Type { get; set; }
+
+            //Navigational property
+            public BeskrivelseEntity Beskrivelse { get; set; }
+            public BudEntity Bud { get; set; }
+            public TimeEntity Tid { get; set; }
         }
-    }
 }
 

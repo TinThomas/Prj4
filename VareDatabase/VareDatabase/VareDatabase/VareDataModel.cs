@@ -6,14 +6,8 @@ using System.Timers;
 
 namespace VareDatabase
 {
-    class VareDataModelContext : DbContext
-    {
-        protected override void OnConfiguring(DbContextOptionsBuilder ob)
-        {
-            ob.UseSqlite("Data Source=d.db");
-        }
-    }
 
+    /*
     public class Item
     {
         public int ItemId { get; set;}
@@ -39,6 +33,7 @@ namespace VareDatabase
         public string descriptionOfItem { get; set; }
         public string title { get; set; }
     }
+    */
 
 
 }
