@@ -14,26 +14,26 @@ namespace VareDatabase.DBContext
         }
 
         public DbSet<ItemEntity> Item { get; set; }
-        public DbSet<BudEntity> Bud { get; set; }
-        public DbSet<BeskrivelseEntity> Beskrivelse { get; set; }
-        public DbSet<TimeEntity> Tid { get; set; }
+        public DbSet<BidEntity> BId { get; set; }
+        public DbSet<DescriptionEntity> Description { get; set; }
+        public DbSet<TimeEntity> Time { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ItemEntity>()
-                .HasOne(a => a.Tid)
+                .HasOne(a => a.Time)
                 .WithOne(b => b.Item)
                 .HasForeignKey<TimeEntity>(e => e.Item);
 
             modelBuilder.Entity<ItemEntity>()
-                .HasOne(a => a.Bud)
+                .HasOne(a => a.Bid)
                 .WithOne(b => b.Item)
-                .HasForeignKey<BudEntity>(e => e.Item);
+                .HasForeignKey<BidEntity>(e => e.Item);
 
             modelBuilder.Entity<ItemEntity>()
-                .HasOne(a => a.Beskrivelse)
+                .HasOne(a => a.Description)
                 .WithOne(b => b.Item)
-                .HasForeignKey<BeskrivelseEntity>(e => e.Item);
+                .HasForeignKey<DescriptionEntity>(e => e.Item);
         }
 
     }

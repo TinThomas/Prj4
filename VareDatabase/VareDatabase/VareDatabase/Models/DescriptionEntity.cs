@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace VareDatabase.Models
 {
 
-    public class BeskrivelseEntity
+    public class DescriptionEntity
     {
         public string imageOfItem { get; set; }
         public string descriptionOfItem { get; set; }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace VareDatabase.Models
 {
 
-    public class BudEntity
+    public class BidEntity
     {
         public int userID_forLastBid { get; set; } 
         public int price { get; set; }

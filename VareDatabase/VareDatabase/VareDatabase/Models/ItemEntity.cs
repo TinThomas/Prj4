@@ -14,9 +14,9 @@ namespace VareDatabase.Models
             public string Type { get; set; }
 
             //Navigational property
-            public BeskrivelseEntity Beskrivelse { get; set; }
-            public BudEntity Bud { get; set; }
-            public TimeEntity Tid { get; set; }
+            public DescriptionEntity Description { get; set; }
+            public BidEntity Bid { get; set; }
+            public TimeEntity Time { get; set; }
         }
 }
 
