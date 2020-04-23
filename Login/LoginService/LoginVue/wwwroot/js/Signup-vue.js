@@ -1,7 +1,7 @@
 ﻿vm = new Vue({
     el: '#vueSignin',
     data: {
-        introText: 'Please fill out the information to signup',
+        introText: 'Please fill out the information to sign up',
         Username: '',
         UsernameInputOk: false,
         UsernameValidationMsg: '',
