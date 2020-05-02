@@ -22,5 +22,11 @@ namespace SignupController
         [EmailAddress(ErrorMessage = "Must be a valid Email address")]
         public string Email { get; set; }
         public string UserName { get; set; }
+
+        //Contructor for creating new object with pre-generated key
+        public UserNDB(int key)
+        {
+            UserNId = key;
+        }
     }
 }

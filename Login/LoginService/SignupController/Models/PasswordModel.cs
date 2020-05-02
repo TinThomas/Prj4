@@ -19,6 +19,12 @@ namespace SignupController
     {
         [Key]
         public int UserId { get; set; }
-        public int Password { get; set; }
+        public string Password { get; set; }
+
+        //Contructor for creating new object with a pre-generated key
+        public PassDB(int key)
+        {
+            UserId = key;
+        }
     }
 }

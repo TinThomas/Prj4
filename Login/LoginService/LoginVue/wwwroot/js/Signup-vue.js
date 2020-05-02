@@ -1,7 +1,7 @@
 ﻿vm = new Vue({
     el: '#vueSignin',
     data: {
-        introText: 'Please fill out the information to signup',
+        introText: 'Please fill out the information to sign up',
         Username: '',
         UsernameInputOk: false,
         UsernameValidationMsg: '',
@@ -13,8 +13,8 @@
         PasswordValidationMsg: ''
     },
     watch: {
-        name: function (newValue) {
-            if (newValue == '') {
+        Username: function (newValue) {
+            if (newValue == "") {
                 this.UsernameValidationMsg = "Please fill the field";
                 this.UsernameInputOk = false;
             } else {
@@ -22,7 +22,7 @@
                 this.UsernameInputOk = true;
             }
         },
-        email: function(newValue) {
+        Email: function(newValue) {
             if (newValue == '') {
                 this.EmailValidationMsg = "Please fill the field";
                 this.EmailInputOk = false;
@@ -31,9 +31,9 @@
                 this.EmailInputOk = true;
             }
         },
-        password: function (newValue) {
-            if (newValue == '') {
-                this.PasswordValidationMsg = '*This field cannot be empty*';
+        Password: function (newValue) {
+            if (newValue == "") {
+                this.PasswordValidationMsg = "Please fill the field";
                 this.PasswordInputOk = false;
             } else {
                 this.PasswordValidationMsg = '';
