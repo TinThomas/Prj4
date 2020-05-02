@@ -23,17 +23,17 @@ namespace VareDatabase.DBContext
             modelBuilder.Entity<ItemEntity>()
                 .HasOne(a => a.Time)
                 .WithOne(b => b.Item)
-                .HasForeignKey<TimeEntity>(e => e.Item);
+                .HasForeignKey<TimeEntity>(e => e.ItemRef);
 
-            modelBuilder.Entity<ItemEntity>()
-                .HasOne(a => a.Bid)
-                .WithOne(b => b.Item)
-                .HasForeignKey<BidEntity>(e => e.Item);
+                modelBuilder.Entity<ItemEntity>()
+                    .HasOne(a => a.Bid)
+                    .WithOne(b => b.Item)
+                    .HasForeignKey<BidEntity>(e => e.ItemRef);
 
-            modelBuilder.Entity<ItemEntity>()
-                .HasOne(a => a.Description)
-                .WithOne(b => b.Item)
-                .HasForeignKey<DescriptionEntity>(e => e.Item);
+                modelBuilder.Entity<ItemEntity>()
+                    .HasOne(a => a.Description)
+                    .WithOne(b => b.Item)
+                    .HasForeignKey<DescriptionEntity>(e => e.ItemRef);
         }
 
     }
