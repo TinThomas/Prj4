@@ -96,6 +96,5 @@ namespace VareDatabase.Repo
             db.SaveChangesAsync();
         }
 
-
     }
 }
