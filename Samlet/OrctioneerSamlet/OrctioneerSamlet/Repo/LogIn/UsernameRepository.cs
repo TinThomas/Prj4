@@ -22,11 +22,8 @@ namespace VareDatabase.Repo
         {
             Console.WriteLine("seeing user:" + user.Username);
             string id = Guid.NewGuid().ToString();
-            UsernameEntity _user = new UsernameEntity();
             user.UserId = id;
-            user.Username = user.Username;
-            user.Email = user.Email;
-            db.Add(_user);
+            db.AddAsync(user);
             var done = await db.SaveChangesAsync();
             return id;
 
@@ -49,14 +46,14 @@ namespace VareDatabase.Repo
             return query;
         }
 
-        public void updateUsername(UsernameEntity user)
+        public async void updateUsername(UsernameEntity user)
         {
            var query = (from i in db.Users
                 where i.UserId == user.UserId
                       select i).FirstOrDefault();
            query.Username = user.Username;
            db.Update(query);
-           db.SaveChangesAsync();
+           int wait = await db.SaveChangesAsync();
 
         }
 
@@ -76,18 +73,17 @@ namespace VareDatabase.Repo
                 where i.Username == user.Username
                 select i).FirstOrDefault();
             if (query != null)
-            {  db.DisposeAsync();
+            {
                 return false;
             }
             query = (from i in db.Users
                 where i.Email == user.Email
                 select i).FirstOrDefault();
             if (query != null)
-            {   db.DisposeAsync();
+            { 
                 return false;
             }
 
-            db.DisposeAsync();
             return true;
         }
 
