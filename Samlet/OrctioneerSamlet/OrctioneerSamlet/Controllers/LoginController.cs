@@ -12,8 +12,13 @@ using OrctioneerSamlet.Token;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using OrctioneerSamlet.Interfaces.Login;
 using OrctioneerSamlet.Models;
+using OrctioneerSamlet.Models.Login;
+using VareDatabase.DBContext;
+using VareDatabase.Repo;
 
 
 namespace OrctioneerSamlet.Controllers
@@ -24,12 +29,17 @@ namespace OrctioneerSamlet.Controllers
     {
         private IConfiguration _configuration;
         private CoreService LoginService;
+        private readonly IPasswordRepository _pass;
+        private readonly IUsernameRepository _user;
 
-        public LoginController(IConfiguration configuration)
+        public LoginController(IConfiguration configuration, PassModelContext Passdb, UserModelContext userdb)
         {
             _configuration = configuration;
             LoginService = new CoreService(new SigninControl(
                 new UserName(), new Password()),new Signup());
+            _pass = new PasswordRepository(Passdb);
+            _user = new UsernameRepository(userdb);
+
         }
 
         [Authorize]
@@ -40,10 +50,19 @@ namespace OrctioneerSamlet.Controllers
         }
 
         [HttpPost("UserN")]
-        public async Task<IActionResult> PostUsername([FromBody]InternalMessage request)
+        public async Task<IActionResult> PostUsername([FromBody]UsernameEntity request)
         {
-            int id = await LoginService.validateUsername(request.msg);
-            if (id != -1)
+            string id;
+            if (request.Username != null)
+            {
+                id = _user.validateUsername(request.Username);
+            }
+            else
+            {
+                id = _user.validateEmail(request.Email);
+            }
+            //int id = await LoginService.validateUsername(request.msg);
+            if (!string.IsNullOrEmpty(id))
             { 
                 return Ok(id);
             }
@@ -52,13 +71,14 @@ namespace OrctioneerSamlet.Controllers
         }
 
         [HttpPost("Pass")]
-        public async Task<IActionResult> PostPassword([FromBody] InternalMessage val)
+        public async Task<IActionResult> PostPassword([FromBody] PasswordEntity data)
         {
-            bool complete = await LoginService.validatePassword(val.id,val.msg);
-            if (complete)
+            bool valid = _pass.validatePassword(data);
+           // bool complete = await LoginService.validatePassword(val.id,val.msg);
+            if (valid)
             {
                 TokenControl myToken = new TokenControl(_configuration);
-                string token = await myToken.GenerateToken(val.id);
+                string token = await myToken.GenerateToken(data.UserId);
                 Console.WriteLine(token);
                 return Ok(token);
             }

@@ -4,14 +4,14 @@ using VareDatabase;
 
 namespace OrctioneerSamlet.Interfaces.Login
 {
-    public interface IUsernameRepository
+    public interface IUsernameRepository : IRepository<UsernameEntity>
     {
-        void addUser(string username,string email);
+        void addUser(UsernameEntity user);
         string validateUsername(string username);
         string validateEmail(string email);
-        void updateUsername(string id,string username);
-        void updateEmail(string id,string email);
-        bool CheckUser(string username, string email);
+        void updateUsername(UsernameEntity user);
+        void updateEmail(UsernameEntity user);
+        bool CheckUser(UsernameEntity user);
         void DeleteUser(string id);
 
     }

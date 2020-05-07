@@ -7,11 +7,11 @@ using VareDatabase.DBContext;
 
 namespace VareDatabase.Repo
 {
-    public class PasswordRepository : IPasswordRepository
+    public class PasswordRepository : Repository<PasswordEntity>, IPasswordRepository
     {
         private PassModelContext db;
 
-        public PasswordRepository(PassModelContext _db)
+        public PasswordRepository(PassModelContext _db) : base(_db)
         {
             db = _db;
         }

@@ -4,7 +4,7 @@ using VareDatabase;
 
 namespace OrctioneerSamlet.Interfaces.Login
 {
-    public interface IPasswordRepository
+    public interface IPasswordRepository : IRepository<PasswordEntity>
     {
         bool validatePassword(PasswordEntity password);
         void CreatePassword(PasswordEntity password);

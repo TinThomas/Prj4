@@ -8,23 +8,23 @@ using VareDatabase.DBContext;
 
 namespace VareDatabase.Repo
 {
-    public class UsernameRepository : IUsernameRepository
+    public class UsernameRepository : Repository<UsernameEntity>, IUsernameRepository
     {
         private UserModelContext db;
 
-        public UsernameRepository(UserModelContext _db)
+        public UsernameRepository(UserModelContext _db) : base(_db)
         {
             db = _db;
         }
 
-        public void addUser(string username,string email)
+        public void addUser(UsernameEntity user)
         {
             string id = Guid.NewGuid().ToString();
-            UsernameEntity user = new UsernameEntity();
+            UsernameEntity _user = new UsernameEntity();
             user.UserId = id;
-            user.Username = username;
-            user.Email = email;
-            db.Add(user);
+            user.Username = user.Username;
+            user.Email = user.Email;
+            db.Add(_user);
             db.SaveChangesAsync();
 
         }
@@ -46,31 +46,31 @@ namespace VareDatabase.Repo
             return query;
         }
 
-        public void updateUsername(string id, string username)
+        public void updateUsername(UsernameEntity user)
         {
            var query = (from i in db.Users
-                where i.UserId == id
+                where i.UserId == user.UserId
                       select i).FirstOrDefault();
-           query.Username = username;
+           query.Username = user.Username;
            db.Update(query);
            db.SaveChangesAsync();
 
         }
 
-        public void updateEmail(string id, string email)
+        public void updateEmail(UsernameEntity user)
         {
             var query = (from i in db.Users
-                where i.UserId == id
+                where i.UserId == user.UserId
                 select i).FirstOrDefault();
-            query.Email = email;
+            query.Email = user.Email;
             db.Update(query);
             db.SaveChangesAsync();
         }
 
-        public bool CheckUser(string username, string email)
+        public bool CheckUser(UsernameEntity user)
         {
             var query = (from i in db.Users
-                where i.Username == username
+                where i.Username == user.Username
                 select i).FirstOrDefault();
             if (query != null)
             {
@@ -78,7 +78,7 @@ namespace VareDatabase.Repo
             }
 
             query = (from i in db.Users
-                where i.Email == email
+                where i.Email == user.Email
                 select i).FirstOrDefault();
             if (query != null)
             {

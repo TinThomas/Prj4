@@ -16,12 +16,12 @@ namespace OrctioneerSamlet.Token
                 _configuration = configuration;
             }
     
-            public async Task<string> GenerateToken(int userId)
+            public async Task<string> GenerateToken(string userId)
             {
                 Console.WriteLine("making token");
                 var claims = new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, userId.ToString()),
+                    new Claim(ClaimTypes.Name, userId),
                     new Claim(JwtRegisteredClaimNames.Nbf, new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds().ToString()),
                     new Claim(JwtRegisteredClaimNames.Exp,
                         new DateTimeOffset(DateTime.Now.AddDays(1)).ToUnixTimeSeconds().ToString()),
