@@ -121,10 +121,10 @@
                 signup.email = this.Email;
             if (ref.validatePassword() && ref.validateEmail()) {
                 window.console.log("Sending");
-                let data = JSON.stringify(signup);
                 instance.post('/Signup/Create', {
-                    id: 0,
-                    msg: data
+                    Username: signup.userName,
+                    Email : signup.email,
+                    Password : signup.password
                 })
                     .then(function (response) {
                         if (response.status !== 200) {

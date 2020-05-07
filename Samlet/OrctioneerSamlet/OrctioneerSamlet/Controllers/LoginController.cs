@@ -44,7 +44,7 @@ namespace OrctioneerSamlet.Controllers
 
         [Authorize]
         [HttpPost("Token")]
-        public async Task<IActionResult> PostToken([FromBody]InternalMessage request)
+        public async Task<IActionResult> PostToken()
         {
             return Ok(User.Identity.Name);
         }
@@ -56,11 +56,11 @@ namespace OrctioneerSamlet.Controllers
             string id;
             if (request.Username != null)
             {
-                id = _user.validateUsername(request.Username);
+                id = await _user.validateUsername(request.Username);
             }
             else
             {
-                id = _user.validateEmail(request.Email);
+                id = await _user.validateEmail(request.Email);
             }
             //int id = await LoginService.validateUsername(request.msg);
             if (!string.IsNullOrEmpty(id))
@@ -74,7 +74,7 @@ namespace OrctioneerSamlet.Controllers
         [HttpPost("Pass")]
         public async Task<IActionResult> PostPassword([FromBody] PasswordEntity data)
         {
-            bool valid = _pass.validatePassword(data);
+            bool valid = await _pass.validatePassword(data);
            // bool complete = await LoginService.validatePassword(val.id,val.msg);
             if (valid)
             {

@@ -9,7 +9,11 @@ using Login.SignupControl;
 using Login.WalletControl;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OrctioneerSamlet.Interfaces.Login;
 using OrctioneerSamlet.Models;
+using OrctioneerSamlet.Models.Login;
+using VareDatabase.DBContext;
+using VareDatabase.Repo;
 
 namespace LoginVue.Controllers
 {
@@ -18,22 +22,39 @@ namespace LoginVue.Controllers
     public class SignupController : Controller
     {
         private CoreService SignupService;
+        private IPasswordRepository _pass;
+        private IUsernameRepository _user;
 
-        public SignupController()
+        public SignupController(PassModelContext Passdb, UserModelContext userdb)
         {
             SignupService = new CoreService(new SigninControl(new UserName(), 
                     new Password()),new Signup());
+            _pass = new PasswordRepository(Passdb);
+            _user = new UsernameRepository(userdb);
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create([FromBody] InternalMessage msg)
+        public async Task<IActionResult> Create([FromBody]HeaderRequest request)
         {
-            string complete = await SignupService.CreateUser(msg.msg);
-            if (complete != null)
+            UsernameEntity user = new UsernameEntity()
             {
+                Username = request.Username,
+                Email = request.Email
+            };
+            //bool check = await _user.CheckUser(user);
+            //if (check)
+              
+                string id = await _user.addUser(user);
+                if(!string.IsNullOrEmpty(id))
+                {
+                PasswordEntity pass = new PasswordEntity()
+                {
+                    UserId = id,
+                    Password = request.Password
+                };
+                _pass.CreatePassword(pass);
                 return Ok();
             }
-
             return BadRequest();
         }
     }

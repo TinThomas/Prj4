@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Login.SigninControl.Modules;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using OrctioneerSamlet.Interfaces.Login;
@@ -16,7 +17,7 @@ namespace VareDatabase.Repo
             db = _db;
         }
 
-        public bool validatePassword(PasswordEntity pass)
+        public async Task<bool> validatePassword(PasswordEntity pass)
         {
             var query = (from i in db.Passwords
                 where i.UserId == pass.UserId

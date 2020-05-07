@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using OrctioneerSamlet.Interfaces.Login;
@@ -17,7 +18,7 @@ namespace VareDatabase.Repo
             db = _db;
         }
 
-        public void addUser(UsernameEntity user)
+        public async Task<string> addUser(UsernameEntity user)
         {
             Console.WriteLine("seeing user:" + user.Username);
             string id = Guid.NewGuid().ToString();
@@ -26,12 +27,13 @@ namespace VareDatabase.Repo
             user.Username = user.Username;
             user.Email = user.Email;
             db.Add(_user);
-            db.SaveChangesAsync();
+            var done = await db.SaveChangesAsync();
+            return id;
 
         }
 
 
-        public string validateUsername(string username)
+        public async Task<string> validateUsername(string username)
         {
             string query = (from i in db.Users
                 where i.Username == username
@@ -39,7 +41,7 @@ namespace VareDatabase.Repo
             return query;
         }
 
-        public string validateEmail(string email)
+        public async Task<string> validateEmail(string email)
         {
             string query = (from i in db.Users
                 where i.Email == email
@@ -68,23 +70,24 @@ namespace VareDatabase.Repo
             db.SaveChangesAsync();
         }
 
-        public bool CheckUser(UsernameEntity user)
+        public async Task<bool> CheckUser(UsernameEntity user)
         {
             var query = (from i in db.Users
                 where i.Username == user.Username
                 select i).FirstOrDefault();
             if (query != null)
-            {
+            {  db.DisposeAsync();
                 return false;
             }
-
             query = (from i in db.Users
                 where i.Email == user.Email
                 select i).FirstOrDefault();
             if (query != null)
-            {
+            {   db.DisposeAsync();
                 return false;
             }
+
+            db.DisposeAsync();
             return true;
         }
 

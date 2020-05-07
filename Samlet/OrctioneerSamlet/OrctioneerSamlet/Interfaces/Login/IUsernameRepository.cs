@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using OrctioneerSamlet.Models.Login;
 using VareDatabase;
 
@@ -6,12 +7,12 @@ namespace OrctioneerSamlet.Interfaces.Login
 {
     public interface IUsernameRepository : IRepository<UsernameEntity>
     {
-        void addUser(UsernameEntity user);
-        string validateUsername(string username);
-        string validateEmail(string email);
+        Task<string> addUser(UsernameEntity user);
+        Task<string> validateUsername(string username);
+        Task<string> validateEmail(string email);
         void updateUsername(UsernameEntity user);
         void updateEmail(UsernameEntity user);
-        bool CheckUser(UsernameEntity user);
+        Task<bool> CheckUser(UsernameEntity user);
         void DeleteUser(string id);
 
     }
