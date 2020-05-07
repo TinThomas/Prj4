@@ -125,5 +125,6 @@ namespace VareDatabase
 
 
             //Tilbehør - Ildkugler, Eliksirer, elverøre, 
+        }
     }
 }

@@ -17,12 +17,12 @@ namespace VareDatabase.Repo
             this.db = db;
         }
 
-        public override void Delete(ImageEntity image)
+        public void AddImage(int a, string b)
         {
 
         }
 
-        public void AddImage(int a, string b)
+        public void Delete()
         {
 
         }
@@ -31,8 +31,7 @@ namespace VareDatabase.Repo
         {
 
         }
-
-        public void Delete()
+        public override void Delete(ImageEntity image)
         {
 
         }
