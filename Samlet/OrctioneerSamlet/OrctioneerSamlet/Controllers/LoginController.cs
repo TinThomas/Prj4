@@ -52,6 +52,7 @@ namespace OrctioneerSamlet.Controllers
         [HttpPost("UserN")]
         public async Task<IActionResult> PostUsername([FromBody]UsernameEntity request)
         {
+            Console.WriteLine(request.Username);
             string id;
             if (request.Username != null)
             {

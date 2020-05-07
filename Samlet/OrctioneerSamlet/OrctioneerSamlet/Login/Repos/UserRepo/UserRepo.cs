@@ -74,7 +74,6 @@ namespace Login.Repos.UserRepo
 
         public bool AddUser(UserModel user)
         {
-            Console.WriteLine("Adding user");
             if (user.userID == 0)
             {
                 int key = users.Count;
@@ -85,9 +84,6 @@ namespace Login.Repos.UserRepo
 
                 user.userID = key;
             }
-            Console.WriteLine("ID:" + user.userID);
-            Console.WriteLine("Name" + user.userName);
-            Console.WriteLine("Email" + user.Email);
             users[user.userID] = user;
             return true;
         }

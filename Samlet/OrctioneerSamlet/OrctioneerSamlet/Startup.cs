@@ -89,8 +89,7 @@ namespace OrctioneerSamlet
             app.UseAuthentication();
             app.UseAuthorization();
 
-            SeedUsers seeding = new SeedUsers(user,pass);
-            seeding.seedUsers();
+            SeedUsers.seedUsers(user,pass);
 
             app.UseEndpoints(endpoints =>
             {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using OrctioneerSamlet.Interfaces.Login;
 using VareDatabase.DBContext;
 using VareDatabase.Repo;
@@ -11,55 +12,60 @@ namespace OrctioneerSamlet
 {
     public class SeedUsers
     {
-        private readonly IUsernameRepository _user;
-        private readonly IPasswordRepository _pass;
-        public SeedUsers(UserModelContext user, PassModelContext pass)
+        public static void seedUsers(UserModelContext user, PassModelContext pass)
         {
-            _user = new UsernameRepository(user);
-            _pass = new PasswordRepository(pass);
-        }
-
-        public void seedUsers()
-        {
-            var m = _user.GetAll();
+            string id1 = Guid.NewGuid().ToString();
+            string id2 = Guid.NewGuid().ToString();
+            var m = user.Users.FirstOrDefault();
             if (m == null)
             {
+                Console.WriteLine("seeding users");
+
                 var users = new List<UsernameEntity>();
                 var h = new UsernameEntity()
                 {
+                    UserId = id1,
                     Username = "Admin",
                     Email = "Admin@Orctioneer.com"
                 };
                 users.Add(h);
                 h = new UsernameEntity()
                 {
+                    UserId = id2,
                     Username = "TestUser1",
                     Email = "Test@Orctioneer.com"
                 };
                 users.Add(h);
-                foreach (var i in users)
+
+                user.Users.AddRange(users);
+                user.SaveChangesAsync();
+                Console.WriteLine("Done seeding users.");
+            }
+
+            var p = pass.Passwords.FirstOrDefault();
+            if (p == null)
+            {
+
+                var myPasswords = new List<PasswordEntity>();
+                var my = new PasswordEntity()
                 {
-                    _user.addUser(i);
-                }
-
-                m = _user.GetAll();
-
-                users = new List<UsernameEntity>();
-                foreach (var i in m)
+                    UserId = id1,
+                    Password = "Password1"
+                };
+                myPasswords.Add(my);
+                my = new PasswordEntity()
                 {
-                 users.Add(i);   
-                }
+                    UserId = id2,
+                    Password = "TestPass1"
+                };
+                myPasswords.Add(my);
 
-                    var myPass = new PasswordEntity();
-                    myPass.UserId = users[0].UserId;
-                    myPass.Password = "Password1";
-                    _pass.CreatePassword(myPass);
-                    myPass = new PasswordEntity();
-                    myPass.UserId = users[1].UserId;
-                    myPass.Password = "TestPass1";
-                    _pass.CreatePassword(myPass);
-
+                pass.Passwords.AddRange(my);
+                pass.SaveChangesAsync();
+                Console.WriteLine("done seeding");
             }
         }
+
     }
 }
+

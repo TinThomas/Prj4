@@ -19,6 +19,7 @@ namespace VareDatabase.Repo
 
         public void addUser(UsernameEntity user)
         {
+            Console.WriteLine("seeing user:" + user.Username);
             string id = Guid.NewGuid().ToString();
             UsernameEntity _user = new UsernameEntity();
             user.UserId = id;

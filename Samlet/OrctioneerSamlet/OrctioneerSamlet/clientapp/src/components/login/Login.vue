@@ -108,7 +108,6 @@
         methods: {
             sendPassword(id) {
                 instance.post('/login/Pass', {
-                    id : null,
                     UserId : id,
                     Password : this.Password
                 })
@@ -131,10 +130,7 @@
             sendApplication() {
                 var ref = this;
                 instance.post('/Login/UserN', {
-                    id : null,
-                    UserId : null,
-                    Username : this.Username,
-                    Email : null
+                    Username : this.Username
                 })
                     .then(function (response) {
                         if (response.status !== 200) {
