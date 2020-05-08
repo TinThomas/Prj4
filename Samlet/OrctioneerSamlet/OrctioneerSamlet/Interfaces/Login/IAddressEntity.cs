@@ -3,12 +3,12 @@ using VareDatabase.Repo;
 
 namespace OrctioneerSamlet.Interfaces.Login
 {
-    public interface IAddressEntity : IRepository<AddressEntity>
+    public interface IAddressEntity : IRepository<AddressRepository>
     {
-        AddressEntity GetAddressEntity(string id);
-        void addAddress(AddressEntity address);
+        AddressRepository GetAddressEntity(string id);
+        void addAddress(AddressRepository address);
 
-        void updateAddress(AddressEntity address);
+        void updateAddress(AddressRepository address);
         void DeleteAddress(string id);
     }
 }

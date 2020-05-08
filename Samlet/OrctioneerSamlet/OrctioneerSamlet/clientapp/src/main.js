@@ -6,13 +6,15 @@ import Axios from 'axios'
 import VueAxios from 'vue-axios'
 import login from './components/login/Login.vue';
 import signup from './components/login/Signup.vue';
+import test from './components/Test.vue';
 
 Vue.use(VueRouter);
 Vue.use(VueAxios, Axios);
 
 const routes = [
     { path: '/Login', component: login},
-    { path:'/Signup', component: signup}
+    { path:'/Signup', component: signup},
+    {path: '/test', component: test}
 ];
 
 const router = new VueRouter({

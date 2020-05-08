@@ -14,6 +14,9 @@
                 <router-link to="/Wallet">
                     <button type="button" class="btn btn-secondary">Wallet</button>
                 </router-link>
+                <router-link to="/test">
+                    <button type="button" class="btn btn-secondary">test</button>
+                </router-link>
             </div>
         </div>
     </div>

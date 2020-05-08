@@ -1,6 +1,6 @@
 ﻿namespace VareDatabase.Repo
 {
-    public class AddressEntity
+    public class AddressRepository
     {
         
     }
