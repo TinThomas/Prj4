@@ -41,21 +41,60 @@ namespace LoginVue.Controllers
                 Username = request.Username,
                 Email = request.Email
             };
-            //bool check = await _user.CheckUser(user);
-            //if (check)
-              
+            bool check = await _user.CheckUser(user);
+            if (check)
+            {
                 string id = await _user.addUser(user);
-                if(!string.IsNullOrEmpty(id))
+                if (!string.IsNullOrEmpty(id))
                 {
-                PasswordEntity pass = new PasswordEntity()
-                {
-                    UserId = id,
-                    Password = request.Password
-                };
-                _pass.CreatePassword(pass);
-                return Ok();
+                    PasswordEntity pass = new PasswordEntity()
+                    {
+                        UserId = id,
+                        Password = request.Password
+                    };
+
+                    _pass.CreatePassword(pass);
+                    return Ok();
+                }
             }
+
             return BadRequest();
+        }
+
+        [HttpPost("Update")]
+        public async Task<IActionResult> Update([FromBody] HeaderRequest request)
+        {
+            UsernameEntity user = new UsernameEntity();
+            user.UserId = User.Identity.Name;
+            if (request.Username != null)
+            {
+                user.Username = request.Username;
+                _user.updateUsername(user);
+            }
+
+            if (request.Email != null)
+            {
+                user.Email = request.Email;
+            }
+
+            if (request.Password != null)
+            {
+                PasswordEntity pass = new PasswordEntity();
+                pass.UserId = User.Identity.Name;
+                pass.Password = request.Password;
+                _pass.updatePassword(pass);
+            }
+
+            return Ok();
+
+        }
+
+        [HttpPost("Delete")]
+        public async Task<IActionResult> Delete()
+        {
+            _user.DeleteUser(User.Identity.Name);
+            _pass.DeletePassword(User.Identity.Name);
+            return Ok();
         }
     }
 }

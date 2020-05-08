@@ -70,7 +70,7 @@ namespace OrctioneerSamlet
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserModelContext user, PassModelContext pass)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserModelContext user, PassModelContext pass, WalletContext wallet)
         {
             if (env.IsDevelopment())
             {
@@ -89,7 +89,7 @@ namespace OrctioneerSamlet
             app.UseAuthentication();
             app.UseAuthorization();
 
-            SeedUsers.seedUsers(user,pass);
+            SeedUsers.seedUsers(user,pass, wallet);
 
             app.UseEndpoints(endpoints =>
             {
