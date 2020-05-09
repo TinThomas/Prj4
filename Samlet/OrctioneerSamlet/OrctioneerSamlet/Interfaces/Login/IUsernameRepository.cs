@@ -10,10 +10,10 @@ namespace OrctioneerSamlet.Interfaces.Login
         Task<string> addUser(UsernameEntity user);
         Task<string> validateUsername(string username);
         Task<string> validateEmail(string email);
-        void updateUsername(UsernameEntity user);
-        void updateEmail(UsernameEntity user);
+        Task<int> updateUsername(UsernameEntity user);
+        Task<int> updateEmail(UsernameEntity user);
         Task<bool> CheckUser(UsernameEntity user);
-        void DeleteUser(string id);
+        Task<int> DeleteUser(string id);
 
     }
 }

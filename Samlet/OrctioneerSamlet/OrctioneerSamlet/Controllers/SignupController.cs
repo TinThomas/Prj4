@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Login;
-using Login.SigninControl.Modules;
-using Login.SignupControl;
-using Login.WalletControl;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OrctioneerSamlet.Interfaces.Login;
@@ -21,14 +17,11 @@ namespace LoginVue.Controllers
     [ApiController]
     public class SignupController : Controller
     {
-        private CoreService SignupService;
         private IPasswordRepository _pass;
         private IUsernameRepository _user;
 
         public SignupController(PassModelContext Passdb, UserModelContext userdb)
         {
-            SignupService = new CoreService(new SigninControl(new UserName(), 
-                    new Password()),new Signup());
             _pass = new PasswordRepository(Passdb);
             _user = new UsernameRepository(userdb);
         }
@@ -53,7 +46,7 @@ namespace LoginVue.Controllers
                         Password = request.Password
                     };
 
-                    _pass.CreatePassword(pass);
+                    int wait = await _pass.CreatePassword(pass);
                     return Ok();
                 }
             }
@@ -64,17 +57,19 @@ namespace LoginVue.Controllers
         [HttpPost("Update")]
         public async Task<IActionResult> Update([FromBody] HeaderRequest request)
         {
+            int wait;
             UsernameEntity user = new UsernameEntity();
             user.UserId = User.Identity.Name;
             if (request.Username != null)
             {
                 user.Username = request.Username;
-                _user.updateUsername(user);
+                wait = await _user.updateUsername(user);
             }
 
             if (request.Email != null)
             {
                 user.Email = request.Email;
+                wait = await _user.updateEmail(user);
             }
 
             if (request.Password != null)
@@ -82,7 +77,7 @@ namespace LoginVue.Controllers
                 PasswordEntity pass = new PasswordEntity();
                 pass.UserId = User.Identity.Name;
                 pass.Password = request.Password;
-                _pass.updatePassword(pass);
+                wait = await _pass.updatePassword(pass);
             }
 
             return Ok();
@@ -92,8 +87,9 @@ namespace LoginVue.Controllers
         [HttpPost("Delete")]
         public async Task<IActionResult> Delete()
         {
-            _user.DeleteUser(User.Identity.Name);
-            _pass.DeletePassword(User.Identity.Name);
+            int wait;
+            wait = await _user.DeleteUser(User.Identity.Name);
+            wait = await _pass.DeletePassword(User.Identity.Name);
             return Ok();
         }
     }

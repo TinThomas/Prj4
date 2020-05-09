@@ -16,7 +16,7 @@ namespace OrctioneerSamlet.Token
                 _configuration = configuration;
             }
     
-            public async Task<string> GenerateToken(string userId)
+            public string GenerateToken(string userId)
             {
                 Console.WriteLine("making token");
                 var claims = new Claim[]

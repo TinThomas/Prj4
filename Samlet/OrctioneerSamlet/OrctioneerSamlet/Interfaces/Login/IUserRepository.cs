@@ -3,7 +3,7 @@ using VareDatabase.Repo;
 
 namespace OrctioneerSamlet.Interfaces.Login
 {
-    public interface IUserEntity : IRepository<UserRepository>
+    public interface IUserRepository : IRepository<UserRepository>
     {
         void getThisUser(string id);
         void getUser(string name);

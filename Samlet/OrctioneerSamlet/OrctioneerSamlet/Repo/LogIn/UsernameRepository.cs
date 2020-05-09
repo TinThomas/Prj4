@@ -20,10 +20,9 @@ namespace VareDatabase.Repo
 
         public async Task<string> addUser(UsernameEntity user)
         {
-            Console.WriteLine("seeing user:" + user.Username);
             string id = Guid.NewGuid().ToString();
             user.UserId = id;
-            db.AddAsync(user);
+            var wait = await db.AddAsync(user);
             var done = await db.SaveChangesAsync();
             return id;
 
@@ -32,53 +31,52 @@ namespace VareDatabase.Repo
 
         public async Task<string> validateUsername(string username)
         {
-            string query = (from i in db.Users
+            string query = await (from i in db.Users
                 where i.Username == username
-                select i.UserId).FirstOrDefault();
+                select i.UserId).FirstOrDefaultAsync();
             return query;
         }
 
         public async Task<string> validateEmail(string email)
         {
-            string query = (from i in db.Users
+            string query = await (from i in db.Users
                 where i.Email == email
-                select i.UserId).FirstOrDefault();
+                select i.UserId).FirstOrDefaultAsync();
             return query;
         }
 
-        public async void updateUsername(UsernameEntity user)
+        public async Task<int> updateUsername(UsernameEntity user)
         {
-           var query = (from i in db.Users
+           var query =  (from i in db.Users
                 where i.UserId == user.UserId
                       select i).FirstOrDefault();
            query.Username = user.Username;
            db.Update(query);
-           int wait = await db.SaveChangesAsync();
-
+           return await db.SaveChangesAsync();
         }
 
-        public void updateEmail(UsernameEntity user)
+        public async Task<int> updateEmail(UsernameEntity user)
         {
             var query = (from i in db.Users
                 where i.UserId == user.UserId
                 select i).FirstOrDefault();
             query.Email = user.Email;
             db.Update(query);
-            db.SaveChangesAsync();
+            return await db.SaveChangesAsync();
         }
 
         public async Task<bool> CheckUser(UsernameEntity user)
         {
-            var query = (from i in db.Users
+            var query = await (from i in db.Users
                 where i.Username == user.Username
-                select i).FirstOrDefault();
+                select i).FirstOrDefaultAsync();
             if (query != null)
             {
                 return false;
             }
-            query = (from i in db.Users
+            query = await (from i in db.Users
                 where i.Email == user.Email
-                select i).FirstOrDefault();
+                select i).FirstOrDefaultAsync();
             if (query != null)
             { 
                 return false;
@@ -87,13 +85,13 @@ namespace VareDatabase.Repo
             return true;
         }
 
-        public void DeleteUser(string id)
+        public async Task<int> DeleteUser(string id)
         {
             var query = (from i in db.Users
                 where i.UserId == id
                 select i).FirstOrDefault();
             db.Remove(query);
-            db.SaveChangesAsync();
+            return await db.SaveChangesAsync();
         }
 
     }

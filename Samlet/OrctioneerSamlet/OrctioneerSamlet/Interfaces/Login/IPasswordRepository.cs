@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Login.SigninControl.Modules;
 using OrctioneerSamlet.Models.Login;
 using VareDatabase;
 
@@ -8,8 +7,8 @@ namespace OrctioneerSamlet.Interfaces.Login
     public interface IPasswordRepository : IRepository<PasswordEntity>
     {
         Task<bool> validatePassword(PasswordEntity password);
-        void CreatePassword(PasswordEntity password);
-        void updatePassword(PasswordEntity password);
-        void DeletePassword(string id);
+        Task<int> CreatePassword(PasswordEntity password);
+        Task<int> updatePassword(PasswordEntity password);
+        Task<int> DeletePassword(string id);
     }
 }
