@@ -1,5 +1,4 @@
-﻿using Login.WalletControl.Modules;
-using OrctioneerSamlet.Models.Login;
+﻿using OrctioneerSamlet.Models.Login;
 using VareDatabase;
 
 namespace OrctioneerSamlet.Interfaces.Login

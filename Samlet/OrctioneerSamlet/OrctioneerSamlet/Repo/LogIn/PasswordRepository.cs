@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Login.SigninControl.Modules;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using OrctioneerSamlet.Interfaces.Login;
 using OrctioneerSamlet.Models.Login;
@@ -19,9 +19,9 @@ namespace VareDatabase.Repo
 
         public async Task<bool> validatePassword(PasswordEntity pass)
         {
-            var query = (from i in db.Passwords
+            var query = await (from i in db.Passwords
                 where i.UserId == pass.UserId
-                select i).FirstOrDefault();
+                select i).FirstOrDefaultAsync();
             if (query.Password == pass.Password)
             {
                 return true;
@@ -30,27 +30,29 @@ namespace VareDatabase.Repo
             return false;
         }
 
-        public void CreatePassword(PasswordEntity password)
+        public async Task<int> CreatePassword(PasswordEntity password)
         {
             db.Passwords.Add(password);
-            db.SaveChangesAsync();
+            return await db.SaveChangesAsync();
         }
 
-        public void updatePassword(PasswordEntity password)
+        public async Task<int> updatePassword(PasswordEntity password)
         {
             var query = (from i in db.Passwords
                 where i.UserId == password.UserId
                 select i).FirstOrDefault();
             query.Password = password.Password;
             db.Passwords.Update(password);
-            db.SaveChangesAsync();
+            return await db.SaveChangesAsync();
         }
 
-        public void DeletePassword(string id)
+        public async Task<int> DeletePassword(string id)
         {
             var query = (from i in db.Passwords
                 where i.UserId == id
                 select i).FirstOrDefault();
+            db.Remove(query);
+            return await db.SaveChangesAsync();
         }
     }
 }

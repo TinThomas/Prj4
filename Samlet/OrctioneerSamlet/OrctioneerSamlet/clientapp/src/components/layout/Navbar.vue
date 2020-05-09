@@ -11,6 +11,9 @@
                 <router-link to="/addAuction">
                     <Button type="button" class="btn btn-secondary">New Auction</Button>
                 </router-link>
+                <router-link to="/test">
+                    <button type="button" class="btn btn-secondary">test</button>
+                </router-link>
             </div>
             <div class="col-6">
                 <modal-login id="login-modal"></modal-login>

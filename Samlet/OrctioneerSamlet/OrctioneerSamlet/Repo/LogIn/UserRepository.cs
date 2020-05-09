@@ -1,6 +1,6 @@
 ﻿namespace VareDatabase.Repo
 {
-    public class UserEntity
+    public class UserRepository
     {
         
     }
