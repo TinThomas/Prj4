@@ -6,7 +6,7 @@
                 <h5 >{{ auc.title }}</h5>
                 <h5>Current bid: {{ auc.bid }}</h5>
                 <h5>Time left: {{ auc.timeLeft }}</h5>
-                <button @click="navigateToAuction(auc.Title)" class="btn btn-secondary">See full auction</button>
+                <button @click="navigateToAuction(auc.title)" class="btn btn-secondary">See full auction</button>
                 
                 
             </div>
