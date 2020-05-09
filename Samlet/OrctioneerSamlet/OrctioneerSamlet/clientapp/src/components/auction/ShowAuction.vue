@@ -3,16 +3,20 @@
         <h1>All auctions</h1>
         <input type="text" v-model="search" placeholder="search auctions">
         <item-auction :auctions="filteredAuctions"></item-auction>
-        <span v-html="test"></span>
+        New
+        <item-auction2 :auctions="filteredAuctions2"></item-auction2>
+        {{test}}
     </div>
 </template>
 
 <script>
-import Auction from './Auction.vue'
+    import Auction from './Auction.vue'
+    import Auction2 from './Auction2.vue'
 import axios from 'axios';
 export default {
      components:{
-    'item-auction' : Auction
+        'item-auction': Auction,
+        'item-auction2': Auction2
     },
     data(){
         return{
@@ -23,7 +27,8 @@ export default {
                 { title: 'Én pil', url: require('./../../images/En_pil.jpg'), bid: 1234, timeLeft: "4 day"},
             ],
             search: '',
-            test: ''
+            test: []
+            
         }
     },
     methods:{
@@ -35,6 +40,11 @@ export default {
                 return auction.title.toLowerCase().match(this.search.toLowerCase()) 
             })
         },
+        filteredAuctions2: function () {
+            return this.test.filter((auction) => {
+                return auction.Title.toLowerCase().match(this.search.toLowerCase())
+            })
+        },
             
         },
         created() {
@@ -43,12 +53,9 @@ export default {
             if (response.status != 200) {
                 //error
             }
-                var data = response.data;
-                for (var i = 0; i < response.data.length; i++) {
-                    ref.test += '<p>' + data[i].Title + '</p>';
-                }
-        })
-            
+                //ref.test = response.data.splice(0, 4);
+                ref.test = response.data;
+        })     
     }
 }
 </script>

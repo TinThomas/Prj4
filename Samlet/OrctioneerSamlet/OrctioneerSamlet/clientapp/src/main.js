@@ -11,6 +11,7 @@ import AddAuction from './components/auction/AddAuction.vue';
 import Home from './components/layout/Home.vue';
 import ItemAuction from './components/auction/Auction.vue'
 import FullAuction from './components/auction/FullAuction.vue'
+import FullAuction2 from './components/auction/FullAuction2.vue'
 
 
 Vue.use(VueRouter);
@@ -24,7 +25,8 @@ const routes = [
     { path: '/search', component: ShowAuction },
     { path: '/addAuction', component: AddAuction },
     { path: '/itemAuction', component: ItemAuction },
-    { path: '/fullAuction/:id', component: FullAuction }
+    { path: '/fullAuction/:id', component: FullAuction },
+        { path: '/fullAuction2/:id', component: FullAuction2 }
 ];
 
 const router = new VueRouter({
