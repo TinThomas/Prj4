@@ -55,16 +55,11 @@ namespace VareDatabase.Controllers
         [HttpPost]
         [Route("Home/item")]
         //Post = Create
-        public void CreateEntity(string jsonItem)
+        public async Task<IActionResult> CreateEntity([FromBody]ItemEntity item)
         {
-            var jItem = JsonConvert.DeserializeObject(jsonItem);
-
-            ItemEntity item = new ItemEntity()
-            {
-                
-            };
             _dbLogic.AddItem(item);
             _dbLogic.Save();
+            return Ok();
         }
 
         [HttpPut]

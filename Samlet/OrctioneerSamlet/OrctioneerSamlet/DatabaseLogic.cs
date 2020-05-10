@@ -38,9 +38,9 @@ namespace VareDatabase
         {
             return repo.Read(id);
         }
-        public void Save()
+        public int Save()
         {
-            unit.Commit(); 
+            return unit.Commit(); 
         }
         public void AddTag(int id, string newTag)
         {

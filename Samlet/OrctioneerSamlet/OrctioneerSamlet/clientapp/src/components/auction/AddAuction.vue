@@ -8,11 +8,12 @@
           <textarea v-model.lazy="auction.description"></textarea>
           <div id="cat-checkbox">
               <label>Category 1</label>
-              <input type="checkbox" value="cat1" v-model="auction.categories"/>
+              <input type="checkbox" value="cat1" v-model="auction.categories" />
               <label>Category 2</label>
-              <input type="checkbox" value="cat2" v-model="auction.categories"/>
+              <input type="checkbox" value="cat2" v-model="auction.categories" />
+              <a href="AddAuction.vue">AddAuction.vue</a>
               <label>Category 3</label>
-              <input type="checkbox" value="cat3" v-model="auction.categories"/>
+              <input type="checkbox" value="cat3" v-model="auction.categories" />
           </div>
           <label>End date:</label>
           <select v-model="auction.endDate">

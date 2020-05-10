@@ -16,9 +16,9 @@ namespace VareDatabase.Repo
         {
             Context = context;
         }
-        public void Commit()
+        public int Commit()
         {
-            Context.SaveChanges();
+            return Context.SaveChanges();
         }
         public void Dispose()
         {
