@@ -31,5 +31,12 @@ namespace VareDatabase.Models
         public ICollection<ImageEntity> Images { get; set; }
         public ICollection<TagEntity> Tags { get; set; }
         public ICollection<BidEntity> Bids { get; set; }
+        public ItemEntity()
+        {
+            DateCreated = DateTime.Now;
+            Images = new List<ImageEntity>();
+            Tags = new List<TagEntity>();
+            Bids = new List<BidEntity>();
+        }
     }
 }
