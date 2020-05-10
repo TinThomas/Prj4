@@ -58,6 +58,10 @@ namespace VareDatabase.Controllers
         public void CreateEntity(string jsonItem)
         {
             ItemEntity item = JsonConvert.DeserializeObject<ItemEntity>(jsonItem);
+            //ItemEntity item = new ItemEntity()
+            //{
+                //Title =
+            //};
             _dbLogic.AddItem(item);
             _dbLogic.Save();
         }
