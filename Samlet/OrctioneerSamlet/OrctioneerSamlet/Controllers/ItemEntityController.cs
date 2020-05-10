@@ -53,6 +53,7 @@ namespace VareDatabase.Controllers
         }
 
         [HttpPost]
+        [Route("Home/item")]
         //Post = Create
         public void CreateEntity(string jsonItem)
         {
