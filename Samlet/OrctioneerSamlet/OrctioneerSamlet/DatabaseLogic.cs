@@ -22,7 +22,7 @@ namespace VareDatabase
         public void AddItem(ItemEntity item)
         {
             repo.Create(item);
-            repo.GenerateTags(item);
+            //repo.GenerateTags(item);
             unit.Commit();
         }
         public void Delete(ItemEntity item)
