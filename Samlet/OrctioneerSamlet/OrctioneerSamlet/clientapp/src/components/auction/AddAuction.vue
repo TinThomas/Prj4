@@ -60,6 +60,7 @@ export default {
             {
                 Title: this.auction.title,
                 DescriptionOfItem: this.auction.description,
+                
             })
             //    .then(function (response) {
             //    console.log(response);
