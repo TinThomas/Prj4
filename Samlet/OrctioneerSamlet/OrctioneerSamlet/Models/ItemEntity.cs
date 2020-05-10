@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
 
 namespace VareDatabase.Models
 {
@@ -18,10 +16,9 @@ namespace VareDatabase.Models
         public int BuyOutPrice { get; set; }
         [Required]
         public DateTime ExpirationDate { get; set; }
-        [Required]
-        public DateTime DateCreated { get; set; }
-        [Required]
-        public int UserIdSeller { get; set; }
+
+        [Required] public DateTime DateCreated { get; set; } = DateTime.Now;
+        [Required] public int UserIdSeller { get; set; }
         [Required]
         [MaxLength(500)]
         public string DescriptionOfItem { get; set; }

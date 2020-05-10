@@ -28,7 +28,7 @@ namespace VareDatabase.Repo.Auction
         }
         public void AddTag(int itemId, string newTag)
         {
-            ItemEntity item = db.Set<ItemEntity>().ToList().First(x => x.ItemId == itemId);
+            ItemEntity item = db.Set<ItemEntity>().ToList().FirstOrDefault(x => x.ItemId == itemId);
             if (item == null)
             {
                 return;
