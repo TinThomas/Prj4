@@ -57,6 +57,10 @@ namespace VareDatabase.Controllers
         //Post = Create
         public async Task<IActionResult> CreateEntity([FromBody]ItemEntity item)
         {
+            if(item.Title == null)
+            {
+                return BadRequest();
+            }
             _dbLogic.AddItem(item);
             _dbLogic.Save();
             return Ok();
