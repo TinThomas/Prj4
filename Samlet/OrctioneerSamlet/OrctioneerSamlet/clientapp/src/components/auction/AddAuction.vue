@@ -56,7 +56,7 @@ export default {
   },
   methods:{
       postAuction: function(){
-          axios.post('http://localhost:5000/Home',
+          axios.post('http://localhost:5000/Home/item',
             {
                 Title: this.auction.title,
                 DescriptionOfItem: this.auction.description,
