@@ -61,7 +61,7 @@ export default {
             //    })
             //},
         },
-        mounted() {
+        created() {
             var ref = this;
             axios.get('http://localhost:5000/Home/item/' + ref.id).then(function (response) {
                 if (response.status != 200) {

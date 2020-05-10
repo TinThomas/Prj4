@@ -56,12 +56,11 @@ export default {
   },
   methods:{
       postAuction: function(){
-            axios.post('https://jsonplaceholder.typicode.com/posts',
+          axios.post('http://localhost:5000/Home',
             {
-                title: this.auction.title,
-                body: this.auction.description,
-                userId: 1
-                })
+                Title: this.auction.title,
+                DescriptionOfItem: this.auction.description,
+            })
             //    .then(function (response) {
             //    console.log(response);
             //}).catch(function (error) {
