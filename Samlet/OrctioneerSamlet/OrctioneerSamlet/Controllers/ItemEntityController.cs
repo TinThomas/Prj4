@@ -53,7 +53,7 @@ namespace VareDatabase.Controllers
         }
 
         [HttpPost]
-        [Route("Home/item")]
+        [Route("Home/newItem")]
         //Post = Create
         public async Task<IActionResult> CreateEntity([FromBody]ItemEntity item)
         {

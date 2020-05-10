@@ -59,7 +59,7 @@ export default {
   methods:{
       postAuction: function () {
           var ref = this;
-          axios.post('http://localhost:5000/Home/item',
+          axios.post('http://localhost:5000/Home/newItem',
               {
                   ItemId:99,
                   Title: ref.auction.title,
