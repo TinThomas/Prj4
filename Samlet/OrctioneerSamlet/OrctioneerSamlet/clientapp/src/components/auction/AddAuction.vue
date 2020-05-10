@@ -53,16 +53,27 @@ export default {
         },
         endDates:['1 day', '2 days', '7 days', '31 days'],
         submitted: false,
+       
     }
   },
   methods:{
-      postAuction: function(){
-          axios.post('http://localhost:5000/Home',
-            {
-                Title: this.auction.title,
-                DescriptionOfItem: this.auction.description,
+      postAuction: function () {
+          var ref = this;
+          axios.post('http://localhost:5000/Home/item',
+              {
+                  ItemId:99,
+                  Title: ref.auction.title,
+                  BuyOutPrice: 123,
+                  ExpirationDate: "2020-05-012T10:21:47.6980913",
+                  DateCreated:"2020-05-07T10:21:47.6980913",
+                  UserIdSeller: 99,
+                  DescriptionOfItem: ref.auction.description,
+                  Images: "",
+                  Tags: "",
+                  Bids: "",
                 
-            })
+              })
+
             //    .then(function (response) {
             //    console.log(response);
             //}).catch(function (error) {
