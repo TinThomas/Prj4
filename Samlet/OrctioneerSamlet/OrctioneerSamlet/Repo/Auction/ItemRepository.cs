@@ -73,6 +73,36 @@ namespace VareDatabase.Repo.Auction
             }
             return foundItems;
         }
+        public ItemEntity GenerateItem(string title, string description, string[] tags, string[] images, int userId, int expire, int buyOut = -1)
+        {
+            List<ImageEntity> newImages = new List<ImageEntity>();
+            for (int i = 0; i < images.Length; i++)
+            {
+                ImageEntity item = new ImageEntity();
+                item.ImageOfItem = images[i];
+                newImages[i] = item;
+            }
+            List<TagEntity> newTags = new List<TagEntity>();
+            for (int i = 0; i < tags.Length; i++)
+            {
+                TagEntity tag = new TagEntity();
+                tag.Type = tags[i];
+                newTags[i] = tag;
+            }
+            ItemEntity itemEntity = new ItemEntity()
+            {
+                BuyOutPrice = buyOut,
+                DateCreated = DateTime.Now,
+                ExpirationDate = DateTime.Now.AddDays(expire),
+                Title = title,
+                Images = newImages,
+                Tags = newTags,
+                DescriptionOfItem = description,
+                UserIdSeller = userId,
+            };
+            GenerateTags(itemEntity);
+            return itemEntity;
+        }
         private List<ItemEntity> SearchByTag(string tag)
         {
             List<ItemEntity> itemsId = new List<ItemEntity>();

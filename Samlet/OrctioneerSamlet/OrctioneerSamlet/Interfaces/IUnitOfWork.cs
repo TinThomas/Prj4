@@ -9,7 +9,6 @@ namespace VareDatabase.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        void Commit();
-        //IRepository GetRepository();
+        int Commit();
     }
 }

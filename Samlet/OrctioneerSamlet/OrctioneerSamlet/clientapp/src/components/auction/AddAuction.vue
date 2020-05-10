@@ -8,11 +8,11 @@
           <textarea v-model.lazy="auction.description"></textarea>
           <div id="cat-checkbox">
               <label>Category 1</label>
-              <input type="checkbox" value="cat1" v-model="auction.categories"/>
+              <input type="checkbox" value="cat1" v-model="auction.categories" />
               <label>Category 2</label>
-              <input type="checkbox" value="cat2" v-model="auction.categories"/>
+              <input type="checkbox" value="cat2" v-model="auction.categories" />
               <label>Category 3</label>
-              <input type="checkbox" value="cat3" v-model="auction.categories"/>
+              <input type="checkbox" value="cat3" v-model="auction.categories" />
           </div>
           <label>End date:</label>
           <select v-model="auction.endDate">
@@ -52,16 +52,28 @@ export default {
         },
         endDates:['1 day', '2 days', '7 days', '31 days'],
         submitted: false,
+       
     }
   },
   methods:{
-      postAuction: function(){
-            axios.post('https://jsonplaceholder.typicode.com/posts',
-            {
-                title: this.auction.title,
-                body: this.auction.description,
-                userId: 1
-                })
+      postAuction: function () {
+          var ref = this;
+          axios.post('http://localhost:5000/Home/newItem',
+              {
+                  ItemId:99,
+                  Title: ref.auction.title,
+                  BuyOutPrice: 123,
+                  ExpirationDate: "2020-05-012T10:21:47.6980913",
+                  DateCreated:"2020-05-07T10:21:47.6980913",
+                  UserIdSeller: 99,
+                  DescriptionOfItem: ref.auction.description,
+                  Sold: false,
+                  Images: [],
+                  Tags: [],
+                  Bids: []
+                
+              })
+
             //    .then(function (response) {
             //    console.log(response);
             //}).catch(function (error) {
