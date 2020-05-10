@@ -58,19 +58,12 @@ export default {
   methods:{
       postAuction: function () {
           var ref = this;
-          axios.post('http://localhost:5000/Home/newItem',
+          axios.post('http://localhost:5000/api/ItemEntity/Item',
               {
-                  ItemId:99,
                   Title: ref.auction.title,
                   BuyOutPrice: 123,
-                  ExpirationDate: "2020-05-012T10:21:47.6980913",
-                  DateCreated:"2020-05-07T10:21:47.6980913",
-                  UserIdSeller: 99,
                   DescriptionOfItem: ref.auction.description,
-                  Sold: false,
-                  Images: [],
-                  Tags: [],
-                  Bids: []
+    
                 
               })
 

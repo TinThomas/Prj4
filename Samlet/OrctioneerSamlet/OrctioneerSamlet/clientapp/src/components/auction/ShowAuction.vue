@@ -49,7 +49,7 @@ export default {
         },
         created() {
             var ref = this;
-            axios.get('http://localhost:5000/Home/item/').then(function (response) {
+            axios.get('http://localhost:5000/api/ItemEntity/Home/item').then(function (response) {
             if (response.status != 200) {
                 //error
             }
