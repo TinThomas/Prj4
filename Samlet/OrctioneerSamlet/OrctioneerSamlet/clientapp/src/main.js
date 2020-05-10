@@ -2,21 +2,21 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from './App.vue';
 import VModal from 'vue-js-modal'
-import Axios from 'axios'
+import axios from 'axios'
 import VueAxios from 'vue-axios'
 import login from './components/login/Login.vue';
 import signup from './components/login/Signup.vue';
 import ShowAuction from './components/auction/ShowAuction.vue';
 import AddAuction from './components/auction/AddAuction.vue';
 import Home from './components/layout/Home.vue';
-import ItemAuction from './components/auction/Auction.vue'
+import ItemAuction from './components/auction/Auction.vue';
 import FullAuction from './components/auction/FullAuction.vue'
 import FullAuction2 from './components/auction/FullAuction2.vue'
-
+import store from './components/Utility/Store'
 
 Vue.use(VueRouter);
 Vue.use(VModal);
-Vue.use(VueAxios, Axios);
+Vue.use(VueAxios, axios);
 
 const routes = [
     { path: '/Login', component: login},
@@ -26,7 +26,7 @@ const routes = [
     { path: '/addAuction', component: AddAuction },
     { path: '/itemAuction', component: ItemAuction },
     { path: '/fullAuction/:id', component: FullAuction },
-        { path: '/fullAuction2/:id', component: FullAuction2 }
+    { path: '/fullAuction2/:id', component: FullAuction2 }
 ];
 
 const router = new VueRouter({
@@ -34,15 +34,16 @@ const router = new VueRouter({
     mode: 'history'
 });
 
-const token = localStorage.getItem('token');
-if (token) {
-    Axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
-}
+
+//Removing token on app start up - requiring user to login.
+axios.defaults.headers.common['Authorization'] = null;
+localStorage.removeItem('token');
 
 Vue.config.productionTip = false;
 
 window.vm = new Vue({
-    Axios,
+    axios,
     router,
+    store,
     render: h => h(App),
 }).$mount('#app');

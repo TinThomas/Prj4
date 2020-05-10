@@ -11,7 +11,6 @@
               <input type="checkbox" value="cat1" v-model="auction.categories" />
               <label>Category 2</label>
               <input type="checkbox" value="cat2" v-model="auction.categories" />
-              <a href="AddAuction.vue">AddAuction.vue</a>
               <label>Category 3</label>
               <input type="checkbox" value="cat3" v-model="auction.categories" />
           </div>
@@ -68,9 +67,10 @@ export default {
                   DateCreated:"2020-05-07T10:21:47.6980913",
                   UserIdSeller: 99,
                   DescriptionOfItem: ref.auction.description,
-                  Images: "",
-                  Tags: "",
-                  Bids: "",
+                  Sold: false,
+                  Images: [],
+                  Tags: [],
+                  Bids: []
                 
               })
 

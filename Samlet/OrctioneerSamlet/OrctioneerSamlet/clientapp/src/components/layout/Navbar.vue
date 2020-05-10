@@ -11,12 +11,13 @@
                 <router-link to="/addAuction">
                     <Button type="button" class="btn btn-secondary">New Auction</Button>
                 </router-link>
-                <router-link to="/test">
-                    <button type="button" class="btn btn-secondary">test</button>
-                </router-link>
             </div>
             <div class="col-6">
-                <modal-login id="login-modal"></modal-login>
+                <div class="row">
+                    <modal-login id="login-modal" v-show="!loginState"></modal-login>
+                    <modal-signup id="modal-signup" v-show="!loginState"></modal-signup>
+                </div>
+                <signout v-show="loginState"></signout>
             </div>
         </div>
     </div>
@@ -24,11 +25,21 @@
 
 <script>
 import ModalLogin from './LoginModal.vue'
+import ModalSignup from './SignupModal'
+import Signout from '../Utility/Signout.vue'
 
 export default {
-  components:{
-    'modal-login' : ModalLogin
-  }
+    components: {
+        'modal-login': ModalLogin,
+        'modal-signup': ModalSignup,
+        'signout': Signout
+    },
+    computed:{
+        loginState(){
+            return this.$store.state.logged
+        }
+    }
+    
 }
 </script>
 

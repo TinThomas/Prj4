@@ -13,6 +13,8 @@ using VareDatabase.Repo.Auction;
 
 namespace VareDatabase.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class ItemEntityController : Controller
     {
         private DatabaseLogic _dbLogic;
@@ -51,19 +53,16 @@ namespace VareDatabase.Controllers
             json = JsonConvert.SerializeObject(_dbLogic.Search(search), Formatting.Indented);
             return json;
         }
-
-        [HttpPost]
-        [Route("Home/newItem")]
+        
         //Post = Create
+        [HttpPost("Item")]
         public async Task<IActionResult> CreateEntity([FromBody]ItemEntity item)
         {
-            if(item.Title == null)
-            {
-                return BadRequest();
-            }
+            Console.WriteLine("Adding item with title: " + item.Title);
             _dbLogic.AddItem(item);
             _dbLogic.Save();
-            return Ok();
+
+            return Ok(item);
         }
 
         [HttpPut]

@@ -1,15 +1,16 @@
-﻿using OrctioneerSamlet.Models.Login;
+﻿using System.Threading.Tasks;
+using OrctioneerSamlet.Models.Login;
 using VareDatabase;
 using VareDatabase.Repo;
 
 namespace OrctioneerSamlet.Interfaces.Login
 {
-    public interface IUserRepository : IRepository<UserRepository>
+    public interface IUserRepository : IRepository<UserEntity>
     {
-        UserEntity getThisUser(string id);
-        void getUser(string name);
-        void addUser(UserRepository user);
-        void updateUser(UserRepository user);
-        void DeleteUser(string id);
+        Task<UserEntity> getThisUser(string id);
+        Task<UserEntity> getUser(string name);
+        Task<int> addUser(UserEntity user);
+        Task<int> updateUser(UserEntity user);
+        Task<int> DeleteUser(string id);
     }
 }

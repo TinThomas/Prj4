@@ -120,6 +120,7 @@
                         localStorage.setItem("token", response.data);
                         axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data;
                         instance.defaults.headers.common['Authorization'] = 'Bearer ' + response.data;
+                        this.store.dispatch("login");
                     })
                     .catch(function (err) {
                         var message = 'Fetch Error: ' + err;
