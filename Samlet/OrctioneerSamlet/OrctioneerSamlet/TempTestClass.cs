@@ -10,7 +10,7 @@ namespace VareDatabase
     public class TempTestClass
     {
         private VareDataModelContext db;
-        public void CreateItem(int buyOut, int userId, int expire, string[] tags, string title, string description, string[] images)
+        public void GenerateItem(int buyOut, int userId, int expire, string[] tags, string title, string description, string[] images)
         {
             List<ImageEntity> newImages = new List<ImageEntity>();
             for (int i = 0; i < images.Length; i++)
@@ -38,8 +38,6 @@ namespace VareDatabase
                 UserIdSeller = userId,
             };
             GenerateTags(itemEntity.Title, itemEntity.ItemId);
-            db.Add(itemEntity);
-            db.SaveChanges();
         }
         public void AddImage(int itemId, string image)
         {

@@ -54,8 +54,9 @@ namespace VareDatabase.Controllers
 
         [HttpPost]
         //Post = Create
-        public void CreateEntity(ItemEntity item)
+        public void CreateEntity(string jsonItem)
         {
+            ItemEntity item = JsonConvert.DeserializeObject<ItemEntity>(jsonItem);
             _dbLogic.AddItem(item);
             _dbLogic.Save();
         }
