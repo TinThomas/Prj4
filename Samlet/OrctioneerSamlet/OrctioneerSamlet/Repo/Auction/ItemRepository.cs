@@ -6,6 +6,7 @@ using VareDatabase.Models;
 using VareDatabase.DBContext;
 using VareDatabase.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
 
 namespace VareDatabase.Repo.Auction
 {
@@ -20,6 +21,10 @@ namespace VareDatabase.Repo.Auction
         {
             return db.Set<ItemEntity>().Where(x => x.Sold == false).ToList();
         }*/
+        public override ItemEntity Read(int id)
+        {
+            return Context.Set<ItemEntity>().Include(x => x.Tags).Include(x => x.Bids).FirstOrDefault(x => x.ItemId == id);
+        }
         public override IEnumerable<ItemEntity> GetAll()
         {
             return Context.Set<ItemEntity>()

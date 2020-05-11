@@ -15,7 +15,7 @@ namespace VareDatabase.Repo
         {
             Context = context;
         }
-        public TEntity Read(int id)
+        public virtual TEntity Read(int id)
         {
             return Context.Set<TEntity>().Find(id);
         }
