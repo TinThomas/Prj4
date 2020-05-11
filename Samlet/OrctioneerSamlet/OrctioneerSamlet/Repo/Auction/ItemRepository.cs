@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using VareDatabase.Models;
 using VareDatabase.DBContext;
 using VareDatabase.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace VareDatabase.Repo.Auction
 {
@@ -15,9 +16,16 @@ namespace VareDatabase.Repo.Auction
         {
             this.db = db;
         }
-        public override IEnumerable<ItemEntity> GetAll()
+        /*public override IEnumerable<ItemEntity> GetAll()
         {
             return db.Set<ItemEntity>().Where(x => x.Sold == false).ToList();
+        }*/
+        public override IEnumerable<ItemEntity> GetAll()
+        {
+            return Context.Set<ItemEntity>()
+                .Include(tag => tag.Tags)
+                .Include(bid => bid.Bids)
+                .Include(img => img.Images);
         }
         public void GenerateTags(ItemEntity item)
         {

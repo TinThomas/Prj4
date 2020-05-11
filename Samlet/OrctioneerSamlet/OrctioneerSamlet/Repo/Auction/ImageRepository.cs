@@ -16,25 +16,5 @@ namespace VareDatabase.Repo
         {
             this.db = db;
         }
-
-        public void AddImage(int a, string b)
-        {
-
-        }
-
-        public void Delete()
-        {
-
-        }
-
-        public void DeleteImage(int a, int b)
-        {
-
-        }
-        public override void Delete(ImageEntity image)
-        {
-
-        }
-        
     }
 }

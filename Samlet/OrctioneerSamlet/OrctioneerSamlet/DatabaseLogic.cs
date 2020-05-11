@@ -15,15 +15,19 @@ namespace VareDatabase
         private readonly IUnitOfWork unit;
         private readonly IItemRepository itemRepo;
         private readonly IBidRepository bidRepo;
-        public DatabaseLogic(IUnitOfWork unit, IItemRepository itemRepo = null, IBidRepository bidRepo = null)
+        private readonly ITagRepository tagRepo;
+        private readonly IImageRepository imageRepo;
+        public DatabaseLogic(IUnitOfWork unit, IItemRepository itemRepo = null, IBidRepository bidRepo = null, ITagRepository tagRepo = null, IImageRepository imageRepo = null)
         {
             this.unit = unit;
             this.itemRepo = itemRepo;
             this.bidRepo = bidRepo;
+            this.tagRepo = tagRepo;
+            this.imageRepo = imageRepo;
         }
         public void CreateBid(BidEntity bid)
         {
-            bidRepo.AddBid(bid.ItemId,  bid.Bid,  bid.UserIdBuyer);
+            bidRepo.AddBid(bid.ItemId, bid.Bid, bid.UserIdBuyer);
             unit.Commit();
         }
         public IEnumerable<BidEntity> GetBidsFromItem(int itemId)
@@ -43,7 +47,7 @@ namespace VareDatabase
 
         public IEnumerable<ItemEntity> GetAll()
         {
-            return itemRepo.GetAll();
+            
         }
         public ItemEntity GetSingle(int id)
         {
@@ -51,7 +55,7 @@ namespace VareDatabase
         }
         public int Save()
         {
-            return unit.Commit(); 
+            return unit.Commit();
         }
         public void AddTag(int id, string newTag)
         {

@@ -63,7 +63,7 @@ namespace VareDatabase.Controllers
         public ActionResult<string> GetNewestItems()
         {
             var items = _dbLogic.GetAll();
-            items.ToList().OrderBy(i => i.DateCreated);
+            items.OrderByDescending(i => i.DateCreated);
             json = JsonConvert.SerializeObject(items, Formatting.Indented);
             return json;
         }
@@ -73,7 +73,7 @@ namespace VareDatabase.Controllers
         public ActionResult<string> GetExpiringItems()
         {
             var items = _dbLogic.GetAll();
-            items.ToList().OrderBy(i => i.ExpirationDate);
+            items.OrderBy(i => i.ExpirationDate);
             json = JsonConvert.SerializeObject(items, Formatting.Indented);
             return json;
         }

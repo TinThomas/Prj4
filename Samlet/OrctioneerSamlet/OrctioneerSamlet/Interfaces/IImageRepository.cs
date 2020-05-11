@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VareDatabase.Models;
 
 namespace VareDatabase.Interfaces
 {
-    public interface IImageRepository
+    public interface IImageRepository : IRepository<ImageEntity>
     {
-        public void AddImage(int itemId, string image);
-        public void DeleteImage(int itemId, int imageId);
-        void Delete();
     }
 }

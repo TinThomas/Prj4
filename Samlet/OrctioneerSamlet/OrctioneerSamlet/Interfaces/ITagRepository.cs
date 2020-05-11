@@ -6,11 +6,7 @@ using VareDatabase.Models;
 
 namespace VareDatabase.Interfaces
 {
-    interface ITagRepository : IRepository<TagEntity>
+    public interface ITagRepository : IRepository<TagEntity>
     {
-        void Create(TagEntity tag);
-        TagEntity Read(int id);
-        IEnumerable<TagEntity> GetAll();
-        IEnumerable<TagEntity> GetAllTagForSpecificItem(int id);
     }
 }

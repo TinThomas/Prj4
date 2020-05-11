@@ -12,6 +12,7 @@ namespace VareDatabase
     {
         public void InsertDummyData(VareDataModelContext db)
         {
+
             //Bows
             ItemEntity DeluxeBow = new ItemEntity()
             {
