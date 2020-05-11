@@ -85,7 +85,7 @@ export default {
       onUpload() {
           const formData = new FormData();
           formData.append('myFile', this.selectedFile, this.selectedFile.name)
-          axios.post('', formData);
+          axios.post('http://localhost:5000/api/ItemEntity/CreateImage', formData);
       }
 
 
