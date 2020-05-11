@@ -10,7 +10,7 @@ namespace VareDatabase.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        VareDataModelContext Context { get; protected set; }
+        VareDataModelContext Context { get;}
         int Commit();
     }
 }

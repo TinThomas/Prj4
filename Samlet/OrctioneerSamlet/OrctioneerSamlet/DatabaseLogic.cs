@@ -47,7 +47,7 @@ namespace VareDatabase
 
         public IEnumerable<ItemEntity> GetAll()
         {
-            
+            return itemRepo.GetAll();
         }
         public ItemEntity GetSingle(int id)
         {
