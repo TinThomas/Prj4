@@ -11,6 +11,7 @@ using VareDatabase.Repo.Auction;
 using VareDatabase.Interfaces;
 using VareDatabase.Repo;
 using VareDatabase.Interfaces.Auction;
+using Newtonsoft.Json;
 
 namespace VareDatabase.Controllers
 {
@@ -37,6 +38,13 @@ namespace VareDatabase.Controllers
             _dbLogic.CreateBid(bid);
             _dbLogic.Save();
             return Ok(bid);
+        }
+        [HttpGet]
+        [Route("items/{id}/bids")]
+        public async Task<ActionResult<string>> GetBidsFromItem([FromBody] int itemId)
+        {
+            json = JsonConvert.SerializeObject(_dbLogic.GetBidsFromItem(itemId), Formatting.Indented);
+            return json;
         }
     }
 }

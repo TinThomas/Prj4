@@ -11,6 +11,7 @@ namespace VareDatabase.Interfaces.Auction
 {
     public interface IBidRepository : IRepository<BidEntity>
     {
+        IEnumerable<BidEntity> GetBidsFromItem(int itemId);
         void AddBid(int itemId, int bid, int user);
     }
 }
