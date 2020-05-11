@@ -44,7 +44,9 @@ namespace VareDatabase.Controllers
         [Route("Home/item")]
         public ActionResult<string> GetAllItems()
         {
-            json = JsonConvert.SerializeObject(_dbLogic.GetAll(), Formatting.Indented);
+            var serializerSettings = new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects };
+            var items = _dbLogic.GetAll();
+            json = JsonConvert.SerializeObject(items, Formatting.Indented, serializerSettings);
             return json;
         }
         //populær

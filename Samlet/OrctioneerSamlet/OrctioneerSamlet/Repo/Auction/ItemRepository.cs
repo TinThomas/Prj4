@@ -23,14 +23,14 @@ namespace VareDatabase.Repo.Auction
         }*/
         public override ItemEntity Read(int id)
         {
-            return Context.Set<ItemEntity>().Include(x => x.Tags).Include(x => x.Bids).FirstOrDefault(x => x.ItemId == id);
+            return Context.Set<ItemEntity>().FirstOrDefault(x => x.ItemId == id);
         }
         public override IEnumerable<ItemEntity> GetAll()
         {
             return Context.Set<ItemEntity>()
                 .Include(tag => tag.Tags)
                 .Include(bid => bid.Bids)
-                .Include(img => img.Images);
+                .Include(img => img.Images).ToList();
         }
         public void GenerateTags(ItemEntity item)
         {
