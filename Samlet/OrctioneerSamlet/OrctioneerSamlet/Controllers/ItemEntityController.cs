@@ -127,13 +127,11 @@ namespace VareDatabase.Controllers
             }
             return Ok(file.Length);
         }
-
+        [HttpGet("GetPicture")]
         public async Task<ActionResult<string>> LoadPicture(string path)
         {
-            StreamReader sr = new StreamReader(path);
-
-            return sr.ReadLine();
-
+            Byte[] b = System.IO.File.ReadAllBytes(path);
+            return File(b, "image/jpg");
         }
     }
 }
