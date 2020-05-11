@@ -15,6 +15,10 @@ namespace VareDatabase.Repo.Auction
         {
             this.db = db;
         }
+        public override IEnumerable<ItemEntity> GetAll()
+        {
+            return db.Set<ItemEntity>().Where(x => x.Sold == false).ToList();
+        }
         public void GenerateTags(ItemEntity item)
         {
             string[] words = item.Title.Split(' ', ',', '.');

@@ -11,6 +11,7 @@ using VareDatabase.Repo;
 using VareDatabase.Interfaces;
 using VareDatabase.Models;
 using VareDatabase.Repo.Auction;
+using System.Security.Principal;
 
 namespace VareDatabase.Controllers
 {
@@ -47,54 +48,33 @@ namespace VareDatabase.Controllers
             return json;
         }
         //populær
-        //[HttpGet]
-        //[Route("Home/item/pop")]
-        //public ActionResult<string> GetPopularItems()
-        //{
-        //    var items = _dbLogic.GetAll();
-        //    List<ItemEntity> popularItems = new List<ItemEntity>();
-        //    foreach(var item in items)
-        //    {
-        //        if(popularItems.Count == 0 && item.Bids.Count > 0)
-        //        {
-        //            popularItems.Add(item);
-        //        }
-        //        else if(item.Bids.Count > popularItems.Last().Bids.Count && item.Bids.Count > 0)
-        //        {
-        //            //iterate down to find right index to insert
-        //            for(int i = 0; i < popularItems.Count; i++)
-        //            {
-        //                if(popularItems[i].Bids.Count < item.Bids.Count)
-        //                {
-        //                    var temp = popularItems[i];
-        //                    popularItems[i] = item;
-        //                    popularItems[i] = temp;
-
-        //                }
-        //            }
-        //        }
-        //        else if(popularItems.Count < 10)
-        //        {
-        //            popularItems.Add(item);
-        //        }
-        //    }
-        //    json = JsonConvert.SerializeObject(popularItems, Formatting.Indented);
-        //    return json;
-        //}
+        [HttpGet]
+        [Route("item/pop")]
+        public ActionResult<string> GetPopularItems()
+        {
+            var items = _dbLogic.GetAll();
+            items.ToList().OrderBy(i => i.Bids.Count);
+            json = JsonConvert.SerializeObject(items, Formatting.Indented);
+            return json;
+        }
         //newest
         [HttpGet]
-        [Route("Home/item/new")]
+        [Route("item/new")]
         public ActionResult<string> GetNewestItems()
         {
-            json = JsonConvert.SerializeObject(_dbLogic.GetAll(), Formatting.Indented);
+            var items = _dbLogic.GetAll();
+            items.ToList().OrderBy(i => i.DateCreated);
+            json = JsonConvert.SerializeObject(items, Formatting.Indented);
             return json;
         }
         //about to expire
         [HttpGet]
-        [Route("Home/item/expire")]
+        [Route("item/expire")]
         public ActionResult<string> GetExpiringItems()
         {
-            json = JsonConvert.SerializeObject(_dbLogic.GetAll(), Formatting.Indented);
+            var items = _dbLogic.GetAll();
+            items.ToList().OrderBy(i => i.ExpirationDate);
+            json = JsonConvert.SerializeObject(items, Formatting.Indented);
             return json;
         }
         [HttpGet]
