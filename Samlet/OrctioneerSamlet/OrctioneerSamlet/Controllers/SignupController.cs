@@ -99,15 +99,19 @@ namespace LoginVue.Controllers
         {
             if (file.Length > 0)
             {
-                string fileName = Guid.NewGuid().ToString() + ".jpg";
                 string imgFolder = @"..\images";
-                string path = imgFolder + fileName;
+                string path = imgFolder + file.FileName;
                 //var filePath = Path.GetTempFileName();
 
                 using (var stream = System.IO.File.Create(path))
                 {
                     await file.CopyToAsync(stream);
                 }
+                string newFileName = Guid.NewGuid().ToString();
+                //rename file
+                System.IO.File.Move(file.Name, newFileName);
+                //------------
+                //save to folder            
             }
             return Ok(new { file.Length });
         }
