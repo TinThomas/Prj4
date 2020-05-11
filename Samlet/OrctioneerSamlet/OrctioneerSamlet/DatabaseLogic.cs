@@ -6,37 +6,48 @@ using VareDatabase.Interfaces;
 using VareDatabase.Repo;
 using VareDatabase.Repo.Auction;
 using VareDatabase.Models;
+using VareDatabase.Interfaces.Auction;
 
 namespace VareDatabase
 {
     public class DatabaseLogic
     {
         private readonly IUnitOfWork unit;
-        private readonly IItemRepository repo;
-        //private ILoginRepository _loginRepo; //does not exist atm
-        public DatabaseLogic(IUnitOfWork unit, IItemRepository repo)
+        private readonly IItemRepository itemRepo;
+        private readonly IBidRepository bidRepo;
+        public DatabaseLogic(IUnitOfWork unit, IItemRepository itemRepo = null, IBidRepository bidRepo = null)
         {
             this.unit = unit;
-            this.repo = repo;
+            this.itemRepo = itemRepo;
+            this.bidRepo = bidRepo;
+        }
+        public void CreateBid(BidEntity bid)
+        {
+            bidRepo.AddBid(bid.ItemId,  bid.Bid,  bid.UserIdBuyer);
+            unit.Commit();
+        }
+        public IEnumerable<BidEntity> GetBidsFromItem(int itemId)
+        {
+            return bidRepo.GetBidsFromItem(itemId);
         }
         public void AddItem(ItemEntity item)
         {
-            repo.Create(item);
-            //repo.GenerateTags(item);
+            itemRepo.Create(item);
+            //itemRepo.GenerateTags(item);
             unit.Commit();
         }
         public void Delete(ItemEntity item)
         {
-            repo.Delete(item);
+            itemRepo.Delete(item);
         }
 
         public IEnumerable<ItemEntity> GetAll()
         {
-            return repo.GetAll();
+            return itemRepo.GetAll();
         }
         public ItemEntity GetSingle(int id)
         {
-            return repo.Read(id);
+            return itemRepo.Read(id);
         }
         public int Save()
         {
@@ -44,11 +55,11 @@ namespace VareDatabase
         }
         public void AddTag(int id, string newTag)
         {
-            repo.AddTag(id, newTag);
+            itemRepo.AddTag(id, newTag);
         }
         public IEnumerable<ItemEntity> Search(string searchingstring)
         {
-            return repo.Search(searchingstring);
+            return itemRepo.Search(searchingstring);
         }
     }
 }

@@ -11,6 +11,7 @@ using VareDatabase.Repo;
 using VareDatabase.Interfaces;
 using VareDatabase.Models;
 using VareDatabase.Repo.Auction;
+using System.Security.Principal;
 
 namespace VareDatabase.Controllers
 {
@@ -46,7 +47,36 @@ namespace VareDatabase.Controllers
             json = JsonConvert.SerializeObject(_dbLogic.GetAll(), Formatting.Indented);
             return json;
         }
-
+        //populær
+        [HttpGet]
+        [Route("item/pop")]
+        public ActionResult<string> GetPopularItems()
+        {
+            var items = _dbLogic.GetAll();
+            items.ToList().OrderBy(i => i.Bids.Count);
+            json = JsonConvert.SerializeObject(items, Formatting.Indented);
+            return json;
+        }
+        //newest
+        [HttpGet]
+        [Route("item/new")]
+        public ActionResult<string> GetNewestItems()
+        {
+            var items = _dbLogic.GetAll();
+            items.ToList().OrderBy(i => i.DateCreated);
+            json = JsonConvert.SerializeObject(items, Formatting.Indented);
+            return json;
+        }
+        //about to expire
+        [HttpGet]
+        [Route("item/expire")]
+        public ActionResult<string> GetExpiringItems()
+        {
+            var items = _dbLogic.GetAll();
+            items.ToList().OrderBy(i => i.ExpirationDate);
+            json = JsonConvert.SerializeObject(items, Formatting.Indented);
+            return json;
+        }
         [HttpGet]
         [Route("Home/item/tag/{search?}")]
         public ActionResult<string> GetTag(string search)
@@ -92,16 +122,16 @@ namespace VareDatabase.Controllers
                 {
                     await file.CopyToAsync(fileStream);
                 }
-
-                //using (var stream = System.IO.File.Create(path))
-                //{
-                //    await file.CopyToAsync(stream);
-                //}
                 string newFileName = Guid.NewGuid().ToString();
-                //rename file
                 System.IO.File.Move(path, Path.Combine(imgFolder,newFileName));
             }
             return Ok(file.Length);
+        }
+        [HttpGet("GetPicture")]
+        public async Task<ActionResult<string>> LoadPicture(string path)
+        {
+            Byte[] b = System.IO.File.ReadAllBytes(path);
+            return File(b, "image/jpg");
         }
     }
 }

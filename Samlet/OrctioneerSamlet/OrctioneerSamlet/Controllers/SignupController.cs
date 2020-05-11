@@ -93,15 +93,5 @@ namespace LoginVue.Controllers
             wait = await _pass.DeletePassword(User.Identity.Name);
             return Ok();
         }
-
-
-
-        public async Task<ActionResult<string>> LoadPicture(string path)
-        {
-            StreamReader sr = new StreamReader(path);
-
-            return sr.ReadLine();
-
-        }
     }
 }
