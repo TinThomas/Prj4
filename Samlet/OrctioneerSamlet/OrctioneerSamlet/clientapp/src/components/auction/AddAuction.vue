@@ -3,7 +3,7 @@
       <h1>Add a new auction</h1>
       <form v-if="!submitted">
           <label>Auction Title</label>
-          <input type="text" v-model.lazy="auction.title" required/>
+          <input type="text" v-model.lazy="auction.title" required />
           <label>Auction Description</label>
           <textarea v-model.lazy="auction.description"></textarea>
           <div id="cat-checkbox">
@@ -14,15 +14,15 @@
               <label>Category 3</label>
               <input type="checkbox" value="cat3" v-model="auction.categories" />
           </div>
+          <input type="file" @change="onFileChanged" />
           <label>End date:</label>
           <select v-model="auction.endDate">
               <option v-for="day in endDates" :key="day">{{day}}</option>
           </select>
-          <button class="btn btn-secondary" @click.prevent="postAuction">Add auction</button>
+          <button class="btn btn-secondary" @click.prevent="postAuction" @click="onUpload">Add auction</button>
       </form>
 
-      <input type="file" @change="onFileChanged"/>
-      <button @click="onUpload">Upload</button>
+      
 
       <div v-show="submitted">
           <h3>Your auction has been posted!</h3>
@@ -80,11 +80,13 @@ export default {
             this.submitted = true;
       },
       onFileChanged(event) {
-          this.selectedFile = event.target.files[0];
+          var ref = this;
+          ref.selectedFile = event.target.files[0];
       },
       onUpload() {
-          const formData = new FormData();
-          formData.append('myFile', this.selectedFile, this.selectedFile.name)
+          var ref = this;
+          var formData = new FormData();
+          formData.append('file', ref.selectedFile, ref.selectedFile.name)
           axios.post('http://localhost:5000/api/ItemEntity/CreateImage', formData);
       }
 
