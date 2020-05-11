@@ -23,9 +23,9 @@ namespace VareDatabase.Repo
          * EditAuction
          * SearchForItem
          */
-        public void Commit()
+        public int Commit()
         {
-            Context.SaveChanges();
+            return Context.SaveChanges();
         }
         public void Dispose()
         {

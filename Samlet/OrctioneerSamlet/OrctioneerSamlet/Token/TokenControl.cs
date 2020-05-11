@@ -18,7 +18,6 @@ namespace OrctioneerSamlet.Token
     
             public string GenerateToken(string userId)
             {
-                Console.WriteLine("making token");
                 var claims = new Claim[]
                 {
                     new Claim(ClaimTypes.Name, userId),

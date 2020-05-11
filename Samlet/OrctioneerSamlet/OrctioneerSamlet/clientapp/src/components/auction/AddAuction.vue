@@ -8,11 +8,11 @@
           <textarea v-model.lazy="auction.description"></textarea>
           <div id="cat-checkbox">
               <label>Category 1</label>
-              <input type="checkbox" value="cat1" v-model="auction.categories"/>
+              <input type="checkbox" value="cat1" v-model="auction.categories" />
               <label>Category 2</label>
-              <input type="checkbox" value="cat2" v-model="auction.categories"/>
+              <input type="checkbox" value="cat2" v-model="auction.categories" />
               <label>Category 3</label>
-              <input type="checkbox" value="cat3" v-model="auction.categories"/>
+              <input type="checkbox" value="cat3" v-model="auction.categories" />
           </div>
           <label>End date:</label>
           <select v-model="auction.endDate">
@@ -20,6 +20,10 @@
           </select>
           <button class="btn btn-secondary" @click.prevent="postAuction">Add auction</button>
       </form>
+
+      <input type="file" @change="onFileChanged"/>
+      <button @click="onUpload">Upload</button>
+
       <div v-show="submitted">
           <h3>Your auction has been posted!</h3>
       </div>
@@ -52,23 +56,39 @@ export default {
         },
         endDates:['1 day', '2 days', '7 days', '31 days'],
         submitted: false,
+        selectedFile: null
+       
     }
   },
   methods:{
-      postAuction: function(){
-          axios.post('http://localhost:5000/Home/item',
-            {
-                Title: this.auction.title,
-                DescriptionOfItem: this.auction.description,
+      postAuction: function () {
+          var ref = this;
+          axios.post('http://localhost:5000/api/ItemEntity/Item',
+              {
+                  Title: ref.auction.title,
+                  BuyOutPrice: 123,
+                  DescriptionOfItem: ref.auction.description,
+    
                 
-            })
+              })
+
             //    .then(function (response) {
             //    console.log(response);
             //}).catch(function (error) {
             //    console.log(error);
             //});
             this.submitted = true;
+      },
+      onFileChanged(event) {
+          this.selectedFile = event.target.files[0];
+      },
+      onUpload() {
+          const formData = new FormData();
+          formData.append('myFile', this.selectedFile, this.selectedFile.name)
+          axios.post('', formData);
       }
+
+
   }
 }
 </script>

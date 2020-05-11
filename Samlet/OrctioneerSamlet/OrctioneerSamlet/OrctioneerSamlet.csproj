@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="clientapp\src\components\wallet\" />
+    <Folder Include="clientapp\src\components\UserProfile\" />
   </ItemGroup>
 
 
