@@ -8,14 +8,15 @@ using VareDatabase.Interfaces.Auction;
 
 namespace VareDatabase.Repo
 {
-    public class BidOnItemRepository : Repository<BidEntity>, IBidOnItemRepository
+    public class BidRepository : Repository<BidEntity>, IBidRepository
     {
 
         private VareDataModelContext db;
-        public BidOnItemRepository(VareDataModelContext db): base(db)
+        public BidRepository(VareDataModelContext db): base(db)
         {
             this.db = db;
         }
+
         public void AddBid(int itemId, int bid, int userId)
         {
             ItemEntity item = db.Set<ItemEntity>().Find(itemId);

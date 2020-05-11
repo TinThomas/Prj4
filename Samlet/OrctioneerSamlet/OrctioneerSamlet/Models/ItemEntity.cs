@@ -17,7 +17,7 @@ namespace VareDatabase.Models
         [Required]
         public DateTime ExpirationDate { get; set; }
 
-        [Required] public DateTime DateCreated { get; set; } = DateTime.Now;
+        [Required] public DateTime DateCreated { get; set; }
         [Required] public int UserIdSeller { get; set; }
         [Required]
         [MaxLength(500)]

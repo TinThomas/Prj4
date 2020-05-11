@@ -74,10 +74,11 @@ namespace VareDatabase.Controllers
         }
 
         [HttpDelete]
-        public void DeleteItem(ItemEntity item)
+        public async Task<IActionResult> DeleteItem(ItemEntity item)
         { 
             _dbLogic.Delete(item);
             _dbLogic.Save();
+            return Ok();
         }
     }
 }
