@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -91,6 +92,29 @@ namespace LoginVue.Controllers
             wait = await _user.DeleteUser(User.Identity.Name);
             wait = await _pass.DeletePassword(User.Identity.Name);
             return Ok();
+        }
+
+        [HttpPost("CreateImage")]
+        public async Task<IActionResult> UploadPicture([FromBody] byte[] picture)
+        {
+            string temp = Guid.NewGuid().ToString() + ".jpg";
+            string imgFolder = @"..\images\";
+            string path = imgFolder + temp;
+
+            using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write))
+                {
+                    fs.Write(picture,0,picture.Length);
+                }
+
+                return Ok();
+        }
+
+        public string LoadPicture(string path)
+        {
+            StreamReader sr = new StreamReader(path);
+
+            return sr.ReadLine();
+
         }
     }
 }
