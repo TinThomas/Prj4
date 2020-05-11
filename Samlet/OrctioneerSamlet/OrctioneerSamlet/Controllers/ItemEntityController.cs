@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -79,6 +80,28 @@ namespace VareDatabase.Controllers
             _dbLogic.Delete(item);
             _dbLogic.Save();
             return Ok();
+        }
+        [HttpPost("CreateImage")]
+        public async Task<IActionResult> UploadPicture(IFormFile file)
+        {
+            if (file.Length > 0)
+            {
+                string imgFolder = @"..\images";
+                string path = Path.Combine(imgFolder, file.FileName);
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    await file.CopyToAsync(fileStream);
+                }
+
+                //using (var stream = System.IO.File.Create(path))
+                //{
+                //    await file.CopyToAsync(stream);
+                //}
+                string newFileName = Guid.NewGuid().ToString();
+                //rename file
+                System.IO.File.Move(path, Path.Combine(imgFolder,newFileName));
+            }
+            return Ok(file.Length);
         }
     }
 }

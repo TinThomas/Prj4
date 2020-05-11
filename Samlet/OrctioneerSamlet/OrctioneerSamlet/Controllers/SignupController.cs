@@ -94,30 +94,7 @@ namespace LoginVue.Controllers
             return Ok();
         }
 
-        [HttpPost("CreateImage")]
-        public async Task<IActionResult> UploadPicture([FromBody] IFormFile file)
-        {
-            if (file.Length > 0)
-            {
-                string imgFolder = @"..\images";
-                string path = Path.Combine(imgFolder, file.FileName);
-                using (var fileStream = new FileStream(path, FileMode.Create))  
-                {  
-                    await file.CopyToAsync(fileStream);  
-                }
-                 
-                //using (var stream = System.IO.File.Create(path))
-                //{
-                //    await file.CopyToAsync(stream);
-                //}
-                string newFileName = Guid.NewGuid().ToString();
-                //rename file
-                System.IO.File.Move(file.Name, newFileName);
-                //------------
-                //save to folder            
-            }
-            return Ok(new { file.Length });
-        }
+
 
         public async Task<ActionResult<string>> LoadPicture(string path)
         {
