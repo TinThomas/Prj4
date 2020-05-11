@@ -56,17 +56,17 @@ namespace VareDatabase.Controllers
         public ActionResult<string> GetPopularItems()
         {
             var items = _dbLogic.GetAll();
-            items.ToList().OrderBy(i => i.Bids.Count);
+            items.ToList().OrderBy(i => i.Bids.Count).ToList();
             json = JsonConvert.SerializeObject(items, Formatting.Indented, serializerSettings);
             return json;
         }
         //newest
         [HttpGet]
-        [Route("item/new")]
+        [Route("Home/item/new")]
         public ActionResult<string> GetNewestItems()
         {
             var items = _dbLogic.GetAll();
-            items.OrderByDescending(i => i.DateCreated);
+            items.OrderByDescending(i => i.DateCreated).ToList();
             json = JsonConvert.SerializeObject(items, Formatting.Indented, serializerSettings);
             return json;
         }

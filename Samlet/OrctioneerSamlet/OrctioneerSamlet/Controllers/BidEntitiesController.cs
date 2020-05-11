@@ -32,7 +32,7 @@ namespace VareDatabase.Controllers
         }
 
         [HttpPost("newBid")]
-        public async Task<IActionResult> CreateBid([FromBody] BidEntity bid)
+        public async Task<IActionResult> CreateBid(BidEntity bid)
         {
             Console.WriteLine("Added bid");
             _dbLogic.CreateBid(bid);
@@ -41,7 +41,7 @@ namespace VareDatabase.Controllers
         }
         [HttpGet]
         [Route("items/{id}/bids")]
-        public async Task<ActionResult<string>> GetBidsFromItem([FromBody] int itemId)
+        public async Task<ActionResult<string>> GetBidsFromItem( int itemId)
         {
             json = JsonConvert.SerializeObject(_dbLogic.GetBidsFromItem(itemId), Formatting.Indented);
             return json;

@@ -27,7 +27,7 @@ namespace VareDatabase
         }
         public void CreateBid(BidEntity bid)
         {
-            bidRepo.AddBid(bid.ItemId, bid.Bid, bid.UserIdBuyer);
+            bidRepo.Create(bid);
             unit.Commit();
         }
         public IEnumerable<BidEntity> GetBidsFromItem(int itemId)
