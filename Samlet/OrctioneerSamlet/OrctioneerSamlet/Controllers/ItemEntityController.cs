@@ -22,6 +22,8 @@ namespace VareDatabase.Controllers
         private DatabaseLogic _dbLogic;
         private string json;
 
+        private JsonSerializerSettings serializerSettings = new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects };
+
         public ItemEntityController()
         {
             var db = new DBContext.VareDataModelContext();
@@ -36,7 +38,7 @@ namespace VareDatabase.Controllers
         //Get on ID
         public ActionResult<string> GetItem(int id)
         {
-            json = JsonConvert.SerializeObject(_dbLogic.GetSingle(id), Formatting.Indented);
+            json = JsonConvert.SerializeObject(_dbLogic.GetSingle(id), Formatting.Indented, serializerSettings);
             return json;
         }
 
@@ -44,7 +46,6 @@ namespace VareDatabase.Controllers
         [Route("Home/item")]
         public ActionResult<string> GetAllItems()
         {
-            var serializerSettings = new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects };
             var items = _dbLogic.GetAll();
             json = JsonConvert.SerializeObject(items, Formatting.Indented, serializerSettings);
             return json;
@@ -56,7 +57,7 @@ namespace VareDatabase.Controllers
         {
             var items = _dbLogic.GetAll();
             items.ToList().OrderBy(i => i.Bids.Count);
-            json = JsonConvert.SerializeObject(items, Formatting.Indented);
+            json = JsonConvert.SerializeObject(items, Formatting.Indented, serializerSettings);
             return json;
         }
         //newest
@@ -66,7 +67,7 @@ namespace VareDatabase.Controllers
         {
             var items = _dbLogic.GetAll();
             items.OrderByDescending(i => i.DateCreated);
-            json = JsonConvert.SerializeObject(items, Formatting.Indented);
+            json = JsonConvert.SerializeObject(items, Formatting.Indented, serializerSettings);
             return json;
         }
         //about to expire
@@ -76,14 +77,14 @@ namespace VareDatabase.Controllers
         {
             var items = _dbLogic.GetAll();
             items.OrderBy(i => i.ExpirationDate);
-            json = JsonConvert.SerializeObject(items, Formatting.Indented);
+            json = JsonConvert.SerializeObject(items, Formatting.Indented, serializerSettings);
             return json;
         }
         [HttpGet]
         [Route("Home/item/tag/{search?}")]
         public ActionResult<string> GetTag(string search)
         {
-            json = JsonConvert.SerializeObject(_dbLogic.Search(search), Formatting.Indented);
+            json = JsonConvert.SerializeObject(_dbLogic.Search(search), Formatting.Indented, serializerSettings);
             return json;
         }
         
