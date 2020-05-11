@@ -21,9 +21,10 @@ namespace VareDatabase
             this.itemRepo = itemRepo;
             this.bidRepo = bidRepo;
         }
-        public void AddBid(BidEntity bid)
+        public void CreateBid(BidEntity bid)
         {
-
+            bidRepo.AddBid(bid.ItemId,  bid.Bid,  bid.UserIdBuyer);
+            unit.Commit();
         }
         public void AddItem(ItemEntity item)
         {
