@@ -23,7 +23,7 @@
                 <h3>Ends:</h3>
             </div>
             <div class="col-3">
-                <h3 class="auction-text">{{auctionTest.ExpirationDate | moment("from", auctionTest.DateCreated)}}</h3>
+                <h3 class="auction-text">{{auctionTest.ExpirationDate | moment("from", now)}}</h3>
                 
             </div>
             <div class="col-6" id="bid-table">

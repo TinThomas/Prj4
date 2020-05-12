@@ -10,8 +10,8 @@ import signup from './components/login/Signup.vue';
 import ShowAuction from './components/auction/ShowAuction.vue';
 import AddAuction from './components/auction/AddAuction.vue';
 import Home from './components/layout/Home.vue';
-import ItemAuction from './components/auction/Auction.vue';
-import FullAuction from './components/auction/FullAuction.vue'
+import ItemAuction from './components/auction/old/Auction.vue';
+import FullAuction from './components/auction/old/FullAuction.vue'
 import FullAuction2 from './components/auction/FullAuction2.vue'
 import store from './components/Utility/Store'
 

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-    import Auction from './Auction.vue'
+    import Auction from './old/Auction.vue'
     import Auction2 from './Auction2.vue'
 import axios from 'axios';
 export default {
@@ -51,7 +51,7 @@ export default {
             var ref = this;
             axios.get('http://localhost:5000/api/ItemEntity/item').then(function (response) {
             if (response.status != 200) {
-                //error
+                window.console.log(response.status)
             }
                 //ref.test = response.data.splice(0, 4);
                 ref.test = response.data;
