@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using VareDatabase.Models;
 using VareDatabase.DBContext;
 using VareDatabase.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography.X509Certificates;
 
 namespace VareDatabase.Repo.Auction
 {
@@ -24,6 +22,16 @@ namespace VareDatabase.Repo.Auction
         public override ItemEntity Read(int id)
         {
             return Context.Set<ItemEntity>().FirstOrDefault(x => x.ItemId == id);
+        }
+
+        public IEnumerable<ItemEntity> getAllOnItem(int id)
+        {
+            return Context.Set<ItemEntity>()
+                .Where(x => x.ItemId == id)
+                .Include(tag => tag.Tags)
+                .Include(bid => bid.Bids)
+                .Include(img => img.Images)
+                .ToList();
         }
         public override IEnumerable<ItemEntity> GetAll()
         {

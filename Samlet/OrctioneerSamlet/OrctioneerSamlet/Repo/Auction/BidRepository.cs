@@ -23,7 +23,7 @@ namespace VareDatabase.Repo
                 .ToList();
         }
 
-        public IEnumerable<BidEntity> GetBidsByUser(int userId)
+        public IEnumerable<BidEntity> GetBidsByUser(string userId)
         {
             return Context.Set<BidEntity>()
                 .Where(x => x.UserIdBuyer == userId)

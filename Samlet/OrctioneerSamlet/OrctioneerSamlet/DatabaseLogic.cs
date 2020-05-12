@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using VareDatabase.Interfaces;
 using VareDatabase.Repo;
 using VareDatabase.Repo.Auction;
@@ -35,7 +37,7 @@ namespace VareDatabase
             return bidRepo.GetBidsFromItem(itemId);
         }
 
-        public IEnumerable<BidEntity> GetBidsByUserId(int userId)
+        public IEnumerable<BidEntity> GetBidsByUserId(string userId)
         {
             return bidRepo.GetBidsByUser(userId);
         }
@@ -74,6 +76,11 @@ namespace VareDatabase
         {
             return itemRepo.GetAll();
         }
+
+        public IEnumerable<ItemEntity> GetAllInfoOnItem(int id)
+        {
+            return itemRepo.getAllOnItem(id);
+        }
         public ItemEntity GetSingle(int id)
         {
             return itemRepo.Read(id);
@@ -89,6 +96,11 @@ namespace VareDatabase
         public IEnumerable<ItemEntity> Search(string searchingstring)
         {
             return itemRepo.Search(searchingstring);
+        }
+
+        public void UploadPicture(IFormFile file)
+        {
+            imageRepo.UploadPicture(file);
         }
     }
 }
