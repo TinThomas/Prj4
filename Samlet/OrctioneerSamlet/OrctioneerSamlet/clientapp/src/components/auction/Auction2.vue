@@ -47,7 +47,7 @@
 <style scoped>
     #auctionId {
         max-width: 1200px;
-        margin: 10px;
+        margin: 11px;
     }
 
     .single-auction {
