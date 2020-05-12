@@ -49,22 +49,22 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 200,
-                        UserIdBuyer = 30
+                        UserIdBuyer = "30"
                     },
                     new BidEntity
                     {
                         Bid = 300,
-                        UserIdBuyer = 29
+                        UserIdBuyer = "29"
                     },
                     new BidEntity
                     {
                         Bid = 350,
-                        UserIdBuyer = 22
+                        UserIdBuyer = "22"
                     },
                     new BidEntity
                     {
                         Bid = 375,
-                        UserIdBuyer = 11
+                        UserIdBuyer = "11"
                     }
                 }
             };
@@ -101,17 +101,17 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 200,
-                        UserIdBuyer = 26
+                        UserIdBuyer = "26"
                     },
                     new BidEntity
                     {
                         Bid = 300,
-                        UserIdBuyer = 82
+                        UserIdBuyer = "82"
                     },
                     new BidEntity
                     {
                         Bid = 320,
-                        UserIdBuyer = 25
+                        UserIdBuyer = "25"
                     }
                 }
             };
@@ -153,17 +153,17 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 200,
-                        UserIdBuyer = 62
+                        UserIdBuyer = "62"
                     },
                     new BidEntity
                     {
                         Bid = 320,
-                        UserIdBuyer = 71
+                        UserIdBuyer = "71"
                     },
                     new BidEntity
                     {
                         Bid = 360,
-                        UserIdBuyer = 52
+                        UserIdBuyer = "52"
                     }
                 }
             };
@@ -200,12 +200,12 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 150,
-                        UserIdBuyer = 15
+                        UserIdBuyer = "15"
                     },
                     new BidEntity
                     {
                         Bid = 170,
-                        UserIdBuyer = 80
+                        UserIdBuyer = "80"
                     }
                 }
             };
@@ -242,32 +242,32 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 160,
-                        UserIdBuyer = 11
+                        UserIdBuyer = "11"
                     },
                     new BidEntity
                     {
                         Bid = 195,
-                        UserIdBuyer = 14
+                        UserIdBuyer = "14"
                     },
                     new BidEntity
                     {
                         Bid = 230,
-                        UserIdBuyer = 13
+                        UserIdBuyer = "13"
                     },
                     new BidEntity
                     {
                         Bid = 250,
-                        UserIdBuyer = 41
+                        UserIdBuyer = "41"
                     },
                     new BidEntity
                     {
                         Bid = 280,
-                        UserIdBuyer = 55
+                        UserIdBuyer = "55"
                     },
                     new BidEntity
                     {
                         Bid = 300,
-                        UserIdBuyer = 44
+                        UserIdBuyer = "44"
                     }
 
                 }
@@ -313,17 +313,17 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 40,
-                        UserIdBuyer = 11
+                        UserIdBuyer = "11"
                     },
                     new BidEntity
                     {
                         Bid = 55,
-                        UserIdBuyer = 35
+                        UserIdBuyer = "35"
                     },
                     new BidEntity
                     {
                         Bid = 60,
-                        UserIdBuyer = 74
+                        UserIdBuyer = "74"
                     }
                 }
             };
@@ -376,12 +376,12 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 600,
-                        UserIdBuyer = 44
+                        UserIdBuyer = "44"
                     },
                     new BidEntity
                     {
                         Bid = 650,
-                        UserIdBuyer = 6
+                        UserIdBuyer = "6"
                     }
                 }
             };
@@ -434,27 +434,27 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 400,
-                        UserIdBuyer = 65
+                        UserIdBuyer = "65"
                     },
                     new BidEntity
                     {
                         Bid = 420,
-                        UserIdBuyer = 6
+                        UserIdBuyer = "6"
                     },
                     new BidEntity
                     {
                         Bid = 450,
-                        UserIdBuyer = 3
+                        UserIdBuyer = "3"
                     },
                     new BidEntity
                     {
                         Bid = 480,
-                        UserIdBuyer = 62
+                        UserIdBuyer = "62"
                     },
                     new BidEntity
                     {
                         Bid = 530,
-                        UserIdBuyer = 34
+                        UserIdBuyer = "34"
                     }
                 }
             };
@@ -507,42 +507,42 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 550,
-                        UserIdBuyer = 17
+                        UserIdBuyer = "17"
                     },
                     new BidEntity
                     {
                         Bid = 578,
-                        UserIdBuyer = 2
+                        UserIdBuyer = "2"
                     },
                     new BidEntity
                     {
                         Bid = 620,
-                        UserIdBuyer = 6
+                        UserIdBuyer = "6"
                     },
                     new BidEntity
                     {
                         Bid = 650,
-                        UserIdBuyer = 78
+                        UserIdBuyer = "78"
                     },
                     new BidEntity
                     {
                         Bid = 680,
-                        UserIdBuyer = 59
+                        UserIdBuyer = "59"
                     },
                     new BidEntity
                     {
                         Bid = 720,
-                        UserIdBuyer = 94
+                        UserIdBuyer = "94"
                     },
                     new BidEntity
                     {
                         Bid = 740,
-                        UserIdBuyer = 42
+                        UserIdBuyer = "42"
                     },
                     new BidEntity
                     {
                         Bid = 760,
-                        UserIdBuyer = 85
+                        UserIdBuyer = "85"
                     }
                 }
             };
@@ -588,17 +588,17 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 350,
-                        UserIdBuyer = 71
+                        UserIdBuyer = "71"
                     },
                     new BidEntity
                     {
                         Bid = 370,
-                        UserIdBuyer = 28
+                        UserIdBuyer = "28"
                     },
                     new BidEntity
                     {
                         Bid = 400,
-                        UserIdBuyer = 27
+                        UserIdBuyer = "27"
                     }
                 }
             };
@@ -640,12 +640,12 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 550,
-                        UserIdBuyer = 71
+                        UserIdBuyer = "71"
                     },
                     new BidEntity
                     {
                         Bid = 575,
-                        UserIdBuyer = 13
+                        UserIdBuyer = "13"
                     }
                 }
             };
@@ -686,52 +686,52 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 410,
-                        UserIdBuyer = 21
+                        UserIdBuyer = "21"
                     },
                     new BidEntity
                     {
                         Bid = 440,
-                        UserIdBuyer = 52
+                        UserIdBuyer = "52"
                     },
                     new BidEntity
                     {
                         Bid = 460,
-                        UserIdBuyer = 77
+                        UserIdBuyer = "77"
                     },
                     new BidEntity
                     {
                         Bid = 390,
-                        UserIdBuyer = 18
+                        UserIdBuyer = "18"
                     },
                     new BidEntity
                     {
                         Bid = 420,
-                        UserIdBuyer = 20
+                        UserIdBuyer = "20"
                     },
                     new BidEntity
                     {
                         Bid = 460,
-                        UserIdBuyer = 90
+                        UserIdBuyer = "90"
                     },
                     new BidEntity
                     {
                         Bid = 500,
-                        UserIdBuyer = 79
+                        UserIdBuyer = "79"
                     },
                     new BidEntity
                     {
                         Bid = 520,
-                        UserIdBuyer = 51
+                        UserIdBuyer ="51"
                     },
                     new BidEntity
                     {
                         Bid = 535,
-                        UserIdBuyer = 10
+                        UserIdBuyer ="10"
                     },
                     new BidEntity
                     {
                         Bid = 550,
-                        UserIdBuyer = 86
+                        UserIdBuyer = "86"
                     }
                 }
             };
@@ -776,22 +776,22 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 300,
-                        UserIdBuyer = 21
+                        UserIdBuyer = "21"
                     },
                     new BidEntity
                     {
                         Bid = 315,
-                        UserIdBuyer = 42
+                        UserIdBuyer = "42"
                     },
                     new BidEntity
                     {
                         Bid = 340,
-                        UserIdBuyer = 83
+                        UserIdBuyer = "83"
                     },
                     new BidEntity
                     {
                         Bid = 350,
-                        UserIdBuyer = 16
+                        UserIdBuyer = "16"
                     }
                 }
             };
@@ -836,17 +836,17 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 260,
-                        UserIdBuyer = 4
+                        UserIdBuyer = "4"
                     },
                     new BidEntity
                     {
                         Bid = 280,
-                        UserIdBuyer = 46
+                        UserIdBuyer = "46"
                     },
                     new BidEntity
                     {
                         Bid = 315,
-                        UserIdBuyer = 75
+                        UserIdBuyer = "75"
                     }
                 }
             };
@@ -887,22 +887,22 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 420,
-                        UserIdBuyer = 4
+                        UserIdBuyer = "4"
                     },
                     new BidEntity
                     {
                         Bid = 450,
-                        UserIdBuyer = 25
+                        UserIdBuyer = "25"
                     },
                     new BidEntity
                     {
                         Bid = 480,
-                        UserIdBuyer = 15
+                        UserIdBuyer = "15"
                     },
                     new BidEntity
                     {
                         Bid = 500,
-                        UserIdBuyer = 60
+                        UserIdBuyer = "60"
                     }
                 }
             };

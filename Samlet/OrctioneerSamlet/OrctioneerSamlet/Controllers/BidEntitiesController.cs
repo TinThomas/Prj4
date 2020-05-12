@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -33,9 +34,11 @@ namespace VareDatabase.Controllers
             _dbLogic = dbLogic;
         }
 
+        [Authorize]
         [HttpPost("newBid")]
         public async Task<IActionResult> CreateBid([FromBody]BidEntity bid)
         {
+            bid.UserIdBuyer = User.Identity.Name;
             _dbLogic.CreateBid(bid);
             _dbLogic.Save();
             return Ok(bid);
@@ -50,7 +53,7 @@ namespace VareDatabase.Controllers
 
         [HttpGet]
         [Route("GetBidsFromUser/{id}")]
-        public ActionResult<string> GetBidsByUserId(int id)
+        public ActionResult<string> GetBidsByUserId(string id)
         {
             json = JsonConvert.SerializeObject(_dbLogic.GetBidsByUserId(id), Formatting.Indented, serializerSettings);
             return json;

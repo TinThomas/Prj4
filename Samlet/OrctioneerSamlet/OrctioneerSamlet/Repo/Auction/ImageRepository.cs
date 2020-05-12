@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using VareDatabase.DBContext;
 using VareDatabase.Interfaces;
 using VareDatabase.Models;
@@ -15,6 +18,20 @@ namespace VareDatabase.Repo
         public ImageRepository(VareDataModelContext db) : base(db)
         {
             this.db = db;
+        }
+        public void UploadPicture(IFormFile file)
+        {
+            if (file.Length > 0)
+            {
+                string imgFolder = @"..\images";
+                string path = Path.Combine(imgFolder, file.FileName);
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    file.CopyToAsync(fileStream);
+                }
+                string newFileName = Guid.NewGuid().ToString();
+                System.IO.File.Move(path, Path.Combine(imgFolder, newFileName));
+            }
         }
     }
 }

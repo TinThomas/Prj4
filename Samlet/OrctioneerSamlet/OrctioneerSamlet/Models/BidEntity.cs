@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace VareDatabase.Models
 {
@@ -14,10 +15,16 @@ namespace VareDatabase.Models
         [Required]
         public int Bid { get; set; }
         [Required]
-        public int UserIdBuyer { get; set; }
+        public string UserIdBuyer { get; set; }
 
         //Navigational property
         public ItemEntity Item { get; set; }
         public int ItemId { get; set; }
+        public DateTime Created { get; set; }
+
+        public BidEntity()
+        {
+            Created = DateTime.Now;
+        }
     }
 }
