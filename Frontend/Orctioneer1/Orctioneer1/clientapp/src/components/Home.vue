@@ -22,7 +22,7 @@ export default {
     data(){
       return{
         auctions:[
-            {title: 'Stort sværd', url: require('./../images/sværd.jpg'), bid: 1234, timeLeft: "1 day"},
+            {title: 'Stort sværd og mere tekst', url: require('./../images/sværd.jpg'), bid: 1234, timeLeft: "1 day"},
             {title: 'Hjelm og brynje', url: require('./../images/Hjelm_og_Brynje.jpg'), bid: 1234, timeLeft: "2 day"},
             {title: 'Faktisk økse', url: require('./../images/Faktisk_økse.jpg'), bid: 1234, timeLeft: "3 day"},
             {title: 'Én pil', url: require('./../images/En_pil.jpg'), bid: 1234, timeLeft: "4 day"},
