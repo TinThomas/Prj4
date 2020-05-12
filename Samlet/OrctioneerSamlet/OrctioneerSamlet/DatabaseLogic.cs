@@ -34,6 +34,11 @@ namespace VareDatabase
         {
             return bidRepo.GetBidsFromItem(itemId);
         }
+
+        public IEnumerable<BidEntity> GetBidsByUserId(int userId)
+        {
+            return bidRepo.GetBidsByUser(userId);
+        }
         public void AddItem(ItemEntity item)
         {
             itemRepo.Create(item);

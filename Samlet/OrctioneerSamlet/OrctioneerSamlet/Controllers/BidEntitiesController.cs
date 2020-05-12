@@ -21,6 +21,8 @@ namespace VareDatabase.Controllers
     {
         private DatabaseLogic _dbLogic;
         private string json;
+        private JsonSerializerSettings serializerSettings = new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects };
+
 
         public BidEntitiesController(VareDataModelContext _context)
         {
@@ -40,10 +42,18 @@ namespace VareDatabase.Controllers
             return Ok(bid);
         }
         [HttpGet]
-        [Route("items/{id}/bids")]
-        public async Task<ActionResult<string>> GetBidsFromItem( int itemId)
+        [Route("GetBidsFromItem/{id}")]
+        public  ActionResult<string> GetBidsFromItem( int id)
         {
-            json = JsonConvert.SerializeObject(_dbLogic.GetBidsFromItem(itemId), Formatting.Indented);
+            json = JsonConvert.SerializeObject(_dbLogic.GetBidsFromItem(id), Formatting.Indented, serializerSettings);
+            return json;
+        }
+
+        [HttpGet]
+        [Route("GetBidsFromUser/{id}")]
+        public ActionResult<string> GetBidsByUserId(int id)
+        {
+            json = JsonConvert.SerializeObject(_dbLogic.GetBidsByUserId(id), Formatting.Indented, serializerSettings);
             return json;
         }
     }

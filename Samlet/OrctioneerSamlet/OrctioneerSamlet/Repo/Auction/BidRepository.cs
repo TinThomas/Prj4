@@ -16,9 +16,18 @@ namespace VareDatabase.Repo
         {
             this.db = db;
         }
-        public IEnumerable<BidEntity> GetBidsFromItem(int itemId)
+        public  IEnumerable<BidEntity> GetBidsFromItem(int itemId)
         {
-            return db.Bids.Where(x => x.ItemId == itemId);
+            return Context.Set<BidEntity>()
+                .Where(x => x.ItemId == itemId)
+                .ToList();
+        }
+
+        public IEnumerable<BidEntity> GetBidsByUser(int userId)
+        {
+            return Context.Set<BidEntity>()
+                .Where(x => x.UserIdBuyer == userId)
+                .ToList();
         }
         public void AddBid(int itemId, int bid, int userId)
         {
