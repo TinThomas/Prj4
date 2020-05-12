@@ -13,12 +13,12 @@
 </template>
 
 <script>
-    import Auction from './../auction/old/Auction.vue'
+    //import Auction from './../auction/old/Auction.vue'
     import Auction2 from './../auction/Auction2.vue'
 import axios from 'axios';
 export default {
     components:{
-        'item-auction': Auction,
+        //'item-auction': Auction,
         'item-auction2': Auction2
     },
     data(){
