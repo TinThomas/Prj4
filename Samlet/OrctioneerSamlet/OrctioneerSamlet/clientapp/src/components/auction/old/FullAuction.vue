@@ -41,12 +41,12 @@ export default {
             id: this.$route.params.id,
             auctions: [
                 {
-                    title: 'Stort sværd', url: require('./../../images/sværd.jpg'), bid: 1234, timeLeft: "1 day",
+                    title: 'Stort sværd', url: require('./../../../images/sværd.jpg'), bid: 1234, timeLeft: "1 day",
                     description: 'Det er et sort sværd, makker! Hvad er det du ikke har fortået? Et stort sværd. Det skal du da ha !Hvis du virkelig ikke kan se hvorfor du selvfølgelig bør eje et stort sværd. Ja.. Så er du måske bedre tjent med et liv som kvinde? Hva?? Nej, det tænkte jeg nok.. Selvfølgelig skal du da have et stort sværd. Jeg kunne se det på dig med det samme! Jamen hvad venter du på!? Byd forhelvede! Og træd ind i de voksnes rækker. Et stort sværd til en stor mand.'
                 },
-                { title: 'Hjelm og brynje', url: require('./../../images/Hjelm_og_Brynje.jpg'), bid: 1234, timeLeft: "2 day" },
-                { title: 'Faktisk økse', url: require('./../../images/Faktisk_økse.jpg'), bid: 1234, timeLeft: "3 day" },
-                { title: 'Én pil', url: require('./../../images/En_pil.jpg'), bid: 1234, timeLeft: "4 day" },
+                { title: 'Hjelm og brynje', url: require('./../../../images/Hjelm_og_Brynje.jpg'), bid: 1234, timeLeft: "2 day" },
+                { title: 'Faktisk økse', url: require('./../../../images/Faktisk_økse.jpg'), bid: 1234, timeLeft: "3 day" },
+                { title: 'Én pil', url: require('./../../../images/En_pil.jpg'), bid: 1234, timeLeft: "4 day" },
             ],
 
 
