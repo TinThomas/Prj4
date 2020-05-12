@@ -49,6 +49,11 @@ namespace VareDatabase
         {
             return itemRepo.GetNewestFirst();
         }
+
+        public IEnumerable<ItemEntity> GetMostPopularItems()
+        {
+            return itemRepo.GetMostPopularItems();
+        }
         public void AddItem(ItemEntity item)
         {
             itemRepo.Create(item);

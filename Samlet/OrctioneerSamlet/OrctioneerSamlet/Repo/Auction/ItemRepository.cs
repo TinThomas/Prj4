@@ -147,5 +147,15 @@ namespace VareDatabase.Repo.Auction
                 .OrderByDescending(x => x.DateCreated)
                 .ToList();
         }
+
+        public IEnumerable<ItemEntity> GetMostPopularItems()
+        {
+            return Context.Set<ItemEntity>()
+                .Include(tag => tag.Tags)
+                .Include(bid => bid.Bids)
+                .Include(img => img.Images)
+                .OrderBy(i => i.Bids.Count)
+                .ToList();
+        }
     }
 }

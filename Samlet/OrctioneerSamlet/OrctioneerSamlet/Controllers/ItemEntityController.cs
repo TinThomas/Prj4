@@ -55,9 +55,7 @@ namespace VareDatabase.Controllers
         [Route("item/pop")]
         public ActionResult<string> GetPopularItems()
         {
-            var items = _dbLogic.GetAll();
-            items.ToList().OrderBy(i => i.Bids.Count).ToList();
-            json = JsonConvert.SerializeObject(items, Formatting.Indented, serializerSettings);
+            json = JsonConvert.SerializeObject(_dbLogic.GetMostPopularItems(), Formatting.Indented, serializerSettings);
             return json;
         }
         //newest
