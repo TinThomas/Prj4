@@ -55,6 +55,16 @@ namespace VareDatabase
                     {
                         Bid = 300,
                         UserIdBuyer = 29
+                    },
+                    new BidEntity
+                    {
+                        Bid = 350,
+                        UserIdBuyer = 22
+                    },
+                    new BidEntity
+                    {
+                        Bid = 375,
+                        UserIdBuyer = 11
                     }
                 }
             };
@@ -97,6 +107,11 @@ namespace VareDatabase
                     {
                         Bid = 300,
                         UserIdBuyer = 82
+                    },
+                    new BidEntity
+                    {
+                        Bid = 320,
+                        UserIdBuyer = 25
                     }
                 }
             };
@@ -144,6 +159,11 @@ namespace VareDatabase
                     {
                         Bid = 320,
                         UserIdBuyer = 71
+                    },
+                    new BidEntity
+                    {
+                        Bid = 360,
+                        UserIdBuyer = 52
                     }
                 }
             };
@@ -228,7 +248,28 @@ namespace VareDatabase
                     {
                         Bid = 195,
                         UserIdBuyer = 14
+                    },
+                    new BidEntity
+                    {
+                        Bid = 230,
+                        UserIdBuyer = 13
+                    },
+                    new BidEntity
+                    {
+                        Bid = 250,
+                        UserIdBuyer = 41
+                    },
+                    new BidEntity
+                    {
+                        Bid = 280,
+                        UserIdBuyer = 55
+                    },
+                    new BidEntity
+                    {
+                        Bid = 300,
+                        UserIdBuyer = 44
                     }
+
                 }
             };
             db.Add(HuntingQuiver);
@@ -278,6 +319,11 @@ namespace VareDatabase
                     {
                         Bid = 55,
                         UserIdBuyer = 35
+                    },
+                    new BidEntity
+                    {
+                        Bid = 60,
+                        UserIdBuyer = 74
                     }
                 }
             };
@@ -394,6 +440,21 @@ namespace VareDatabase
                     {
                         Bid = 420,
                         UserIdBuyer = 6
+                    },
+                    new BidEntity
+                    {
+                        Bid = 450,
+                        UserIdBuyer = 3
+                    },
+                    new BidEntity
+                    {
+                        Bid = 480,
+                        UserIdBuyer = 62
+                    },
+                    new BidEntity
+                    {
+                        Bid = 530,
+                        UserIdBuyer = 34
                     }
                 }
             };
@@ -452,6 +513,36 @@ namespace VareDatabase
                     {
                         Bid = 578,
                         UserIdBuyer = 2
+                    },
+                    new BidEntity
+                    {
+                        Bid = 620,
+                        UserIdBuyer = 6
+                    },
+                    new BidEntity
+                    {
+                        Bid = 650,
+                        UserIdBuyer = 78
+                    },
+                    new BidEntity
+                    {
+                        Bid = 680,
+                        UserIdBuyer = 59
+                    },
+                    new BidEntity
+                    {
+                        Bid = 720,
+                        UserIdBuyer = 94
+                    },
+                    new BidEntity
+                    {
+                        Bid = 740,
+                        UserIdBuyer = 42
+                    },
+                    new BidEntity
+                    {
+                        Bid = 760,
+                        UserIdBuyer = 85
                     }
                 }
             };
@@ -503,6 +594,11 @@ namespace VareDatabase
                     {
                         Bid = 370,
                         UserIdBuyer = 28
+                    },
+                    new BidEntity
+                    {
+                        Bid = 400,
+                        UserIdBuyer = 27
                     }
                 }
             };
@@ -596,6 +692,46 @@ namespace VareDatabase
                     {
                         Bid = 440,
                         UserIdBuyer = 52
+                    },
+                    new BidEntity
+                    {
+                        Bid = 460,
+                        UserIdBuyer = 77
+                    },
+                    new BidEntity
+                    {
+                        Bid = 390,
+                        UserIdBuyer = 18
+                    },
+                    new BidEntity
+                    {
+                        Bid = 420,
+                        UserIdBuyer = 20
+                    },
+                    new BidEntity
+                    {
+                        Bid = 460,
+                        UserIdBuyer = 90
+                    },
+                    new BidEntity
+                    {
+                        Bid = 500,
+                        UserIdBuyer = 79
+                    },
+                    new BidEntity
+                    {
+                        Bid = 520,
+                        UserIdBuyer = 51
+                    },
+                    new BidEntity
+                    {
+                        Bid = 535,
+                        UserIdBuyer = 10
+                    },
+                    new BidEntity
+                    {
+                        Bid = 550,
+                        UserIdBuyer = 86
                     }
                 }
             };
@@ -646,6 +782,16 @@ namespace VareDatabase
                     {
                         Bid = 315,
                         UserIdBuyer = 42
+                    },
+                    new BidEntity
+                    {
+                        Bid = 340,
+                        UserIdBuyer = 83
+                    },
+                    new BidEntity
+                    {
+                        Bid = 350,
+                        UserIdBuyer = 16
                     }
                 }
             };
@@ -696,6 +842,11 @@ namespace VareDatabase
                     {
                         Bid = 280,
                         UserIdBuyer = 46
+                    },
+                    new BidEntity
+                    {
+                        Bid = 315,
+                        UserIdBuyer = 75
                     }
                 }
             };
@@ -742,6 +893,16 @@ namespace VareDatabase
                     {
                         Bid = 450,
                         UserIdBuyer = 25
+                    },
+                    new BidEntity
+                    {
+                        Bid = 480,
+                        UserIdBuyer = 15
+                    },
+                    new BidEntity
+                    {
+                        Bid = 500,
+                        UserIdBuyer = 60
                     }
                 }
             };
