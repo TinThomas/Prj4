@@ -20,10 +20,11 @@
         </div>
         <div class="row">
             <div class="col-3">
-                <h3>Time left:</h3>
+                <h3>Ends:</h3>
             </div>
             <div class="col-3">
-                <h3 class="auction-text">{{auctionTest.ExpirationDate}}</h3>
+                <h3 class="auction-text">{{auctionTest.ExpirationDate | moment("from", auctionTest.DateCreated)}}</h3>
+                
             </div>
             <div class="col-6" id="bid-table">
                 <p>Bid must be higher than: {{auctionTest.BuyOutPrice}} kr</p>
@@ -36,6 +37,7 @@
 
 <script>
     import axios from 'axios';
+    import moment from 'vue-moment'
 export default {
     data(){
         return {

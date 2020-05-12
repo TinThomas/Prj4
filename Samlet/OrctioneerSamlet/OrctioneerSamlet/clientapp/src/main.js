@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import VueMoment from 'vue-moment';
 import App from './App.vue';
 import VModal from 'vue-js-modal'
 import axios from 'axios'
@@ -16,6 +17,7 @@ import store from './components/Utility/Store'
 
 Vue.use(VueRouter);
 Vue.use(VModal);
+Vue.use(VueMoment);
 Vue.use(VueAxios, axios);
 
 const routes = [
@@ -43,6 +45,7 @@ Vue.config.productionTip = false;
 
 window.vm = new Vue({
     axios,
+    VueMoment,
     router,
     store,
     render: h => h(App),

@@ -16,13 +16,11 @@
           </div>
           <input type="file" @change="onFileChanged" />
           <label>End date:</label>
-          <select v-model="auction.endDate">
+          <select v-model="endDate">
               <option v-for="day in endDates" :key="day">{{day}}</option>
           </select>
           <button class="btn btn-secondary" @click.prevent="postAuction" @click="onUpload">Add auction</button>
       </form>
-
-      
 
       <div v-show="submitted">
           <h3>Your auction has been posted!</h3>
@@ -36,7 +34,7 @@
           <ul>
               <li v-for="cat in auction.categories" :key="cat">{{ cat }}</li>
           </ul>
-          <p>Auction ends in: {{ auction.endDate }} </p>
+          <p>Auction ends in: {{ auction.expirationDate }} </p>
       </div>
   </div>
 </template>
@@ -44,54 +42,59 @@
 <script>
 
 import axios from 'axios';
+//import moment from 'vue-moment';
+
 export default {
     
-  data(){
+    data(){
     return{
         auction:{
             title:"",
             description: "",
             categories:[],
-            endDate: ""
+            expirationDate:""
         },
-        endDates:['1 day', '2 days', '7 days', '31 days'],
+        endDates:[1,2,7,14,28],
         submitted: false,
-        selectedFile: null
+        selectedFile: null,
+        endDate: ""
        
     }
-  },
-  methods:{
-      postAuction: function () {
-          var ref = this;
-          axios.post('http://localhost:5000/api/ItemEntity/Item',
-              {
-                  Title: ref.auction.title,
-                  BuyOutPrice: 123,
-                  DescriptionOfItem: ref.auction.description,
-    
-                
-              })
-
+    },
+    methods:{
+        postAuction: function () {
+            var ref = this;
+            this.calcEndDate();
+            axios.post('http://localhost:5000/api/ItemEntity/Item',
+                {
+                    Title: ref.auction.title,
+                    BuyOutPrice: 123,
+                    DescriptionOfItem: ref.auction.description,
+                    ExpirationDate: ref.auction.expirationDate
+                })
             //    .then(function (response) {
             //    console.log(response);
             //}).catch(function (error) {
             //    console.log(error);
             //});
             this.submitted = true;
-      },
-      onFileChanged(event) {
-          var ref = this;
-          ref.selectedFile = event.target.files[0];
-      },
-      onUpload() {
-          var ref = this;
-          var formData = new FormData();
-          formData.append('file', ref.selectedFile, ref.selectedFile.name)
-          axios.post('http://localhost:5000/api/ItemEntity/CreateImage', formData);
-      }
-
-
-  }
+        },
+        onFileChanged(event) {
+            var ref = this;
+            ref.selectedFile = event.target.files[0];
+        },
+        onUpload() {
+            var ref = this;
+            var formData = new FormData();
+            formData.append('file', ref.selectedFile, ref.selectedFile.name)
+            axios.post('http://localhost:5000/api/ItemEntity/CreateImage', formData);
+        },
+        calcEndDate() {
+            const moment = this.$moment().add(this.endDate, 'days').format();
+            window.console.log(this.endDate);
+            this.auction.expirationDate = moment;
+        },
+    },
 }
 </script>
 
