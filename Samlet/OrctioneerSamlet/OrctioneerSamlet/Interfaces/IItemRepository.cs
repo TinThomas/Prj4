@@ -12,6 +12,7 @@ namespace VareDatabase.Interfaces
         IEnumerable<ItemEntity> Search(string searchString);
         IEnumerable<ItemEntity> GetNewestFirst();
         IEnumerable<ItemEntity> GetMostPopularItems();
+        IEnumerable<ItemEntity> GetExpiringFirst();
         void GenerateTags(ItemEntity item);
         void AddTag(int id, string newTag);
     }
