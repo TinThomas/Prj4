@@ -29,24 +29,15 @@ namespace VareDatabase.Repo
                 .Where(x => x.UserIdBuyer == userId)
                 .ToList();
         }
-        public void AddBid(int itemId, int bid, int userId)
+
+        public IEnumerable<BidEntity> GethighestBidOnItem(int itemId)
         {
-            ItemEntity item = db.Set<ItemEntity>().Find(itemId);
-            if (item != null)
-            {
-                foreach (BidEntity b in item.Bids)
-                {
-                    if (b.Bid >= bid)
-                    {
-                        return;
-                    }
-                }
-                item.Bids.Add(new BidEntity
-                {
-                    Bid = bid,
-                    UserIdBuyer = userId
-                });
-            }
+            return Context.Set<BidEntity>()
+                .Where(x => x.ItemId == itemId)
+                .OrderByDescending(x => x.Bid)
+                .ToList();
         }
+
+
     }
 }

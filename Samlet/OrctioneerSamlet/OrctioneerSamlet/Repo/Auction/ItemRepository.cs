@@ -137,5 +137,15 @@ namespace VareDatabase.Repo.Auction
             }
             return itemsId;
         }
+
+        public IEnumerable<ItemEntity> GetNewestFirst()
+        {
+            return Context.Set<ItemEntity>()
+                .Include(tag => tag.Tags)
+                .Include(bid => bid.Bids)
+                .Include(img => img.Images)
+                .OrderByDescending(x => x.DateCreated)
+                .ToList();
+        }
     }
 }

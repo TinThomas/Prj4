@@ -13,6 +13,6 @@ namespace VareDatabase.Interfaces.Auction
     {
         IEnumerable<BidEntity> GetBidsFromItem(int itemId);
         IEnumerable<BidEntity> GetBidsByUser(int userId);
-        void AddBid(int itemId, int bid, int user);
+        IEnumerable<BidEntity> GethighestBidOnItem(int itemId);
     }
 }

@@ -34,9 +34,8 @@ namespace VareDatabase.Controllers
         }
 
         [HttpPost("newBid")]
-        public async Task<IActionResult> CreateBid(BidEntity bid)
+        public async Task<IActionResult> CreateBid([FromBody]BidEntity bid)
         {
-            Console.WriteLine("Added bid");
             _dbLogic.CreateBid(bid);
             _dbLogic.Save();
             return Ok(bid);
@@ -56,5 +55,14 @@ namespace VareDatabase.Controllers
             json = JsonConvert.SerializeObject(_dbLogic.GetBidsByUserId(id), Formatting.Indented, serializerSettings);
             return json;
         }
+
+        [HttpGet]
+        [Route("GetBidsFromUserSorted/{id}")]
+        public ActionResult<string> GethighestBidOnItem(int id)
+        {
+            json = JsonConvert.SerializeObject(_dbLogic.GetBidsForItemSorted(id), Formatting.Indented, serializerSettings);
+            return json;
+        }
+
     }
 }

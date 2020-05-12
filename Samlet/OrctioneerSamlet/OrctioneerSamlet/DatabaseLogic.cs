@@ -39,6 +39,16 @@ namespace VareDatabase
         {
             return bidRepo.GetBidsByUser(userId);
         }
+
+        public IEnumerable<BidEntity> GetBidsForItemSorted(int itemId)
+        {
+            return bidRepo.GethighestBidOnItem(itemId);
+        }
+
+        public IEnumerable<ItemEntity> GetNewestFirst()
+        {
+            return itemRepo.GetNewestFirst();
+        }
         public void AddItem(ItemEntity item)
         {
             itemRepo.Create(item);

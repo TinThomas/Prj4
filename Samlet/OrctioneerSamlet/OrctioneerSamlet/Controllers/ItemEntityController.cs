@@ -65,9 +65,7 @@ namespace VareDatabase.Controllers
         [Route("Home/item/new")]
         public ActionResult<string> GetNewestItems()
         {
-            var items = _dbLogic.GetAll();
-            items.OrderByDescending(i => i.DateCreated).ToList();
-            json = JsonConvert.SerializeObject(items, Formatting.Indented, serializerSettings);
+            json = JsonConvert.SerializeObject(_dbLogic.GetNewestFirst(), Formatting.Indented, serializerSettings);
             return json;
         }
         //about to expire

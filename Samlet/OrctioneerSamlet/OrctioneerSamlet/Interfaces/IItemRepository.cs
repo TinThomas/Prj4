@@ -10,6 +10,7 @@ namespace VareDatabase.Interfaces
     {
         ItemEntity GenerateItem(string title, string description, string[] tags, string[] images, int expire, int userId, int buyOut);
         IEnumerable<ItemEntity> Search(string searchString);
+        IEnumerable<ItemEntity> GetNewestFirst();
         void GenerateTags(ItemEntity item);
         void AddTag(int id, string newTag);
     }
