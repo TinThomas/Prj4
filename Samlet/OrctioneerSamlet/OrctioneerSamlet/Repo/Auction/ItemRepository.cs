@@ -154,7 +154,17 @@ namespace VareDatabase.Repo.Auction
                 .Include(tag => tag.Tags)
                 .Include(bid => bid.Bids)
                 .Include(img => img.Images)
-                .OrderBy(i => i.Bids.Count)
+                .OrderByDescending(i => i.Bids.Count)
+                .ToList();
+        }
+
+        public IEnumerable<ItemEntity> GetExpiringFirst()
+        {
+            return Context.Set<ItemEntity>()
+                .Include(tag => tag.Tags)
+                .Include(bid => bid.Bids)
+                .Include(img => img.Images)
+                .OrderBy(i => i.ExpirationDate)
                 .ToList();
         }
     }

@@ -54,6 +54,11 @@ namespace VareDatabase
         {
             return itemRepo.GetMostPopularItems();
         }
+
+        public IEnumerable<ItemEntity> GetExpiringFirst()
+        {
+            return itemRepo.GetExpiringFirst();
+        }
         public void AddItem(ItemEntity item)
         {
             itemRepo.Create(item);

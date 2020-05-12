@@ -34,7 +34,7 @@ namespace VareDatabase.Controllers
         }
 
         [HttpGet]
-        [Route("Home/item/{id?}")]
+        [Route("item/{id?}")]
         //Get on ID
         public ActionResult<string> GetItem(int id)
         {
@@ -43,7 +43,7 @@ namespace VareDatabase.Controllers
         }
 
         [HttpGet]
-        [Route("Home/item")]
+        [Route("item")]
         public ActionResult<string> GetAllItems()
         {
             var items = _dbLogic.GetAll();
@@ -60,7 +60,7 @@ namespace VareDatabase.Controllers
         }
         //newest
         [HttpGet]
-        [Route("Home/item/new")]
+        [Route("item/new")]
         public ActionResult<string> GetNewestItems()
         {
             json = JsonConvert.SerializeObject(_dbLogic.GetNewestFirst(), Formatting.Indented, serializerSettings);
@@ -71,13 +71,11 @@ namespace VareDatabase.Controllers
         [Route("item/expire")]
         public ActionResult<string> GetExpiringItems()
         {
-            var items = _dbLogic.GetAll();
-            items.OrderBy(i => i.ExpirationDate);
-            json = JsonConvert.SerializeObject(items, Formatting.Indented, serializerSettings);
+            json = JsonConvert.SerializeObject(_dbLogic.GetExpiringFirst(), Formatting.Indented, serializerSettings);
             return json;
         }
         [HttpGet]
-        [Route("Home/item/tag/{search?}")]
+        [Route("item/tag/{search?}")]
         public ActionResult<string> GetTag(string search)
         {
             json = JsonConvert.SerializeObject(_dbLogic.Search(search), Formatting.Indented, serializerSettings);
@@ -85,7 +83,7 @@ namespace VareDatabase.Controllers
         }
         
         //Post = Create
-        [HttpPost("Item")]
+        [HttpPost("item")]
         public async Task<IActionResult> CreateEntity([FromBody]ItemEntity item)
         {
             Console.WriteLine("Adding item with title: " + item.Title);
