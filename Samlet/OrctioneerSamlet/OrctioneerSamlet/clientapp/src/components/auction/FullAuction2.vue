@@ -15,7 +15,7 @@
                 <h3>Current bid: </h3>
             </div>
             <div class="col-3">
-                <h3 class="auction-text">{{getHighestBid}} Gold</h3>
+                <h3 class="auction-text">{{getHighestBid(getHighestBidFirst[0])}}</h3>
             </div>
         </div>
         <div class="row">
@@ -76,21 +76,38 @@ export default {
             //    Title: "",
             //    Bids: [{ Bid: 0 }]
             //}],
-            auctions:""
-            
+            auctions: "",
+            highestBid: ""
 
             }
-        },
-        watch: {
-            
         },
         methods:{
             //testFunction: function () {
             //    return this.auctions.filter((auction) => {
             //        return this.specificAuction = auction.title.match(this.id)
             //    })
-            getHighestBid: function () {
-                var auction = this.auctions.Bids;
+            //getHighestBid: function () {
+            //    var bids = this.auctions.Bids;
+            //    window.console.log(bids);
+            //    if (Array.isArray(bids) && bids.length) {
+                    
+            //        return bids[0].Bid + " Gold";
+            //    }
+            //    else {
+            //        return "No bids";
+            //    }
+
+            //}
+
+            getHighestBid: function (bid) {
+                if (bid != null) {
+                    return bid.Bid + " Gold";
+                }
+                else {
+                    return " No Bids";
+                }
+
+
                 if (Array.isArray(auction.Bids) && auction.Bids.length) {
                     var bids = auction.Bids;
                     bids.sort(function (bidA, bidB) {
@@ -129,7 +146,6 @@ export default {
                 ref.auctions = response.data;
                 //window.console.log(response.data);
                 window.console.log(ref.auctions);
-                
             })
         }
     }   
