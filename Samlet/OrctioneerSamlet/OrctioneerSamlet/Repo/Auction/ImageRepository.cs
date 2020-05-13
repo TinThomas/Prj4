@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using VareDatabase.DBContext;
 using VareDatabase.Interfaces;
 using VareDatabase.Models;
+using OkResult = System.Web.Http.Results.OkResult;
 
 namespace VareDatabase.Repo
 {
@@ -31,7 +32,7 @@ namespace VareDatabase.Repo
                 }
                 string newFileName = Guid.NewGuid().ToString()+".jpg";
                 System.IO.File.Move(path, Path.Combine(imgFolder, newFileName));
-                return newFileName;
+                return "yay";
             }
             return "";
         }
