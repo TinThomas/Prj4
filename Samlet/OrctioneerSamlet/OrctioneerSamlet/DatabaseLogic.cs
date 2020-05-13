@@ -105,11 +105,15 @@ namespace VareDatabase
 
         public void UploadPicture(IFormFile file, int id)
         {
-            string imageId = imageRepo.UploadPicture(file);
+            string imageName = imageRepo.UploadPicture(file);
             var item = itemRepo.Read(id);
+            if(imageName == null)
+            {
+                return;
+            }
             item.Images.Add(new ImageEntity
             {
-                ImageOfItem = imageId,
+                ImageOfItem = imageName,
                 ItemId = id,
             });
         }
