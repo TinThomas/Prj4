@@ -98,20 +98,20 @@ namespace VareDatabase
         {
             itemRepo.AddTag(id, newTag);
         }
+        public void AddImage(ImageEntity img)
+        {
+            imageRepo.Create(img);
+        }
         public IEnumerable<ItemEntity> Search(string searchingstring)
         {
             return itemRepo.Search(searchingstring);
         }
 
-        public void UploadPicture(IFormFile file, int id)
+        public string UploadPicture(IFormFile file)
         {
-            string imageId = imageRepo.UploadPicture(file);
-            var item = itemRepo.Read(id);
-            item.Images.Add(new ImageEntity
-            {
-                ImageOfItem = imageId,
-                ItemId = id,
-            });
+            string path = imageRepo.UploadPicture(file);
+
+            return path;
         }
     }
 }
