@@ -5,7 +5,7 @@
                 <img :src="auc.url">
                 <h5>{{ auc.Title }}</h5>
                 <h5>Buy Out Price: {{ auc.BuyOutPrice }}</h5>
-                <h5>Ends: {{ auc.ExpirationDate | moment("from", now) }}</h5>
+                <h5>Ends: {{ auc.ExpirationDate | moment("from") }}</h5>
 
                 <button @click="navigateToAuction(auc.ItemId)" class="btn btn-secondary">See full auction</button>
 
