@@ -10,6 +10,6 @@ namespace VareDatabase.Interfaces
 {
     public interface IImageRepository : IRepository<ImageEntity>
     {
-        void UploadPicture(IFormFile file);
+        string UploadPicture(IFormFile file);
     }
 }

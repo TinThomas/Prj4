@@ -110,9 +110,10 @@ namespace VareDatabase.Controllers
             return Ok();
         }
         [HttpPost("CreateImage")]
-        public async Task<IActionResult> UploadPicture(IFormFile file)
+        public async Task<IActionResult> UploadPicture(IFormFile file, int id)
         {
-            _dbLogic.UploadPicture(file);
+            _dbLogic.UploadPicture(file, id);
+            _dbLogic.Save();
             return Ok();
         }
         [HttpGet("GetPicture")]

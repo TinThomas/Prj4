@@ -19,7 +19,7 @@ namespace VareDatabase.Repo
         {
             this.db = db;
         }
-        public void UploadPicture(IFormFile file)
+        public string UploadPicture(IFormFile file)
         {
             if (file.Length > 0)
             {
@@ -31,7 +31,9 @@ namespace VareDatabase.Repo
                 }
                 string newFileName = Guid.NewGuid().ToString();
                 System.IO.File.Move(path, Path.Combine(imgFolder, newFileName));
+                return newFileName;
             }
+            return null;
         }
     }
 }
