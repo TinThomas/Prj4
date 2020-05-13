@@ -29,7 +29,6 @@ namespace VareDatabase.Repo.Auction
                 .Where(x => x.ItemId == id)
                 .Include(tag => tag.Tags)
                 .Include(bid => bid.Bids)
-                .Include(img => img.Images)
                 .First();
         }
         public override IEnumerable<ItemEntity> GetAll()
@@ -37,7 +36,7 @@ namespace VareDatabase.Repo.Auction
             return Context.Set<ItemEntity>()
                 .Include(tag => tag.Tags)
                 .Include(bid => bid.Bids)
-                .Include(img => img.Images).ToList();
+                .ToList();
         }
         public void GenerateTags(ItemEntity item)
         {
@@ -99,13 +98,6 @@ namespace VareDatabase.Repo.Auction
         }
         public ItemEntity GenerateItem(string title, string description, string[] tags, string[] images, int userId, int expire, int buyOut = -1)
         {
-            List<ImageEntity> newImages = new List<ImageEntity>();
-            for (int i = 0; i < images.Length; i++)
-            {
-                ImageEntity item = new ImageEntity();
-                item.ImageOfItem = images[i];
-                newImages[i] = item;
-            }
             List<TagEntity> newTags = new List<TagEntity>();
             for (int i = 0; i < tags.Length; i++)
             {
@@ -119,7 +111,6 @@ namespace VareDatabase.Repo.Auction
                 DateCreated = DateTime.Now,
                 ExpirationDate = DateTime.Now.AddDays(expire),
                 Title = title,
-                Images = newImages,
                 Tags = newTags,
                 DescriptionOfItem = description,
                 UserIdSeller = userId,
@@ -150,7 +141,6 @@ namespace VareDatabase.Repo.Auction
             return Context.Set<ItemEntity>()
                 .Include(tag => tag.Tags)
                 .Include(bid => bid.Bids)
-                .Include(img => img.Images)
                 .OrderByDescending(x => x.DateCreated)
                 .ToList();
         }
@@ -160,7 +150,6 @@ namespace VareDatabase.Repo.Auction
             return Context.Set<ItemEntity>()
                 .Include(tag => tag.Tags)
                 .Include(bid => bid.Bids)
-                .Include(img => img.Images)
                 .OrderByDescending(i => i.Bids.Count)
                 .ToList();
         }
@@ -170,7 +159,6 @@ namespace VareDatabase.Repo.Auction
             return Context.Set<ItemEntity>()
                 .Include(tag => tag.Tags)
                 .Include(bid => bid.Bids)
-                .Include(img => img.Images)
                 .OrderBy(i => i.ExpirationDate)
                 .ToList();
         }
