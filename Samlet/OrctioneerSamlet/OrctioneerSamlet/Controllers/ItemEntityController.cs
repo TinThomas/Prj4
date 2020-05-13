@@ -112,6 +112,7 @@ namespace VareDatabase.Controllers
         [HttpPost("CreateImage")]
         public async Task<IActionResult> UploadPicture(IFormFile file, int id)
         {
+
             _dbLogic.UploadPicture(file, id);
             _dbLogic.Save();
             return Ok();

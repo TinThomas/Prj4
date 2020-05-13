@@ -23,17 +23,17 @@ namespace VareDatabase.Repo
         {
             if (file.Length > 0)
             {
-                string imgFolder = @"~\images";
+                string imgFolder = @"..\images";
                 string path = Path.Combine(imgFolder, file.FileName);
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {
                     file.CopyToAsync(fileStream);
                 }
-                string newFileName = Guid.NewGuid().ToString();
+                string newFileName = Guid.NewGuid().ToString()+".jpg";
                 System.IO.File.Move(path, Path.Combine(imgFolder, newFileName));
                 return newFileName;
             }
-            return null;
+            return "";
         }
     }
 }
