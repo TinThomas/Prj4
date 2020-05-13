@@ -57,7 +57,8 @@ export default {
         endDates:[1,2,7,14,28],
         submitted: false,
         selectedFile: null,
-        endDate: ""
+        endDate: "",
+        picpath: ""
        
     }
     },
@@ -67,8 +68,6 @@ export default {
             this.calcEndDate();
             var pic = {};
             pic.ImageOfItem = "randomstring";
-            var array = "[{ImageOfItem:'XD'}]"
-            array = JSON.stringify({ array });
 
             
             axios.post('http://localhost:5000/api/ItemEntity/Item',
@@ -77,7 +76,7 @@ export default {
                     BuyOutPrice: 123,
                     DescriptionOfItem: ref.auction.description,
                     ExpirationDate: ref.auction.expirationDate,
-                    Images: array
+                    img: ref.picpath
                 })
             //    .then(function (response) {
             //    console.log(response);
@@ -94,7 +93,7 @@ export default {
             var ref = this;
             var formData = new FormData();
             formData.append('file', ref.selectedFile, ref.selectedFile.name)
-            axios.post('http://localhost:5000/api/ItemEntity/CreateImage', formData);
+            ref.picpath = axios.post('http://localhost:5000/api/ItemEntity/CreateImage', formData);
         },
         calcEndDate() {
             const moment = this.$moment().add(this.endDate, 'days').format();

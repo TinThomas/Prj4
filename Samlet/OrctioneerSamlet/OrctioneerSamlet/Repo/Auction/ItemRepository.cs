@@ -35,7 +35,8 @@ namespace VareDatabase.Repo.Auction
         {
             return Context.Set<ItemEntity>()
                 .Include(tag => tag.Tags)
-                .Include(bid => bid.Bids).ToList();
+                .Include(bid => bid.Bids)
+                .ToList();
         }
         public void GenerateTags(ItemEntity item)
         {
@@ -95,6 +96,7 @@ namespace VareDatabase.Repo.Auction
             }
             return foundItems;
         }
+
         private List<ItemEntity> SearchByTag(string tag)
         {
             List<ItemEntity> itemsId = new List<ItemEntity>();
