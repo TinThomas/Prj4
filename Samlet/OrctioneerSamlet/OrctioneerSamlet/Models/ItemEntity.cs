@@ -23,6 +23,7 @@ namespace VareDatabase.Models
         [MaxLength(500)]
         public string DescriptionOfItem { get; set; }
         public bool Sold { get; set; } = false;
+        public string img { get; set; }
 
         //Navigational property
         public ICollection<ImageEntity> Images { get; set; }

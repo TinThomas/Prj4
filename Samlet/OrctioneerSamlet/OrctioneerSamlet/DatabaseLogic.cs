@@ -109,9 +109,8 @@ namespace VareDatabase
 
         public string UploadPicture(IFormFile file)
         {
-            string path = imageRepo.UploadPicture(file);
-
-            return path;
+           string  path = itemRepo.UploadPicture(file);
+           return path;
         }
     }
 }

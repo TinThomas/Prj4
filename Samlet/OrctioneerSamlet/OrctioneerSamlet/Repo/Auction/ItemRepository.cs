@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using VareDatabase.Models;
 using VareDatabase.DBContext;
 using VareDatabase.Interfaces;
@@ -169,6 +173,23 @@ namespace VareDatabase.Repo.Auction
                 .Include(img => img.Images)
                 .OrderBy(i => i.ExpirationDate)
                 .ToList();
+        }
+
+        public string UploadPicture(IFormFile file)
+        {
+            if (file.Length > 0)
+            {
+                string imgFolder = @"..\images";
+                string path = Path.Combine(imgFolder, file.FileName);
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    file.CopyToAsync(fileStream);
+                }
+                string newFileName = Guid.NewGuid().ToString() + ".jpg";
+                File.Move(path, Path.Combine(imgFolder, newFileName));
+                return Path.Combine(imgFolder, newFileName);
+            }
+            return null;
         }
     }
 }
