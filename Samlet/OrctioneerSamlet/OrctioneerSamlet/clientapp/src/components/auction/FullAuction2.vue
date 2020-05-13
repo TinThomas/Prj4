@@ -6,8 +6,8 @@
                 <img src="./../../images/sværd.jpg">
             </div>
             <div class="col">
-                <h3>{{auctions[0].Title}}</h3>
-                <p id="description">{{auctions[0].DescriptionOfItem}}</p>
+                <h3>{{auctions.Title}}</h3>
+                <p id="description">{{auctions.DescriptionOfItem}}</p>
             </div>
         </div>
         <div class="row">
@@ -15,7 +15,7 @@
                 <h3>Current bid: </h3>
             </div>
             <div class="col-3">
-                <h3 class="auction-text">{{auctions[0].BuyOutPrice}}kr</h3>
+                <h3 class="auction-text">{{auctions.BuyOutPrice}}kr</h3>
             </div>
         </div>
         <div class="row">
@@ -23,15 +23,14 @@
                 <h3>Ends:</h3>
             </div>
             <div class="col-3">
-                <h3 class="auction-text">{{auctions[0].ExpirationDate | moment("from") }}</h3>
+                <h3 class="auction-text">{{auctions.ExpirationDate | moment("from") }}</h3>
 
             </div>
             <div class="col-6" id="bid-table">
-                <p>Bid must be higher than: {{auctions[0].BuyOutPrice}} kr</p>
+                <p>Bid must be higher than: {{auctions.BuyOutPrice}} kr</p>
                 <input type="text" placeholder="Your bid">
                 <button class="btn btn-secondary">Make a bid!</button>
             </div>
-
             <div class="col-6" id="bid-history">
                 <div class="row">
                     <div class="col-4">
@@ -59,14 +58,9 @@
                     </div>
 
                 </div>
-
             </div>
-
         </div>
-        
 
-        test
-        <p>{{getHighestBidFirst}}</p>
     </div>    
 </template>
 
@@ -78,10 +72,11 @@ export default {
         return {
             id: this.$route.params.id,
 
-            auctions: [{
-                Title: "",
-                Bids: [{ Bid: 0 }]
-            }],
+            //auctions: [{
+            //    Title: "",
+            //    Bids: [{ Bid: 0 }]
+            //}],
+            auctions:""
             
 
             }
@@ -102,14 +97,14 @@ export default {
             //    })
             //},
             getHighestBidFirst: function () {
-                var bids = this.auctions[0].Bids;
+                var bids = this.auctions.Bids;
                 return bids.sort(function(bidA,bidB) {
                     return bidB.Bid-bidA.Bid
                 })
                 
             }
         },
-        mounted() {
+        created() {
             var ref = this;
             axios.get('http://localhost:5000/api/ItemEntity/item/' + ref.id).then(function (response) {
                 if (response.status != 200) {
