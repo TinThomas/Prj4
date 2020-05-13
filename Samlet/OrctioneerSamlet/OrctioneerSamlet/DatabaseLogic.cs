@@ -103,19 +103,14 @@ namespace VareDatabase
             return itemRepo.Search(searchingstring);
         }
 
-        public void UploadPicture(IFormFile file, int id)
+        public string UploadPicture(IFormFile file)
         {
-            string imageName = imageRepo.UploadPicture(file);
-            var item = itemRepo.Read(id);
-            if(imageName == null)
+            string path = imageRepo.UploadPicture(file);
+            if(path == null)
             {
-                return;
+                return null;
             }
-            item.Images.Add(new ImageEntity
-            {
-                ImageOfItem = imageName,
-                ItemId = id,
-            });
+            return path;
         }
     }
 }

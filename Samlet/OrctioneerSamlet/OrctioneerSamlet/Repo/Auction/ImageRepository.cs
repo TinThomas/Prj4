@@ -23,7 +23,7 @@ namespace VareDatabase.Repo
         {
             if (file.Length > 0)
             {
-                string imgFolder = @"~\images";
+                string imgFolder = @".\images";
                 string path = Path.Combine(imgFolder, file.FileName);
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {
@@ -31,7 +31,7 @@ namespace VareDatabase.Repo
                 }
                 string newFileName = Guid.NewGuid().ToString();
                 System.IO.File.Move(path, Path.Combine(imgFolder, newFileName));
-                return newFileName;
+                return Path.Combine(imgFolder, newFileName);
             }
             return null;
         }
