@@ -31,16 +31,40 @@
                 <input type="text" placeholder="Your bid">
                 <button class="btn btn-secondary">Make a bid!</button>
             </div>
+
             <div class="col-6" id="bid-history">
-                <div v-for="bid in getHighestBidFirst" :key="bid.Id">
-                    <p> {{bid.Bid}} </p>
+                <div class="row">
+                    <div class="col-4">
+                        <b>Bid:</b>
+                    </div>
+                    <div class="col-4">
+                        <b>Date Created:</b>
+                    </div>
+                    <div class="col-4">
+                        <b>Time:</b>
+                    </div>
 
                 </div>
+                <div v-for="bid in getHighestBidFirst" :key="bid.Id">
+                    <div class="row">
+                        <div class="col-4">
+                            {{bid.Bid}}
+                        </div>
+                        <div class="col-4">
+                            {{bid.Created | moment("dddd, MMMM Do YYYY")}}
+                        </div>
+                        <div class="col-4">
+                            {{bid.Created | moment("h:mm:ss a")}}
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
         
-        
+
         test
         <p>{{getHighestBidFirst}}</p>
     </div>    
