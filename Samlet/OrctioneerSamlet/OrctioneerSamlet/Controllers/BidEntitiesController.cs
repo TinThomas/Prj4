@@ -29,8 +29,9 @@ namespace VareDatabase.Controllers
         {
             var db = new DBContext.VareDataModelContext();
             IBidRepository repo = new BidRepository(db);
+            IItemRepository itemRepo = new ItemRepository(db);
             var unit = new AuctionUnitOfWork(db);
-            var dbLogic = new DatabaseLogic(unit, null, repo);
+            var dbLogic = new DatabaseLogic(unit, itemRepo, repo);
             _dbLogic = dbLogic;
         }
 

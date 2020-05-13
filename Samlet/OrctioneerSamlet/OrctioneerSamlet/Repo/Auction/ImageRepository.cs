@@ -23,7 +23,7 @@ namespace VareDatabase.Repo
         {
             if (file.Length > 0)
             {
-                string imgFolder = @"..\images";
+                string imgFolder = @"~\images";
                 string path = Path.Combine(imgFolder, file.FileName);
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {

@@ -39,7 +39,7 @@ namespace VareDatabase.Controllers
         //Get on ID
         public ActionResult<string> GetItem(int id)
         {
-            json = JsonConvert.SerializeObject(_dbLogic.GetAllInfoOnItem(id), Formatting.Indented, serializerSettings);
+            json = JsonConvert.SerializeObject(_dbLogic.Get(id), Formatting.Indented, serializerSettings);
             return json;
         }
 
@@ -110,22 +110,11 @@ namespace VareDatabase.Controllers
             return Ok();
         }
         [HttpPost("CreateImage")]
-        //public Task<IActionResult> UploadPicture(IFormFile file)
-        //{
-        //     _dbLogic.UploadPicture(file);
-        //     //if (file.Length > 0)
-        //    //{
-        //    //    string imgFolder = @"..\images";
-        //    //    string path = Path.Combine(imgFolder, file.FileName);
-        //    //    using (var fileStream = new FileStream(path, FileMode.Create))
-        //    //    {
-        //    //        await file.CopyToAsync(fileStream);
-        //    //    }
-        //    //    string newFileName = Guid.NewGuid().ToString();
-        //    //    System.IO.File.Move(path, Path.Combine(imgFolder,newFileName));
-        //    //}
-        //    return Ok(file.Name);
-        //}
+        public async Task<IActionResult> UploadPicture(IFormFile file)
+        {
+            _dbLogic.UploadPicture(file);
+            return Ok();
+        }
         [HttpGet("GetPicture")]
         public async Task<ActionResult<string>> LoadPicture(string path)
         {

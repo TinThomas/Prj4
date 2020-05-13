@@ -21,17 +21,12 @@ namespace VareDatabase.Repo.Auction
         }*/
         public override ItemEntity Read(int id)
         {
-            return Context.Set<ItemEntity>().FirstOrDefault(x => x.ItemId == id);
-        }
-
-        public IEnumerable<ItemEntity> getAllOnItem(int id)
-        {
             return Context.Set<ItemEntity>()
                 .Where(x => x.ItemId == id)
                 .Include(tag => tag.Tags)
                 .Include(bid => bid.Bids)
                 .Include(img => img.Images)
-                .ToList();
+                .First();
         }
         public override IEnumerable<ItemEntity> GetAll()
         {

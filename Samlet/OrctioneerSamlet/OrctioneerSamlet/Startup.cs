@@ -60,6 +60,7 @@ namespace OrctioneerSamlet
                 options.UseSqlServer(Configuration.GetConnectionString("PassConnection")));
             services.AddDbContext<WalletContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("WalletConnection")));
+
             services.AddScoped<VareDataModelContext>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddControllers();
