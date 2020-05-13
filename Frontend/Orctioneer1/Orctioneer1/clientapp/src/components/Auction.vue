@@ -1,5 +1,5 @@
 <template>
-    <div id=auctionId>
+    <div id="auctionId">
         <div class="row">
             <div v-for="auc in auctions" class="single-auction" :key="auc.id" >
                 <img :src="auc.url" >
@@ -42,9 +42,10 @@
          margin: 10px;
     }
     .single-auction{
-        background: #eeeeee;;
+        background: #eeeeee;
         padding:5px;
         margin: 5px;
+        max-width: 190px;
     }
     img{
         object-fit: cover;

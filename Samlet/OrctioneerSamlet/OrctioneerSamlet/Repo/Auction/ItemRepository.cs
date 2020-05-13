@@ -146,7 +146,7 @@ namespace VareDatabase.Repo.Auction
         {
             if (file.Length > 0)
             {
-                string imgFolder = @"..\images";
+                string imgFolder = @"clientapp\src\images";
                 string path = Path.Combine(imgFolder, file.FileName);
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {
@@ -154,7 +154,7 @@ namespace VareDatabase.Repo.Auction
                 }
                 string newFileName = Guid.NewGuid().ToString() + ".jpg";
                 File.Move(path, Path.Combine(imgFolder, newFileName));
-                return Path.Combine(imgFolder, newFileName);
+                return newFileName;
             }
             return null;
         }
