@@ -29,8 +29,13 @@ namespace VareDatabase
         }
         public void CreateBid(BidEntity bid)
         {
-            bidRepo.Create(bid);
-            unit.Commit();
+            var item = itemRepo.Read(bid.ItemId);
+            if(item.Bids.Last().Bid < bid.Bid) //check if new bid is high enough
+            {
+                bidRepo.Create(bid);
+                unit.Commit();
+            }
+            //error handling here
         }
         public IEnumerable<BidEntity> GetBidsFromItem(int itemId)
         {
@@ -77,9 +82,9 @@ namespace VareDatabase
             return itemRepo.GetAll();
         }
 
-        public IEnumerable<ItemEntity> GetAllInfoOnItem(int id)
+        public ItemEntity Get(int id)
         {
-            return itemRepo.getAllOnItem(id);
+            return itemRepo.Read(id);
         }
         public ItemEntity GetSingle(int id)
         {
