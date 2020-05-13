@@ -10,7 +10,7 @@
                 
                 <h5>Ends: {{ auc.ExpirationDate | moment("from") }}</h5>
 
-                <button @click="navigateToAuction(auc.ItemId)" class="btn btn-secondary">See full auction</button>
+                <button @click="navigateToAuction(auc.ItemId)" class="btn btn-secondary" id="buttonId">See full auction</button>
 
 
             </div>
@@ -55,10 +55,10 @@
                 else {
                     return "No bids";
                 }
-                
-            }
 
+            }
         },
+      
         //computed: {
         //    getHighestBid: function (auction) {
         //        var bids = auction.Bids;
@@ -75,6 +75,9 @@
     #auctionId {
         max-width: 1200px;
         margin: 10px;
+    }
+    #buttonId{
+
     }
 
     .single-auction {
