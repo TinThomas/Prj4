@@ -41,11 +41,11 @@
          max-width: 1200px;
          margin: 10px;
     }
-    .single-auction{
+    /*.single-auction{
         background: #eeeeee;;
         padding:5px;
         margin: 5px;
-    }
+    }*/
     img{
         object-fit: cover;
         width: 180px;

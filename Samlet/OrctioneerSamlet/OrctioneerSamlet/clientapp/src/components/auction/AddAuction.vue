@@ -19,7 +19,7 @@
           <select v-model="endDate">
               <option v-for="day in endDates" :key="day">{{day}}</option>
           </select>
-          <button class="btn btn-secondary"  @click="onUpload">Upload Image</button>
+          <!--<button class="btn btn-secondary"  @click="onUpload">Upload Image</button>-->
           <button class="btn btn-secondary" @click.prevent="postAuction">Add auction</button>
       </form>
 
@@ -87,14 +87,25 @@ export default {
         onFileChanged(event) {
             var ref = this;
             ref.selectedFile = event.target.files[0];
-        },
-        onUpload() {
-            var ref = this;
             var formData = new FormData();
             formData.append('file', ref.selectedFile, ref.selectedFile.name)
-            ref.picpath = axios.post('http://localhost:5000/api/ItemEntity/CreateImage', formData);
-            window.console.log(ref.picpath);
+            axios.post('http://localhost:5000/api/ItemEntity/CreateImage', formData)
+                .then(function (response) {
+                    if (response.status != 200) {
+                        window.console.log(response.status)
+                    }
+                    ref.picpath = response.data;
+                }).catch(function (error) {
+                    window.console.log(error)
+                });
         },
+        //onUpload() {
+        //    var ref = this;
+        //    var formData = new FormData();
+        //    formData.append('file', ref.selectedFile, ref.selectedFile.name)
+        //    ref.picpath = axios.post('http://localhost:5000/api/ItemEntity/CreateImage', formData);
+        //    window.console.log(ref.picpath);
+        //},
         calcEndDate() {
             const moment = this.$moment().add(this.endDate, 'days').format();
             window.console.log(this.endDate);

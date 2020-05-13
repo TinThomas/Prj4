@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col">
                 <!--<img :src="">-->
-                <img src="./../../images/sværd.jpg">
+                <img :src="url">
             </div>
             <div class="col">
                 <h3>{{auctions.Title}}</h3>
@@ -30,6 +30,7 @@
                 <p>Bid must be higher than: {{auctions.BuyOutPrice}} </p>
                 <input type="text" placeholder="Your bid">
                 <button class="btn btn-secondary">Make a bid!</button>
+
             </div>
             <div class="col-6" id="bid-history">
                 <div class="row">
@@ -77,7 +78,9 @@ export default {
             //    Bids: [{ Bid: 0 }]
             //}],
             auctions: "",
-            highestBid: ""
+            highestBid: "",
+            url: ""
+                //require('./../../images/df457fc9-c541-405c-a707-ff1d20ffa9d5.jpg')
 
             }
         },
@@ -106,19 +109,6 @@ export default {
                 else {
                     return " No Bids";
                 }
-
-
-                if (Array.isArray(auction.Bids) && auction.Bids.length) {
-                    var bids = auction.Bids;
-                    bids.sort(function (bidA, bidB) {
-                        return bidB.Bid - bidA.Bid
-                    })
-                    return bids[0].Bid + " Gold";
-                }
-                else {
-                    return "No bids";
-                }
-
             }
         },
         computed:{
@@ -144,7 +134,9 @@ export default {
                 }
                 //ref.test = response.data.splice(0, 4);
                 ref.auctions = response.data;
-                //window.console.log(response.data);
+                ref.url = require("./../../images/" + response.data.Image);
+
+                window.console.log(response.data.Image);
                 window.console.log(ref.auctions);
             })
         }
@@ -192,14 +184,16 @@ export default {
     margin-top:10px;
 }
 
-img{
-    width: 400px;
-    height: 400px;
-    box-shadow: grey 0 0 10px;
-    border: 1px solid white;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    float: left;
-}
+    img {
+        width: 400px;
+        height: 400px;
+        box-shadow: grey 0 0 10px;
+        border: 1px solid white;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        float: left;
+        object-fit: contain;
+        background-color: #eeeeee;
+    }
 
 </style>

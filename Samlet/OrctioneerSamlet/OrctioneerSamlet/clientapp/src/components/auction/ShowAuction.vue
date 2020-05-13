@@ -63,7 +63,7 @@ export default {
 }
 </script>
 
-<style >
+<style scoped>
 #show-auctions{
     max-width: 800px;
     min-height: 1000px;
