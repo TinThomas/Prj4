@@ -22,7 +22,7 @@ namespace VareDatabase
                 Title = "Elven Bow BUY NOW",
                 UserIdSeller = 12,
                 DescriptionOfItem = "Powerful bow that is best at the range of 30-50 meters",
-                Images = null,
+                Image = null,
                 Tags = new List<TagEntity>
                 { 
                     new TagEntity
@@ -72,7 +72,7 @@ namespace VareDatabase
                 Title = "Good beginner bow made of wood",
                 UserIdSeller = 35,
                 DescriptionOfItem = "Bow for the beginners who are learning to shoot arrows",
-                Images = null,
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -114,7 +114,7 @@ namespace VareDatabase
                 Title = "Longbow - 30-50 meters",
                 UserIdSeller = 35,
                 DescriptionOfItem = "Selling a longbow, great quality!",
-                Images = null,
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -159,7 +159,7 @@ namespace VareDatabase
                 Title = "Seeker quiver - black",
                 UserIdSeller = 64,
                 DescriptionOfItem = "Pairs great with a longbow, lighly used",
-                Images = null,
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -195,7 +195,7 @@ namespace VareDatabase
                 Title = "Hunting quiver - Brown",
                 UserIdSeller = 37,
                 DescriptionOfItem = "can hold up to 15 arrows",
-                Images = null,
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -252,7 +252,7 @@ namespace VareDatabase
                 Title = "Arrow with rubber head",
                 UserIdSeller = 89,
                 DescriptionOfItem = "Arrows, for your bow and quiver, There is a total of 12 arrows all the same quality",
-                Images = null,
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -301,7 +301,7 @@ namespace VareDatabase
                 Title = "Children bow set - beginner",
                 UserIdSeller = 77,
                 DescriptionOfItem = "Contains 5 arrows, a bow and a small quiver",
-                Images = null,
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -353,7 +353,7 @@ namespace VareDatabase
                 Title = "Bow set - beginner",
                 UserIdSeller = 77,
                 DescriptionOfItem = "Beginner bow set for adults",
-                Images = null,
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -420,7 +420,7 @@ namespace VareDatabase
                 Title = "Longbow set - beginner",
                 UserIdSeller = 98,
                 DescriptionOfItem = "Beginner long-bow set for adults, in elven style",
-                Images = null,
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -503,7 +503,7 @@ namespace VareDatabase
                 Title = "Warglaives of Azzinoth",
                 UserIdSeller = 97,
                 DescriptionOfItem = "Drops from BT, and is recreated here in IRL",
-                Images = null,
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -553,7 +553,7 @@ namespace VareDatabase
                 Title = "One handed sword - leather handle",
                 UserIdSeller = 22,
                 DescriptionOfItem = "One handed sword that is used together with a shield",
-                Images = null,
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -593,7 +593,7 @@ namespace VareDatabase
                 Title = "Two handed sword - leather handle",
                 UserIdSeller = 22,
                 DescriptionOfItem = "Original Zwei-Hander for RP",
-                Images = null,
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -673,7 +673,7 @@ namespace VareDatabase
                 Title = "Round one handed shield made of wood",
                 UserIdSeller = 50,
                 DescriptionOfItem = "Rounded shield made of wood and edge of metal",
-                Images = null,
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -727,7 +727,7 @@ namespace VareDatabase
                 Title = "Round one handed shield of metal",
                 UserIdSeller = 50,
                 DescriptionOfItem = "Rounded shield for one hand made of metal, has a crest of an eagle",
-                Images = null,
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -776,7 +776,7 @@ namespace VareDatabase
                 Title = "Knight shield of metal",
                 UserIdSeller = 50,
                 DescriptionOfItem = "Knight shield made of metal with straps so it can be put on your back",
-                Images = null,
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -1549,7 +1549,7 @@ namespace VareDatabase
                 Title = "Drinking Horn from a cow",
                 UserIdSeller = 1,
                 DescriptionOfItem = "Drops from BT, and is recreated here in IRL",
-                Images = new List<ImageEntity>
+                Image = new List<ImageEntity>
                 {
                     new ImageEntity
                     {
@@ -1587,7 +1587,7 @@ namespace VareDatabase
                 Title = "Elf Ears ",
                 UserIdSeller = 99,
                 DescriptionOfItem = "Perfect for creating an elf character in any RP setting",
-                Images = new List<ImageEntity>
+                Image = new List<ImageEntity>
                 {
                     new ImageEntity
                     {

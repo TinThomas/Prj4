@@ -23,16 +23,13 @@ namespace VareDatabase.Models
         [MaxLength(500)]
         public string DescriptionOfItem { get; set; }
         public bool Sold { get; set; } = false;
-        public string img { get; set; }
+        public string Image { get; set; }
 
-        //Navigational property
-        public ICollection<ImageEntity> Images { get; set; }
         public ICollection<TagEntity> Tags { get; set; }
         public ICollection<BidEntity> Bids { get; set; }
         public ItemEntity()
         {
             DateCreated = DateTime.Now;
-            Images = new List<ImageEntity>();
             Tags = new List<TagEntity>();
             Bids = new List<BidEntity>();
         }

@@ -22,7 +22,6 @@ namespace VareDatabase.DBContext
 
         public DbSet<ItemEntity> Items { get; set; }
         public DbSet<BidEntity> Bids { get; set; }
-        public DbSet<ImageEntity> Images { get; set; }
         public DbSet<TagEntity> Tags { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -31,11 +30,6 @@ namespace VareDatabase.DBContext
             modelBuilder.Entity<BidEntity>()
                 .HasOne(a => a.Item)
                 .WithMany(b => b.Bids)
-                .HasForeignKey(e => e.ItemId);
-
-            modelBuilder.Entity<ImageEntity>()
-                .HasOne(a => a.Item)
-                .WithMany(b => b.Images)
                 .HasForeignKey(e => e.ItemId);
 
             modelBuilder.Entity<TagEntity>()
