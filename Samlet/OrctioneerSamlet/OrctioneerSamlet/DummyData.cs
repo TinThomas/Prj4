@@ -22,13 +22,7 @@ namespace VareDatabase
                 Title = "Elven Bow BUY NOW",
                 UserIdSeller = 12,
                 DescriptionOfItem = "Powerful bow that is best at the range of 30-50 meters",
-                Images = new List<ImageEntity>
-                {
-                    new ImageEntity
-                    {
-                        ImageOfItem = "empty"
-                    }
-                },
+                Image = null,
                 Tags = new List<TagEntity>
                 { 
                     new TagEntity

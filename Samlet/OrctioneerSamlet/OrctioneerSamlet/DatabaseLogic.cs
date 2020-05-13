@@ -18,14 +18,12 @@ namespace VareDatabase
         private readonly IItemRepository itemRepo;
         private readonly IBidRepository bidRepo;
         private readonly ITagRepository tagRepo;
-        private readonly IImageRepository imageRepo;
-        public DatabaseLogic(IUnitOfWork unit, IItemRepository itemRepo = null, IBidRepository bidRepo = null, ITagRepository tagRepo = null, IImageRepository imageRepo = null)
+        public DatabaseLogic(IUnitOfWork unit, IItemRepository itemRepo = null, IBidRepository bidRepo = null, ITagRepository tagRepo = null)
         {
             this.unit = unit;
             this.itemRepo = itemRepo;
             this.bidRepo = bidRepo;
             this.tagRepo = tagRepo;
-            this.imageRepo = imageRepo;
         }
         public void CreateBid(BidEntity bid)
         {
@@ -98,15 +96,10 @@ namespace VareDatabase
         {
             itemRepo.AddTag(id, newTag);
         }
-        public void AddImage(ImageEntity img)
-        {
-            imageRepo.Create(img);
-        }
         public IEnumerable<ItemEntity> Search(string searchingstring)
         {
             return itemRepo.Search(searchingstring);
         }
-
         public string UploadPicture(IFormFile file)
         {
            string  path = itemRepo.UploadPicture(file);
