@@ -15,7 +15,7 @@
                 <h3>Current bid: </h3>
             </div>
             <div class="col-3">
-                <h3 class="auction-text">{{auctions.BuyOutPrice}}kr</h3>
+                <h3 class="auction-text">{{getHighestBid}} Gold</h3>
             </div>
         </div>
         <div class="row">
@@ -27,7 +27,7 @@
 
             </div>
             <div class="col-6" id="bid-table">
-                <p>Bid must be higher than: {{auctions.BuyOutPrice}} kr</p>
+                <p>Bid must be higher than: {{auctions.BuyOutPrice}} </p>
                 <input type="text" placeholder="Your bid">
                 <button class="btn btn-secondary">Make a bid!</button>
             </div>
@@ -89,6 +89,20 @@ export default {
             //    return this.auctions.filter((auction) => {
             //        return this.specificAuction = auction.title.match(this.id)
             //    })
+            getHighestBid: function () {
+                var auction = this.auctions.Bids;
+                if (Array.isArray(auction.Bids) && auction.Bids.length) {
+                    var bids = auction.Bids;
+                    bids.sort(function (bidA, bidB) {
+                        return bidB.Bid - bidA.Bid
+                    })
+                    return bids[0].Bid + " Gold";
+                }
+                else {
+                    return "No bids";
+                }
+
+            }
         },
         computed:{
             //testFunction: function(){
@@ -100,9 +114,10 @@ export default {
                 var bids = this.auctions.Bids;
                 return bids.sort(function(bidA,bidB) {
                     return bidB.Bid-bidA.Bid
-                })
+                }).splice(0,4)
                 
-            }
+            },
+           
         },
         created() {
             var ref = this;

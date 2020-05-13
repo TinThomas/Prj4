@@ -4,7 +4,10 @@
             <div v-for="auc in auctions" class="single-auction" :key="auc.id">
                 <img :src="auc.url">
                 <h5>{{ auc.Title }}</h5>
-                <h5>Buy Out Price: {{ auc.BuyOutPrice }}</h5>
+                <h5>
+                    Bid: <span > {{ getHighestBid(auc) }}</span>
+                </h5>
+                
                 <h5>Ends: {{ auc.ExpirationDate | moment("from") }}</h5>
 
                 <button @click="navigateToAuction(auc.ItemId)" class="btn btn-secondary">See full auction</button>
@@ -27,7 +30,8 @@
             },
         },
         data(){
-            return{
+            return {
+                
             }
         },
 
@@ -40,7 +44,30 @@
                 window.console.log(this.endDate);
                 this.auction.expirationDate = moment;
             },
+            getHighestBid: function (auction) {
+                if (Array.isArray(auction.Bids) && auction.Bids.length) {
+                    var bids = auction.Bids;
+                    bids.sort(function (bidA, bidB) {
+                        return bidB.Bid - bidA.Bid
+                    })
+                    return bids[0].Bid + " Gold";
+                }
+                else {
+                    return "No bids";
+                }
+                
+            }
+
         },
+        //computed: {
+        //    getHighestBid: function (auction) {
+        //        var bids = auction.Bids;
+        //        bids.sort(function (bidA, bidB) {
+        //            return bidB.Bid - bidA.Bid
+        //        })
+        //        return bids[0];
+        //    }
+        //},
     }
 </script>
 
