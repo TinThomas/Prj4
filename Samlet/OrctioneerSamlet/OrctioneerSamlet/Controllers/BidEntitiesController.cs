@@ -35,7 +35,7 @@ namespace VareDatabase.Controllers
             _dbLogic = dbLogic;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost("newBid")]
         public async Task<IActionResult> CreateBid([FromBody]BidEntity bid)
         {

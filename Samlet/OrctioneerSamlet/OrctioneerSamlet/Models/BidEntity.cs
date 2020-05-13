@@ -24,7 +24,10 @@ namespace VareDatabase.Models
 
         public BidEntity()
         {
-            Created = DateTime.Now;
+            if(Created == null)
+            {
+                Created = DateTime.Now;
+            }
         }
     }
 }
