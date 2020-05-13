@@ -65,12 +65,19 @@ export default {
         postAuction: function () {
             var ref = this;
             this.calcEndDate();
+            var pic = {};
+            pic.ImageOfItem = "randomstring";
+            var array = "[{ImageOfItem:'XD'}]"
+            array = JSON.stringify({ array });
+
+            
             axios.post('http://localhost:5000/api/ItemEntity/Item',
                 {
                     Title: ref.auction.title,
                     BuyOutPrice: 123,
                     DescriptionOfItem: ref.auction.description,
-                    ExpirationDate: ref.auction.expirationDate
+                    ExpirationDate: ref.auction.expirationDate,
+                    Images: array
                 })
             //    .then(function (response) {
             //    console.log(response);

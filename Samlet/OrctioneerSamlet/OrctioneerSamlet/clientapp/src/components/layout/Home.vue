@@ -23,12 +23,12 @@ export default {
     },
     data(){
       return{
-        auctions:[
-              { title: 'Stort sværd', url: require('./../../images/sværd.jpg'), bid: 1234, timeLeft: "1 day"},
-              { title: 'Hjelm og brynje', url: require('./../../images/Hjelm_og_Brynje.jpg'), bid: 1234, timeLeft: "2 day"},
-              { title: 'Faktisk økse', url: require('./../../images/Faktisk_økse.jpg'), bid: 1234, timeLeft: "3 day"},
-              { title: 'Én pil', url: require('./../../images/En_pil.jpg'), bid: 1234, timeLeft: "4 day"},
-                ],
+        //auctions:[
+        //      { title: 'Stort sværd', url: require('./../../images/sværd.jpg'), bid: 1234, timeLeft: "1 day"},
+        //      { title: 'Hjelm og brynje', url: require('./../../images/Hjelm_og_Brynje.jpg'), bid: 1234, timeLeft: "2 day"},
+        //      { title: 'Faktisk økse', url: require('./../../images/Faktisk_økse.jpg'), bid: 1234, timeLeft: "3 day"},
+        //      { title: 'Én pil', url: require('./../../images/En_pil.jpg'), bid: 1234, timeLeft: "4 day"},
+        //        ],
           popularAuctions: [],
           newestAuctions: [],
           expiringAuctions: []
@@ -41,21 +41,30 @@ export default {
                 window.console.log(response.status)
             }
             //ref.test = response.data.splice(0, 4);
-            ref.popularAuctions = response.data.splice(0, 4);
+            if (ref.popularAuctions != response.data.splice(0, 4)) {
+                ref.popularAuctions = response.data.splice(0, 4);
+            }
+            
         });     
         axios.get('http://localhost:5000/api/ItemEntity/item/new').then(function (response) {
             if (response.status != 200) {
                 window.console.log(response.status)
             }
+            if (ref.newestAuctions != response.data.splice(0, 4)) {
+                ref.newestAuctions = response.data.splice(0, 4);
+            }
             //ref.test = response.data.splice(0, 4);
-            ref.newestAuctions = response.data.splice(0, 4);
+            
         });
         axios.get('http://localhost:5000/api/ItemEntity/item/expire').then(function (response) {
             if (response.status != 200) {
                 window.console.log(response.status)
             }
+            if (ref.expiringAuctions != response.data.splice(0, 4)) {
+                ref.expiringAuctions = response.data.splice(0, 4);
+            }
             //ref.test = response.data.splice(0, 4);
-            ref.expiringAuctions = response.data.splice(0, 4);
+           
         });  
     }
 

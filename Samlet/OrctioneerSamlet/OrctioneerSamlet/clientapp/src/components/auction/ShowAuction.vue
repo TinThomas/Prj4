@@ -54,7 +54,10 @@ export default {
                 window.console.log(response.status)
             }
                 //ref.test = response.data.splice(0, 4);
-                ref.test = response.data;
+                if (ref.test != response.data) {
+                    ref.test = response.data;
+                }
+                
         })     
     }
 }
