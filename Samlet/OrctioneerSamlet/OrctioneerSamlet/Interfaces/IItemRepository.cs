@@ -14,7 +14,7 @@ namespace VareDatabase.Interfaces
         IEnumerable<ItemEntity> GetNewestFirst();
         IEnumerable<ItemEntity> GetMostPopularItems();
         IEnumerable<ItemEntity> GetExpiringFirst();
-        string UploadPicture (IFormFile file);
+        Task<string> UploadPicture (IFormFile file);
         void GenerateTags(ItemEntity item);
         void AddTag(int id, string newTag);
     }

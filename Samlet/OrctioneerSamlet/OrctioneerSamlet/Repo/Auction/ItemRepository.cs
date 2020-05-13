@@ -140,7 +140,7 @@ namespace VareDatabase.Repo.Auction
                 .ToList();
         }
 
-        public string UploadPicture(IFormFile file)
+        public async Task<string> UploadPicture(IFormFile file)
         {
             if (file.Length > 0)
             {
@@ -148,7 +148,7 @@ namespace VareDatabase.Repo.Auction
                 string path = Path.Combine(imgFolder, file.FileName);
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {
-                    file.CopyToAsync(fileStream);
+                    await file.CopyToAsync(fileStream);
                 }
                 string newFileName = Guid.NewGuid().ToString() + ".jpg";
                 File.Move(path, Path.Combine(imgFolder, newFileName));

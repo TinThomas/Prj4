@@ -100,9 +100,9 @@ namespace VareDatabase
         {
             return itemRepo.Search(searchingstring);
         }
-        public string UploadPicture(IFormFile file)
+        public async Task<string> UploadPicture(IFormFile file)
         {
-           string  path = itemRepo.UploadPicture(file);
+           string  path = await itemRepo.UploadPicture(file);
            return path;
         }
     }

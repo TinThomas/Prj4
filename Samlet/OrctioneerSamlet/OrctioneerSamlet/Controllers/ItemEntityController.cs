@@ -112,7 +112,7 @@ namespace VareDatabase.Controllers
         public async Task<ActionResult<string>> UploadPicture(IFormFile file)
         {
 
-            _dbLogic.UploadPicture(file);
+            await _dbLogic.UploadPicture(file);
             return file.Name;
         }
         [HttpGet("GetPicture")]
