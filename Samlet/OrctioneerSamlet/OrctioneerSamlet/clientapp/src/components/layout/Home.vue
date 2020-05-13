@@ -41,18 +41,18 @@ export default {
                 window.console.log(response.status)
             }
             //ref.test = response.data.splice(0, 4);
-            if (ref.popularAuctions != response.data.splice(0, 4)) {
+            //if (ref.popularAuctions != response.data.splice(0, 4)) {
                 ref.popularAuctions = response.data.splice(0, 4);
-            }
+            //}
             
         });     
         axios.get('http://localhost:5000/api/ItemEntity/item/new').then(function (response) {
             if (response.status != 200) {
                 window.console.log(response.status)
             }
-            if (ref.newestAuctions != response.data.splice(0, 4)) {
+            //if (ref.newestAuctions != response.data.splice(0, 4)) {
                 ref.newestAuctions = response.data.splice(0, 4);
-            }
+            //}
             //ref.test = response.data.splice(0, 4);
             
         });
@@ -60,9 +60,9 @@ export default {
             if (response.status != 200) {
                 window.console.log(response.status)
             }
-            if (ref.expiringAuctions != response.data.splice(0, 4)) {
+            //if (ref.expiringAuctions != response.data.splice(0, 4)) {
                 ref.expiringAuctions = response.data.splice(0, 4);
-            }
+            //}
             //ref.test = response.data.splice(0, 4);
            
         });  
