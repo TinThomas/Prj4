@@ -19,7 +19,8 @@
           <select v-model="endDate">
               <option v-for="day in endDates" :key="day">{{day}}</option>
           </select>
-          <button class="btn btn-secondary" @click.prevent="postAuction" @click="onUpload">Add auction</button>
+          <button class="btn btn-secondary"  @click="onUpload">Upload Image</button>
+          <button class="btn btn-secondary" @click.prevent="postAuction">Add auction</button>
       </form>
 
       <div v-show="submitted">
@@ -92,6 +93,7 @@ export default {
             var formData = new FormData();
             formData.append('file', ref.selectedFile, ref.selectedFile.name)
             ref.picpath = axios.post('http://localhost:5000/api/ItemEntity/CreateImage', formData);
+            window.console.log(ref.picpath);
         },
         calcEndDate() {
             const moment = this.$moment().add(this.endDate, 'days').format();
