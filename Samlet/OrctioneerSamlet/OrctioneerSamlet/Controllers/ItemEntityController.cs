@@ -85,9 +85,13 @@ namespace VareDatabase.Controllers
         
         //Post = Create
         [HttpPost("item")]
-        public async Task<IActionResult> CreateEntity([FromBody]ItemEntity item)
+        public async Task<IActionResult> CreateEntity([FromBody]ItemEntity item, string imagePath)
         {
             Console.WriteLine("Adding item with title: " + item.Title);
+            item.Images.Add(new ImageEntity
+            {
+                ImageOfItem = imagePath,
+            });
             _dbLogic.AddItem(item);
             _dbLogic.Save();
 
@@ -114,9 +118,7 @@ namespace VareDatabase.Controllers
         {
             try
             {
-                string path = _dbLogic.UploadPicture(file);
-                _dbLogic.Save();
-                return path;
+                return _dbLogic.UploadPicture(file);
             }
             catch
             {

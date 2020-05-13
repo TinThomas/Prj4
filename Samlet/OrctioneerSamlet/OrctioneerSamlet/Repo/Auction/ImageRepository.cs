@@ -31,10 +31,10 @@ namespace VareDatabase.Repo
                     file.CopyToAsync(fileStream);
                 }
                 string newFileName = Guid.NewGuid().ToString()+".jpg";
-                System.IO.File.Move(path, Path.Combine(imgFolder, newFileName));
+                File.Move(path, Path.Combine(imgFolder, newFileName));
                 return Path.Combine(imgFolder, newFileName);
             }
-            return "";
+            return null;
         }
     }
 }

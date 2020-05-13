@@ -98,6 +98,10 @@ namespace VareDatabase
         {
             itemRepo.AddTag(id, newTag);
         }
+        public void AddImage(ImageEntity img)
+        {
+            imageRepo.Create(img);
+        }
         public IEnumerable<ItemEntity> Search(string searchingstring)
         {
             return itemRepo.Search(searchingstring);
@@ -106,10 +110,7 @@ namespace VareDatabase
         public string UploadPicture(IFormFile file)
         {
             string path = imageRepo.UploadPicture(file);
-            if(path == null)
-            {
-                return null;
-            }
+
             return path;
         }
     }
