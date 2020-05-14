@@ -45,13 +45,12 @@ namespace VareDatabase.Repo.Auction
             {
                 if (s != null)
                 {
-                    AddTag(item.ItemId, s);
+                    AddTag(item, s);
                 }
             }
         }
-        public void AddTag(int itemId, string newTag)
+        public void AddTag(ItemEntity item, string newTag)
         {
-            ItemEntity item = db.Set<ItemEntity>().ToList().FirstOrDefault(x => x.ItemId == itemId);
             if (item == null)
             {
                 return;
