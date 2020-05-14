@@ -88,7 +88,6 @@ namespace VareDatabase.Controllers
         {
             Console.WriteLine("Adding item with title: " + item.Title);
             _dbLogic.AddItem(item);
-            _dbLogic.Save();
 
             return Ok(item);
         }
