@@ -32,7 +32,6 @@ namespace VareDatabase
             {
                 bid.Created = DateTime.Now;
                 bidRepo.Create(bid);
-                unit.Commit();
             }
             //error handling here
         }
@@ -96,7 +95,8 @@ namespace VareDatabase
         }
         public void AddTag(int id, string newTag)
         {
-            itemRepo.AddTag(id, newTag);
+            var item = itemRepo.Read(id);
+            itemRepo.AddTag(item, newTag);
         }
         public IEnumerable<ItemEntity> Search(string searchingstring)
         {
