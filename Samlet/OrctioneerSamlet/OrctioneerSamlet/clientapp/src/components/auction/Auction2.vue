@@ -1,23 +1,22 @@
 ﻿<template>
-    <div id=auctionId>
+    <div id="auctionId">
         <div class="row">
             <div v-for="auc in auctions" class="single-auction" :key="auc.id">
-                <img :src="auc.url">
-                <h5 style="display: in">{{ auc.Title }}</h5>
-                <h5>Buy Out Price: {{ auc.BuyOutPrice }}</h5>
-                <h5>Ends: {{ auc.ExpirationDate }}</h5>
-
-                <button @click="navigateToAuction(auc.ItemId)" class="btn btn-secondary">See full auction</button>
-
+                
+                <auction-card :auction="auc"></auction-card>
 
             </div>
         </div>
-
     </div>
 </template>
 
 <script>
-    export default{
+    //import moment from 'vue-moment'
+    import AuctionCard from './AuctionCard.vue'
+    export default {
+        components: {
+            'auction-card': AuctionCard
+        },
         props:{
             auctions: {
                 type: Array,
@@ -25,35 +24,31 @@
             },
         },
         data(){
-            return{
+            return {
+                
             }
         },
 
         methods:{
-            navigateToAuction(path){
-                this.$router.push('/fullAuction2/'+path);
-            },
+            
         },
+      
+        //computed: {
+        //    getHighestBid: function (auction) {
+        //        var bids = auction.Bids;
+        //        bids.sort(function (bidA, bidB) {
+        //            return bidB.Bid - bidA.Bid
+        //        })
+        //        return bids[0];
+        //    }
+        //},
     }
 </script>
 
 <style scoped>
     #auctionId {
         max-width: 1200px;
-        margin: 10px;
+        margin: 0;
     }
 
-    .single-auction {
-        background: #eeeeee;
-        max-width: 190px;
-        padding: 5px;
-        margin: 5px;
-    }
-
-    img {
-        object-fit: cover;
-        width: 180px;
-        height: 180px;
-        border: 1px solid white;
-    }
 </style>

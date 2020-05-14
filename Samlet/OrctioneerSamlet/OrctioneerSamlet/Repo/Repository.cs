@@ -15,11 +15,11 @@ namespace VareDatabase.Repo
         {
             Context = context;
         }
-        public TEntity Read(int id)
+        public virtual TEntity Read(int id)
         {
             return Context.Set<TEntity>().Find(id);
         }
-        public IEnumerable<TEntity> GetAll()
+        public virtual IEnumerable<TEntity> GetAll()
         {
             return Context.Set<TEntity>().ToList();
         }

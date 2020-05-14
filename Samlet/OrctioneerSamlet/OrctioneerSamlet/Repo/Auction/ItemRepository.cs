@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using VareDatabase.Models;
 using VareDatabase.DBContext;
 using VareDatabase.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace VareDatabase.Repo.Auction
 {
@@ -15,6 +19,25 @@ namespace VareDatabase.Repo.Auction
         {
             this.db = db;
         }
+        /*public override IEnumerable<ItemEntity> GetAll()
+        {
+            return db.Set<ItemEntity>().Where(x => x.Sold == false).ToList();
+        }*/
+        public override ItemEntity Read(int id)
+        {
+            return Context.Set<ItemEntity>()
+                .Where(x => x.ItemId == id)
+                .Include(tag => tag.Tags)
+                .Include(bid => bid.Bids)
+                .First();
+        }
+        public override IEnumerable<ItemEntity> GetAll()
+        {
+            return Context.Set<ItemEntity>()
+                .Include(tag => tag.Tags)
+                .Include(bid => bid.Bids)
+                .ToList();
+        }
         public void GenerateTags(ItemEntity item)
         {
             string[] words = item.Title.Split(' ', ',', '.');
@@ -22,13 +45,12 @@ namespace VareDatabase.Repo.Auction
             {
                 if (s != null)
                 {
-                    AddTag(item.ItemId, s);
+                    AddTag(item, s);
                 }
             }
         }
-        public void AddTag(int itemId, string newTag)
+        public void AddTag(ItemEntity item, string newTag)
         {
-            ItemEntity item = db.Set<ItemEntity>().ToList().FirstOrDefault(x => x.ItemId == itemId);
             if (item == null)
             {
                 return;
@@ -73,36 +95,7 @@ namespace VareDatabase.Repo.Auction
             }
             return foundItems;
         }
-        public ItemEntity GenerateItem(string title, string description, string[] tags, string[] images, int userId, int expire, int buyOut = -1)
-        {
-            List<ImageEntity> newImages = new List<ImageEntity>();
-            for (int i = 0; i < images.Length; i++)
-            {
-                ImageEntity item = new ImageEntity();
-                item.ImageOfItem = images[i];
-                newImages[i] = item;
-            }
-            List<TagEntity> newTags = new List<TagEntity>();
-            for (int i = 0; i < tags.Length; i++)
-            {
-                TagEntity tag = new TagEntity();
-                tag.Type = tags[i];
-                newTags[i] = tag;
-            }
-            ItemEntity itemEntity = new ItemEntity()
-            {
-                BuyOutPrice = buyOut,
-                DateCreated = DateTime.Now,
-                ExpirationDate = DateTime.Now.AddDays(expire),
-                Title = title,
-                Images = newImages,
-                Tags = newTags,
-                DescriptionOfItem = description,
-                UserIdSeller = userId,
-            };
-            GenerateTags(itemEntity);
-            return itemEntity;
-        }
+
         private List<ItemEntity> SearchByTag(string tag)
         {
             List<ItemEntity> itemsId = new List<ItemEntity>();
@@ -119,6 +112,50 @@ namespace VareDatabase.Repo.Auction
                 itemsId.AddRange(db.Items.Where(i => j.Id == i.ItemId).ToList());
             }
             return itemsId;
+        }
+
+        public IEnumerable<ItemEntity> GetNewestFirst()
+        {
+            return Context.Set<ItemEntity>()
+                .Include(tag => tag.Tags)
+                .Include(bid => bid.Bids)
+                .OrderByDescending(x => x.DateCreated)
+                .ToList();
+        }
+
+        public IEnumerable<ItemEntity> GetMostPopularItems()
+        {
+            return Context.Set<ItemEntity>()
+                .Include(tag => tag.Tags)
+                .Include(bid => bid.Bids)
+                .OrderByDescending(i => i.Bids.Count)
+                .ToList();
+        }
+
+        public IEnumerable<ItemEntity> GetExpiringFirst()
+        {
+            return Context.Set<ItemEntity>()
+                .Include(tag => tag.Tags)
+                .Include(bid => bid.Bids)
+                .OrderBy(i => i.ExpirationDate)
+                .ToList();
+        }
+
+        public async Task<string> UploadPicture(IFormFile file)
+        {
+            if (file.Length > 0)
+            {
+                string imgFolder = @"clientapp\src\images";
+                string path = Path.Combine(imgFolder, file.FileName);
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    await file.CopyToAsync(fileStream);
+                }
+                string newFileName = Guid.NewGuid().ToString() + ".jpg";
+                File.Move(path, Path.Combine(imgFolder, newFileName));
+                return newFileName;
+            }
+            return null;
         }
     }
 }

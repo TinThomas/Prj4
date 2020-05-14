@@ -1,112 +1,74 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using Microsoft.AspNetCore.Http;
-//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.EntityFrameworkCore;
-//using VareDatabase.DBContext;
-//using VareDatabase.Models;
-//using VareDatabase.Repo;
-//using VareDatabase.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using VareDatabase.DBContext;
+using VareDatabase.Models;
+using VareDatabase.Repo.Auction;
+using VareDatabase.Interfaces;
+using VareDatabase.Repo;
+using VareDatabase.Interfaces.Auction;
+using Newtonsoft.Json;
 
-//namespace VareDatabase.Controllers
-//{
-//    [Route("api/[controller]")]
-//    public class BidEntitiesController : ControllerBase
-//    {
-//        private DatabaseLogic _dbLogic;
-//        private string json;
+namespace VareDatabase.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class BidEntitiesController : Controller
+    {
+        private DatabaseLogic _dbLogic;
+        private string json;
+        private JsonSerializerSettings serializerSettings = new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects };
 
-//        public BidEntitiesController()
-//        {
-//            _context = context;
-//        }
 
-//        // GET: api/BidEntities
-//        [HttpGet]
-//        public async Task<ActionResult<IEnumerable<BidEntity>>> GetBids()
-//        {
-//            return await _context.Bids.ToListAsync();
-//        }
+        public BidEntitiesController(VareDataModelContext _context)
+        {
+            var db = new DBContext.VareDataModelContext();
+            IBidRepository repo = new BidRepository(db);
+            IItemRepository itemRepo = new ItemRepository(db);
+            var unit = new AuctionUnitOfWork(db);
+            var dbLogic = new DatabaseLogic(unit, itemRepo, repo);
+            _dbLogic = dbLogic;
+        }
 
-//        // GET: api/BidEntities/5
-//        [HttpGet("{id}")]
-//        public async Task<ActionResult<BidEntity>> GetBidEntity(int id)
-//        {
-//            var bidEntity = await _context.Bids.FindAsync(id);
+        [Authorize]
+        [HttpPost("newBid")]
+        public async Task<IActionResult> CreateBid([FromBody]BidEntity bid)
+        {
+            while (User.Identity.Name == null)
+            {}
+            bid.UserIdBuyer = User.Identity.Name;
+            _dbLogic.CreateBid(bid);
+            _dbLogic.Save();
+            return Ok(bid);
+        }
+        [HttpGet]
+        [Route("GetBidsFromItem/{id}")]
+        public  ActionResult<string> GetBidsFromItem( int id)
+        {
+            json = JsonConvert.SerializeObject(_dbLogic.GetBidsFromItem(id), Formatting.Indented, serializerSettings);
+            return json;
+        }
 
-//            if (bidEntity == null)
-//            {
-//                return NotFound();
-//            }
+        [HttpGet]
+        [Route("GetBidsFromUser/{id}")]
+        public ActionResult<string> GetBidsByUserId(string id)
+        {
+            json = JsonConvert.SerializeObject(_dbLogic.GetBidsByUserId(id), Formatting.Indented, serializerSettings);
+            return json;
+        }
 
-//            return bidEntity;
-//        }
+        [HttpGet]
+        [Route("GetBidsFromUserSorted/{id}")]
+        public ActionResult<string> GethighestBidOnItem(int id)
+        {
+            json = JsonConvert.SerializeObject(_dbLogic.GetBidsForItemSorted(id), Formatting.Indented, serializerSettings);
+            return json;
+        }
 
-//        // PUT: api/BidEntities/5
-//        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-//        // more details see https://aka.ms/RazorPagesCRUD.
-//        [HttpPut("{id}")]
-//        public async Task<IActionResult> PutBidEntity(int id, BidEntity bidEntity)
-//        {
-//            if (id != bidEntity.Id)
-//            {
-//                return BadRequest();
-//            }
-
-//            _context.Entry(bidEntity).State = EntityState.Modified;
-
-//            try
-//            {
-//                await _context.SaveChangesAsync();
-//            }
-//            catch (DbUpdateConcurrencyException)
-//            {
-//                if (!BidEntityExists(id))
-//                {
-//                    return NotFound();
-//                }
-//                else
-//                {
-//                    throw;
-//                }
-//            }
-
-//            return NoContent();
-//        }
-
-//        // POST: api/BidEntities
-//        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-//        // more details see https://aka.ms/RazorPagesCRUD.
-//        [HttpPost]
-//        public async Task<ActionResult<BidEntity>> PostBidEntity(BidEntity bidEntity)
-//        {
-//            _context.Bids.Add(bidEntity);
-//            await _context.SaveChangesAsync();
-
-//            return CreatedAtAction("GetBidEntity", new { id = bidEntity.Id }, bidEntity);
-//        }
-
-//        // DELETE: api/BidEntities/5
-//        [HttpDelete("{id}")]
-//        public async Task<ActionResult<BidEntity>> DeleteBidEntity(int id)
-//        {
-//            var bidEntity = await _context.Bids.FindAsync(id);
-//            if (bidEntity == null)
-//            {
-//                return NotFound();
-//            }
-
-//            _context.Bids.Remove(bidEntity);
-//            await _context.SaveChangesAsync();
-
-//            return bidEntity;
-//        }
-
-//        private bool BidEntityExists(int id)
-//        {
-//            return _context.Bids.Any(e => e.Id == id);
-//        }
-//    }
-//}
+    }
+}

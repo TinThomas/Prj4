@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="clientapp\src\components\UserProfile\" />
+    <Folder Include="images\" />
   </ItemGroup>
 
 

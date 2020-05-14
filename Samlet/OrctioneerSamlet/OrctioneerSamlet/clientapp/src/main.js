@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import VueMoment from 'vue-moment';
 import App from './App.vue';
 import VModal from 'vue-js-modal'
 import axios from 'axios'
@@ -9,14 +10,15 @@ import signup from './components/login/Signup.vue';
 import ShowAuction from './components/auction/ShowAuction.vue';
 import AddAuction from './components/auction/AddAuction.vue';
 import Home from './components/layout/Home.vue';
-import ItemAuction from './components/auction/Auction.vue';
-import FullAuction from './components/auction/FullAuction.vue'
+import ItemAuction from './components/auction/old/Auction.vue';
+import FullAuction from './components/auction/old/FullAuction.vue'
 import FullAuction2 from './components/auction/FullAuction2.vue'
 import store from './components/Utility/Store'
 import UserDetail from './components/UserProfile/UserDetails'
 
 Vue.use(VueRouter);
 Vue.use(VModal);
+Vue.use(VueMoment);
 Vue.use(VueAxios, axios);
 
 const routes = [
@@ -45,6 +47,7 @@ Vue.config.productionTip = false;
 
 window.vm = new Vue({
     axios,
+    VueMoment,
     router,
     store,
     render: h => h(App),

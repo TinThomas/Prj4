@@ -12,6 +12,7 @@ namespace VareDatabase
     {
         public void InsertDummyData(VareDataModelContext db)
         {
+
             //Bows
             ItemEntity DeluxeBow = new ItemEntity()
             {
@@ -21,13 +22,7 @@ namespace VareDatabase
                 Title = "Elven Bow BUY NOW",
                 UserIdSeller = 12,
                 DescriptionOfItem = "Powerful bow that is best at the range of 30-50 meters",
-                Images = new List<ImageEntity>
-                {
-                    new ImageEntity
-                    {
-                        ImageOfItem = "empty"
-                    }
-                },
+                Image = null,
                 Tags = new List<TagEntity>
                 { 
                     new TagEntity
@@ -48,12 +43,22 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 200,
-                        UserIdBuyer = 30
+                        UserIdBuyer = "30"
                     },
                     new BidEntity
                     {
                         Bid = 300,
-                        UserIdBuyer = 29
+                        UserIdBuyer = "29"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 350,
+                        UserIdBuyer = "22"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 375,
+                        UserIdBuyer = "11"
                     }
                 }
             };
@@ -67,13 +72,7 @@ namespace VareDatabase
                 Title = "Good beginner bow made of wood",
                 UserIdSeller = 35,
                 DescriptionOfItem = "Bow for the beginners who are learning to shoot arrows",
-                Images = new List<ImageEntity>
-                {
-                    new ImageEntity
-                    {
-                        ImageOfItem = "empty"
-                    }
-                },
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -90,12 +89,17 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 200,
-                        UserIdBuyer = 26
+                        UserIdBuyer = "26"
                     },
                     new BidEntity
                     {
                         Bid = 300,
-                        UserIdBuyer = 82
+                        UserIdBuyer = "82"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 320,
+                        UserIdBuyer = "25"
                     }
                 }
             };
@@ -110,13 +114,7 @@ namespace VareDatabase
                 Title = "Longbow - 30-50 meters",
                 UserIdSeller = 35,
                 DescriptionOfItem = "Selling a longbow, great quality!",
-                Images = new List<ImageEntity>
-                {
-                    new ImageEntity
-                    {
-                        ImageOfItem = "empty"
-                    }
-                },
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -137,12 +135,17 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 200,
-                        UserIdBuyer = 62
+                        UserIdBuyer = "62"
                     },
                     new BidEntity
                     {
                         Bid = 320,
-                        UserIdBuyer = 71
+                        UserIdBuyer = "71"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 360,
+                        UserIdBuyer = "52"
                     }
                 }
             };
@@ -156,13 +159,7 @@ namespace VareDatabase
                 Title = "Seeker quiver - black",
                 UserIdSeller = 64,
                 DescriptionOfItem = "Pairs great with a longbow, lighly used",
-                Images = new List<ImageEntity>
-                {
-                    new ImageEntity
-                    {
-                        ImageOfItem = "empty"
-                    }
-                },
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -179,12 +176,12 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 150,
-                        UserIdBuyer = 15
+                        UserIdBuyer = "15"
                     },
                     new BidEntity
                     {
                         Bid = 170,
-                        UserIdBuyer = 80
+                        UserIdBuyer = "80"
                     }
                 }
             };
@@ -198,13 +195,7 @@ namespace VareDatabase
                 Title = "Hunting quiver - Brown",
                 UserIdSeller = 37,
                 DescriptionOfItem = "can hold up to 15 arrows",
-                Images = new List<ImageEntity>
-                {
-                    new ImageEntity
-                    {
-                        ImageOfItem = "empty"
-                    }
-                },
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -221,13 +212,34 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 160,
-                        UserIdBuyer = 11
+                        UserIdBuyer = "11"
                     },
                     new BidEntity
                     {
                         Bid = 195,
-                        UserIdBuyer = 14
+                        UserIdBuyer = "14"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 230,
+                        UserIdBuyer = "13"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 250,
+                        UserIdBuyer = "41"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 280,
+                        UserIdBuyer = "55"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 300,
+                        UserIdBuyer = "44"
                     }
+
                 }
             };
             db.Add(HuntingQuiver);
@@ -240,13 +252,7 @@ namespace VareDatabase
                 Title = "Arrow with rubber head",
                 UserIdSeller = 89,
                 DescriptionOfItem = "Arrows, for your bow and quiver, There is a total of 12 arrows all the same quality",
-                Images = new List<ImageEntity>
-                {
-                    new ImageEntity
-                    {
-                        ImageOfItem = "empty"
-                    }
-                },
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -271,12 +277,17 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 40,
-                        UserIdBuyer = 11
+                        UserIdBuyer = "11"
                     },
                     new BidEntity
                     {
                         Bid = 55,
-                        UserIdBuyer = 35
+                        UserIdBuyer = "35"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 60,
+                        UserIdBuyer = "74"
                     }
                 }
             };
@@ -290,13 +301,7 @@ namespace VareDatabase
                 Title = "Children bow set - beginner",
                 UserIdSeller = 77,
                 DescriptionOfItem = "Contains 5 arrows, a bow and a small quiver",
-                Images = new List<ImageEntity>
-                {
-                    new ImageEntity
-                    {
-                        ImageOfItem = "empty"
-                    }
-                },
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -329,12 +334,12 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 600,
-                        UserIdBuyer = 44
+                        UserIdBuyer = "44"
                     },
                     new BidEntity
                     {
                         Bid = 650,
-                        UserIdBuyer = 6
+                        UserIdBuyer = "6"
                     }
                 }
             };
@@ -348,13 +353,7 @@ namespace VareDatabase
                 Title = "Bow set - beginner",
                 UserIdSeller = 77,
                 DescriptionOfItem = "Beginner bow set for adults",
-                Images = new List<ImageEntity>
-                {
-                    new ImageEntity
-                    {
-                        ImageOfItem = "empty"
-                    }
-                },
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -387,12 +386,27 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 400,
-                        UserIdBuyer = 65
+                        UserIdBuyer = "65"
                     },
                     new BidEntity
                     {
                         Bid = 420,
-                        UserIdBuyer = 6
+                        UserIdBuyer = "6"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 450,
+                        UserIdBuyer = "3"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 480,
+                        UserIdBuyer = "62"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 530,
+                        UserIdBuyer = "34"
                     }
                 }
             };
@@ -406,13 +420,7 @@ namespace VareDatabase
                 Title = "Longbow set - beginner",
                 UserIdSeller = 98,
                 DescriptionOfItem = "Beginner long-bow set for adults, in elven style",
-                Images = new List<ImageEntity>
-                {
-                    new ImageEntity
-                    {
-                        ImageOfItem = "empty"
-                    }
-                },
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -445,12 +453,42 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 550,
-                        UserIdBuyer = 17
+                        UserIdBuyer = "17"
                     },
                     new BidEntity
                     {
                         Bid = 578,
-                        UserIdBuyer = 2
+                        UserIdBuyer = "2"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 620,
+                        UserIdBuyer = "6"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 650,
+                        UserIdBuyer = "78"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 680,
+                        UserIdBuyer = "59"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 720,
+                        UserIdBuyer = "94"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 740,
+                        UserIdBuyer = "42"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 760,
+                        UserIdBuyer = "85"
                     }
                 }
             };
@@ -465,13 +503,7 @@ namespace VareDatabase
                 Title = "Warglaives of Azzinoth",
                 UserIdSeller = 97,
                 DescriptionOfItem = "Drops from BT, and is recreated here in IRL",
-                Images = new List<ImageEntity>
-                {
-                    new ImageEntity
-                    {
-                        ImageOfItem = "empty"
-                    }
-                },
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -496,12 +528,17 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 350,
-                        UserIdBuyer = 71
+                        UserIdBuyer = "71"
                     },
                     new BidEntity
                     {
                         Bid = 370,
-                        UserIdBuyer = 28
+                        UserIdBuyer = "28"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 400,
+                        UserIdBuyer = "27"
                     }
                 }
             };
@@ -516,13 +553,7 @@ namespace VareDatabase
                 Title = "One handed sword - leather handle",
                 UserIdSeller = 22,
                 DescriptionOfItem = "One handed sword that is used together with a shield",
-                Images = new List<ImageEntity>
-                {
-                    new ImageEntity
-                    {
-                        ImageOfItem = "empty"
-                    }
-                },
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -543,12 +574,12 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 550,
-                        UserIdBuyer = 71
+                        UserIdBuyer = "71"
                     },
                     new BidEntity
                     {
                         Bid = 575,
-                        UserIdBuyer = 13
+                        UserIdBuyer = "13"
                     }
                 }
             };
@@ -562,13 +593,7 @@ namespace VareDatabase
                 Title = "Two handed sword - leather handle",
                 UserIdSeller = 22,
                 DescriptionOfItem = "Original Zwei-Hander for RP",
-                Images = new List<ImageEntity>
-                {
-                    new ImageEntity
-                    {
-                        ImageOfItem = "empty"
-                    }
-                },
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -589,12 +614,52 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 410,
-                        UserIdBuyer = 21
+                        UserIdBuyer = "21"
                     },
                     new BidEntity
                     {
                         Bid = 440,
-                        UserIdBuyer = 52
+                        UserIdBuyer = "52"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 460,
+                        UserIdBuyer = "77"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 390,
+                        UserIdBuyer = "18"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 420,
+                        UserIdBuyer = "20"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 460,
+                        UserIdBuyer = "90"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 500,
+                        UserIdBuyer = "79"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 520,
+                        UserIdBuyer ="51"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 535,
+                        UserIdBuyer ="10"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 550,
+                        UserIdBuyer = "86"
                     }
                 }
             };
@@ -608,13 +673,7 @@ namespace VareDatabase
                 Title = "Round one handed shield made of wood",
                 UserIdSeller = 50,
                 DescriptionOfItem = "Rounded shield made of wood and edge of metal",
-                Images = new List<ImageEntity>
-                {
-                    new ImageEntity
-                    {
-                        ImageOfItem = "empty"
-                    }
-                },
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -639,12 +698,22 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 300,
-                        UserIdBuyer = 21
+                        UserIdBuyer = "21"
                     },
                     new BidEntity
                     {
                         Bid = 315,
-                        UserIdBuyer = 42
+                        UserIdBuyer = "42"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 340,
+                        UserIdBuyer = "83"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 350,
+                        UserIdBuyer = "16"
                     }
                 }
             };
@@ -658,13 +727,7 @@ namespace VareDatabase
                 Title = "Round one handed shield of metal",
                 UserIdSeller = 50,
                 DescriptionOfItem = "Rounded shield for one hand made of metal, has a crest of an eagle",
-                Images = new List<ImageEntity>
-                {
-                    new ImageEntity
-                    {
-                        ImageOfItem = "empty"
-                    }
-                },
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -689,12 +752,17 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 260,
-                        UserIdBuyer = 4
+                        UserIdBuyer = "4"
                     },
                     new BidEntity
                     {
                         Bid = 280,
-                        UserIdBuyer = 46
+                        UserIdBuyer = "46"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 315,
+                        UserIdBuyer = "75"
                     }
                 }
             };
@@ -708,13 +776,7 @@ namespace VareDatabase
                 Title = "Knight shield of metal",
                 UserIdSeller = 50,
                 DescriptionOfItem = "Knight shield made of metal with straps so it can be put on your back",
-                Images = new List<ImageEntity>
-                {
-                    new ImageEntity
-                    {
-                        ImageOfItem = "empty"
-                    }
-                },
+                Image = null,
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
@@ -735,12 +797,22 @@ namespace VareDatabase
                     new BidEntity
                     {
                         Bid = 420,
-                        UserIdBuyer = 4
+                        UserIdBuyer = "4"
                     },
                     new BidEntity
                     {
                         Bid = 450,
-                        UserIdBuyer = 25
+                        UserIdBuyer = "25"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 480,
+                        UserIdBuyer = "15"
+                    },
+                    new BidEntity
+                    {
+                        Bid = 500,
+                        UserIdBuyer = "60"
                     }
                 }
             };
@@ -1477,7 +1549,7 @@ namespace VareDatabase
                 Title = "Drinking Horn from a cow",
                 UserIdSeller = 1,
                 DescriptionOfItem = "Drops from BT, and is recreated here in IRL",
-                Images = new List<ImageEntity>
+                Image = new List<ImageEntity>
                 {
                     new ImageEntity
                     {
@@ -1515,7 +1587,7 @@ namespace VareDatabase
                 Title = "Elf Ears ",
                 UserIdSeller = 99,
                 DescriptionOfItem = "Perfect for creating an elf character in any RP setting",
-                Images = new List<ImageEntity>
+                Image = new List<ImageEntity>
                 {
                     new ImageEntity
                     {

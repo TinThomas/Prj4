@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -10,6 +11,7 @@ using VareDatabase.Repo;
 using VareDatabase.Interfaces;
 using VareDatabase.Models;
 using VareDatabase.Repo.Auction;
+using System.Security.Principal;
 
 namespace VareDatabase.Controllers
 {
@@ -20,47 +22,72 @@ namespace VareDatabase.Controllers
         private DatabaseLogic _dbLogic;
         private string json;
 
+        private JsonSerializerSettings serializerSettings = new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects };
+
         public ItemEntityController()
         {
             var db = new DBContext.VareDataModelContext();
             IItemRepository repo = new ItemRepository(db);
             var unit = new AuctionUnitOfWork(db);
-            var dbLogic = new DatabaseLogic(unit, repo);
+            var dbLogic = new DatabaseLogic(unit,repo, null,null);
             _dbLogic = dbLogic;
         }
 
         [HttpGet]
-        [Route("Home/item/{id?}")]
+        [Route("item/{id?}")]
         //Get on ID
         public ActionResult<string> GetItem(int id)
         {
-            json = JsonConvert.SerializeObject(_dbLogic.GetSingle(id), Formatting.Indented);
+            json = JsonConvert.SerializeObject(_dbLogic.Get(id), Formatting.Indented, serializerSettings);
             return json;
         }
 
         [HttpGet]
-        [Route("Home/item")]
+        [Route("item")]
         public ActionResult<string> GetAllItems()
         {
-            json = JsonConvert.SerializeObject(_dbLogic.GetAll(), Formatting.Indented);
+            var items = _dbLogic.GetAll();
+            json = JsonConvert.SerializeObject(items, Formatting.Indented, serializerSettings);
             return json;
         }
-
+        //populær
         [HttpGet]
-        [Route("Home/item/tag/{search?}")]
+        [Route("item/pop")]
+        public ActionResult<string> GetPopularItems()
+        {
+            json = JsonConvert.SerializeObject(_dbLogic.GetMostPopularItems(), Formatting.Indented, serializerSettings);
+            return json;
+        }
+        //newest
+        [HttpGet]
+        [Route("item/new")]
+        public ActionResult<string> GetNewestItems()
+        {
+            json = JsonConvert.SerializeObject(_dbLogic.GetNewestFirst(), Formatting.Indented, serializerSettings);
+            return json;
+        }
+        //about to expire
+        [HttpGet]
+        [Route("item/expire")]
+        public ActionResult<string> GetExpiringItems()
+        {
+            json = JsonConvert.SerializeObject(_dbLogic.GetExpiringFirst(), Formatting.Indented, serializerSettings);
+            return json;
+        }
+        [HttpGet]
+        [Route("item/tag/{search?}")]
         public ActionResult<string> GetTag(string search)
         {
-            json = JsonConvert.SerializeObject(_dbLogic.Search(search), Formatting.Indented);
+            json = JsonConvert.SerializeObject(_dbLogic.Search(search), Formatting.Indented, serializerSettings);
             return json;
         }
         
         //Post = Create
-        [HttpPost("Item")]
+        [HttpPost("item")]
         public async Task<IActionResult> CreateEntity([FromBody]ItemEntity item)
         {
             Console.WriteLine("Adding item with title: " + item.Title);
             _dbLogic.AddItem(item);
-            _dbLogic.Save();
 
             return Ok(item);
         }
@@ -74,10 +101,24 @@ namespace VareDatabase.Controllers
         }
 
         [HttpDelete]
-        public void DeleteItem(ItemEntity item)
+        public async Task<IActionResult> DeleteItem(ItemEntity item)
         { 
             _dbLogic.Delete(item);
             _dbLogic.Save();
+            return Ok();
+        }
+        [HttpPost("CreateImage")]
+        public async Task<ActionResult<string>> UploadPicture(IFormFile file)
+        {
+
+            string path = await _dbLogic.UploadPicture(file);
+            return path;
+        }
+        [HttpGet("GetPicture")]
+        public async Task<ActionResult<string>> LoadPicture(string path)
+        {
+            Byte[] b = System.IO.File.ReadAllBytes(path);
+            return File(b, "image/jpg");
         }
     }
 }
