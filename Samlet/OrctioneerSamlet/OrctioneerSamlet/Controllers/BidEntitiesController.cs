@@ -35,10 +35,12 @@ namespace VareDatabase.Controllers
             _dbLogic = dbLogic;
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost("newBid")]
         public async Task<IActionResult> CreateBid([FromBody]BidEntity bid)
         {
+            while (User.Identity.Name == null)
+            {}
             bid.UserIdBuyer = User.Identity.Name;
             _dbLogic.CreateBid(bid);
             _dbLogic.Save();

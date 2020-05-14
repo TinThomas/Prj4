@@ -16,7 +16,7 @@
           </div>
           <input type="file" @change="onFileChanged" />
           <label>End date:</label>
-          <select v-model="endDate">
+          <select v-model="endDate" required>
               <option v-for="day in endDates" :key="day">{{day}}</option>
           </select>
           <!--<button class="btn btn-secondary"  @click="onUpload">Upload Image</button>-->
