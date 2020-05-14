@@ -62,7 +62,9 @@ namespace OrctioneerSamlet
                 options.UseSqlServer(Configuration.GetConnectionString("WalletConnection")));
             services.AddScoped<VareDataModelContext>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp";

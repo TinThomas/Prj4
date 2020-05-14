@@ -3,7 +3,7 @@
         <div class="row">
             <div v-for="auc in auctions" class="single-auction" :key="auc.id">
                 <img :src="auc.url">
-                <h5>{{ auc.Title }}</h5>
+                <h5 style="display: in">{{ auc.Title }}</h5>
                 <h5>Buy Out Price: {{ auc.BuyOutPrice }}</h5>
                 <h5>Ends: {{ auc.ExpirationDate }}</h5>
 

@@ -13,6 +13,7 @@ import ItemAuction from './components/auction/Auction.vue';
 import FullAuction from './components/auction/FullAuction.vue'
 import FullAuction2 from './components/auction/FullAuction2.vue'
 import store from './components/Utility/Store'
+import UserDetail from './components/UserProfile/UserDetails'
 
 Vue.use(VueRouter);
 Vue.use(VModal);
@@ -26,7 +27,8 @@ const routes = [
     { path: '/addAuction', component: AddAuction },
     { path: '/itemAuction', component: ItemAuction },
     { path: '/fullAuction/:id', component: FullAuction },
-    { path: '/fullAuction2/:id', component: FullAuction2 }
+    { path: '/fullAuction2/:id', component: FullAuction2 },
+    { path: '/UserDetails', component: UserDetail}
 ];
 
 const router = new VueRouter({

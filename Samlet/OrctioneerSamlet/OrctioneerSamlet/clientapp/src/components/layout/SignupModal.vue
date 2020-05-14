@@ -1,84 +1,85 @@
 ﻿<template>
     <div>
         <button class="btn btn-outline-primary" @click.prevent="show">Signup</button>
-
-        <modal name="modal-signup" :width="600" :height="400">
+        <modal name="modal-signup" :width="350" :height="342">
             <div id="group">
                 <div id="modal-div" class="row">
                     <div class="col-3">
+                        <br/>
                         <p>
                             Username
                         </p>
                     </div>
                     <div class="col">
-                        <span class="text-danger">
+                        <center><span class="text-danger" style="display: inline-block">
                             <font color="red" size="1">
                                 {{UsernameValidationMsg}}
                             </font>
-                        </span>
+                        </span></center>
                         <input type="text"
                                v-model="Username"
-                               placeholder="Please enter username">
+                               placeholder="Please enter username"
+                        class="inputs">
                     </div>
                 </div>
                 <div id="modal-div2" class="row">
                     <div class="col-3">
+                        <br/>
                         <p>
                             Email
                         </p>
                     </div>
                     <div class="col">
-                        <span class="text-danger">
+                        <center><span class="text-danger" style="display: inline-block">
                             <font color="red" size="1">
                                 {{EmailValidationMsg}}
                             </font>
-                        </span>
+                        </span></center>
                         <input type="text"
                                v-model="Email"
-                               placeholder="Please enter Email">
+                               placeholder="Please enter Email"
+                        class="inputs">
                     </div>
                 </div>
                 <div id="modal-div3" class="row">
                     <div class="col-3">
+                        <br/>
                         <p>
                             Password
                         </p>
                     </div>
                     <div class="col">
-                        <span class="text-danger">
+                       <center><span class="text-danger" style="display: inline-block">
                             <font color="red" size="1">
                                 {{PasswordValidationMsg}}
                             </font>
-                        </span>
+                        </span></center>
                         <input type="Password"
                                v-model="Password"
                                placeholder="Please enter username"
-                               :width="200"
-                               :height="10">
+                               class="inputs">
                     </div>
                 </div>
                 <div id="modal-div4" class="row">
                     <div class="col-3">
+                        <br/>
                         <p>
                             Confirm password
                         </p>
                     </div>
                     <div class="col">
-                        <span class="text-danger">
+                        <center><span class="text-danger" style="display: inline-block">
                             <font color="red" size="1">
                                 {{CfmPasswordValidationMsg}}
                             </font>
-                        </span>
+                        </span></center>
                         <input type="Password"
                                v-model="CfmPassword"
                                placeholder="Please enter retype password"
-                               :width="200"
-                               :height="10">
+                               class="inputs">
                     </div>
                 </div>
                 <div id="modal-div5" class="row">
-                    <div class="col-3">
-                    </div>
                     <div class="col">
                         <button id="login-button" class="btn btn-outline-primary"
                                 v-on:click="sendApplication"
@@ -233,17 +234,22 @@
 </script>
 <style scoped>
     #group{
-        padding: 30px 20px 0px 20px;
+        padding: 10px 20px 10px 20px;
         border: 2px solid cornflowerblue;
     }
 
 
     .modal-signup{
         border: 2px solid black;
-        padding-top: 20px;
     }
 
     #signup-button{
         margin-top:5px;
+        margin-bottom:5px;
+    }
+
+    .inputs{
+        height:30px;
+        width:200px;
     }
 </style>
