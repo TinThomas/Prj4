@@ -8,9 +8,9 @@ namespace VareDatabase
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        void Create(TEntity entity);
-        TEntity Read(int id);
-        IEnumerable<TEntity> GetAll();
+        void Add(TEntity entity);
+        TEntity Get(int id);
+        IEnumerable<TEntity> Get();
         void Delete(TEntity entity);
     }
 }
