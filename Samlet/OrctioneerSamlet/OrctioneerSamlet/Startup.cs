@@ -53,7 +53,8 @@ namespace OrctioneerSamlet
             });
 
             services.AddCors();
-            services.AddDbContext<VareDataModelContext>();
+            services.AddDbContext<VareDataModelContext>(options => 
+                options.UseSqlServer(Configuration.GetConnectionString("VareDatabaseConnection")));
             services.AddDbContext<UserModelContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("UserConnection")));
             services.AddDbContext<PassModelContext>(options =>
