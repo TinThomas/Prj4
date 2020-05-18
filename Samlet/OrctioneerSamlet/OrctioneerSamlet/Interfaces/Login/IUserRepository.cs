@@ -9,6 +9,7 @@ namespace OrctioneerSamlet.Interfaces.Login
     {
         Task<UserEntity> getThisUser(string id);
         Task<UserEntity> getUser(string name);
+        Task<string> getEmail(string id);
         Task<int> addUser(UserEntity user);
         Task<int> updateUser(UserEntity user);
         Task<int> DeleteUser(string id);

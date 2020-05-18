@@ -28,8 +28,11 @@
             </div>
             <div class="col-6" id="bid-table">
                 <p>Bid must be higher than: {{auctions.BuyOutPrice}} </p>
-                <input type="text" placeholder="Your bid">
-                <button class="btn btn-secondary">Make a bid!</button>
+                <input type="number" placeholder="Your bid" v-model.lazy="newBid.bid">
+                <button class="btn btn-secondary" @click.prevent="postBid">Make a bid!</button>
+                <div v-show="submitted">
+                    <h3>Your auction has been posted!</h3>
+                </div>
 
             </div>
             <div class="col-6" id="bid-history">
@@ -77,6 +80,12 @@ export default {
             //    Title: "",
             //    Bids: [{ Bid: 0 }]
             //}],
+            newBid: {
+                bid:0,
+                userIdBuyer: "",
+                itemId: 0
+            },
+            bidSubmitted: false,
             auctions: "",
             highestBid: "",
             url: ""
@@ -101,7 +110,17 @@ export default {
             //    }
 
             //}
-
+            postBid: function () {
+                var ref = this;
+                axios.post('http://localhost:5000/api/BidEntities/newBid', {
+                    Bid: ref.newBid.bid,
+                    UserIdBuyer: "xd",
+                    ItemId: ref.id
+                }).then(function (response) {
+                    window.console.log(response);
+                });
+                    ref.bidSubmitted = true
+             },
             getHighestBid: function (bid) {
                 if (bid != null) {
                     return bid.Bid + " Gold";

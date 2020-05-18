@@ -9,6 +9,7 @@ using VareDatabase.Repo;
 using VareDatabase.Repo.Auction;
 using VareDatabase.Models;
 using VareDatabase.Interfaces.Auction;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace VareDatabase
 {
@@ -28,10 +29,16 @@ namespace VareDatabase
         public void CreateBid(BidEntity bid)
         {
             var item = itemRepo.Read(bid.ItemId);
-            if(item.Bids.Last().Bid < bid.Bid) //check if new bid is high enough
+            
+            if (item.Bids.FirstOrDefault() == null)
             {
                 bidRepo.Create(bid);
                 unit.Commit();
+            }
+            else if( item.Bids.Last().Bid < bid.Bid) //check if new bid is high enough
+            {
+                bid.Created = DateTime.Now;
+                bidRepo.Create(bid);
             }
             //error handling here
         }
@@ -66,8 +73,9 @@ namespace VareDatabase
         }
         public void AddItem(ItemEntity item)
         {
+            item.DateCreated = DateTime.Now;
             itemRepo.Create(item);
-            //itemRepo.GenerateTags(item);
+            itemRepo.GenerateTags(item);
             unit.Commit();
         }
         public void Delete(ItemEntity item)
@@ -94,7 +102,8 @@ namespace VareDatabase
         }
         public void AddTag(int id, string newTag)
         {
-            itemRepo.AddTag(id, newTag);
+            var item = itemRepo.Read(id);
+            itemRepo.AddTag(item, newTag);
         }
         public IEnumerable<ItemEntity> Search(string searchingstring)
         {

@@ -56,7 +56,7 @@ namespace OrctioneerSamlet
                 };
                 myPasswords.Add(my);
 
-                pass.Passwords.AddRange(my);
+                pass.Passwords.AddRange(myPasswords);
                 pass.SaveChangesAsync();
                 Console.WriteLine("done seeding");
             }

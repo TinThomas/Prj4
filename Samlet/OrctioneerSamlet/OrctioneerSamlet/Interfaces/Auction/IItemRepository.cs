@@ -16,6 +16,6 @@ namespace VareDatabase.Interfaces
         IEnumerable<ItemEntity> GetExpiringFirst();
         Task<string> UploadPicture (IFormFile file);
         void GenerateTags(ItemEntity item);
-        void AddTag(int id, string newTag);
+        void AddTag(ItemEntity id, string newTag);
     }
 }

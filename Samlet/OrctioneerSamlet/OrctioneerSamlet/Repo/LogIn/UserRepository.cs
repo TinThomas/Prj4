@@ -39,6 +39,14 @@ namespace VareDatabase.Repo
 
         }
 
+        public async Task<string> getEmail(string id)
+        {
+            var query = await (from i in _users.Users
+                where i.UserId == id
+                select i.Email).FirstOrDefaultAsync();
+            return query;
+        }
+
         public async Task<int> addUser(UserEntity user)
         {
             db.Add(user);

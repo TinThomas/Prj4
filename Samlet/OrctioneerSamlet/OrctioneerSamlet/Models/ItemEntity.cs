@@ -29,7 +29,10 @@ namespace VareDatabase.Models
         public ICollection<BidEntity> Bids { get; set; }
         public ItemEntity()
         {
-            DateCreated = DateTime.Now;
+            if (DateCreated == null) 
+            { 
+                DateCreated = DateTime.Now; 
+            }
             Tags = new List<TagEntity>();
             Bids = new List<BidEntity>();
         }
