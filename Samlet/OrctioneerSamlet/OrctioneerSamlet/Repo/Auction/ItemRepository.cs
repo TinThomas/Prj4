@@ -69,9 +69,8 @@ namespace VareDatabase.Repo.Auction
         }
         public override void Delete(ItemEntity i)
         {
-            var items = db.Set<ItemEntity>().ToList();
-            ItemEntity itemToDelete = items.First(x => x.ItemId == i.ItemId);
-            itemToDelete.Sold = true;
+            i.Sold = true;
+            Update(i);
         }
         public IEnumerable<ItemEntity> Search(string title)
         {
