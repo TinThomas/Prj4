@@ -19,10 +19,6 @@ namespace VareDatabase.Repo.Auction
         {
             this.db = db;
         }
-        /*public override IEnumerable<ItemEntity> GetAll()
-        {
-            return db.Set<ItemEntity>().Where(x => x.Sold == false).ToList();
-        }*/
         public override ItemEntity Get(int id)
         {
             return Context.Set<ItemEntity>()
