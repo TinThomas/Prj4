@@ -4,8 +4,9 @@ using System.Text;
 
 namespace BackEndUnitTest
 {
-    class DbTestModel
+    public class DbTestModel
     {
         public int Id { get; set; }
+        public bool Property { get; set; }
     }
 }

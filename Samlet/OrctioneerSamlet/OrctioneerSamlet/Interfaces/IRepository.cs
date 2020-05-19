@@ -12,5 +12,6 @@ namespace VareDatabase
         TEntity Get(int id);
         IEnumerable<TEntity> Get();
         void Delete(TEntity entity);
+        void Update(TEntity entity);
     }
 }
