@@ -13,8 +13,12 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using VareDatabase;
+using VareDatabase.Controllers;
 using VareDatabase.DBContext;
+using VareDatabase.Interfaces;
+using VareDatabase.Interfaces.Auction;
 using VareDatabase.Repo;
+using VareDatabase.Repo.Auction;
 using VueCliMiddleware;
 
 namespace OrctioneerSamlet
@@ -70,6 +74,11 @@ namespace OrctioneerSamlet
             {
                 configuration.RootPath = "ClientApp";
             });
+            services.AddScoped<IUnitOfWork,AuctionUnitOfWork>();
+            services.AddScoped<IItemRepository, ItemRepository>();
+            services.AddScoped<IBidRepository, BidRepository>();
+            services.AddSingleton<ItemEntityController>();
+            services.AddSingleton<BidEntitiesController>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
