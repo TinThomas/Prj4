@@ -73,16 +73,18 @@ namespace BackEndUnitTest
         public void Update_ObjectPropertyChanged()
         {
             var testObject = new DbTestModel() { Id = 1, Property = false };
-            var updatedTestObject = new DbTestModel() { Id = 1, Property = false };
+            var originalTestObject = new DbTestModel();
+            originalTestObject = testObject;
             var context = new Mock<VareDataModelContext>();
             var mockRepo = new Mock<Repository<DbTestModel>>(context.Object);
             //act
             testObject.Property = true;
             mockRepo.Setup(x => x.Update(testObject));
+            mockRepo.Object.Update(testObject);
             mockRepo.Setup(x => x.Get(1)).Returns(testObject);
             //assert
             mockRepo.Object.Get(1).Property.ShouldBeTrue();
-            mockRepo.Object.Update(testObject).shouldbe
+            
             mockRepo.Verify(x => x.Update(testObject), Times.Once());
         }
     }
