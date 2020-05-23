@@ -26,11 +26,10 @@ namespace VareDatabase.Controllers
         private JsonSerializerSettings serializerSettings = new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects };
 
 
-        public BidEntitiesController(AuctionUnitOfWork uow)
+        public BidEntitiesController()
         {
-            unitOfWork = uow;
-            uow = new AuctionUnitOfWork();
-            _bidLogic = uow.BidRepository;
+            unitOfWork = new AuctionUnitOfWork();
+            _bidLogic = unitOfWork.BidRepository;
         }
 
         [Authorize]

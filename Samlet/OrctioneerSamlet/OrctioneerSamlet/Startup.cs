@@ -74,11 +74,6 @@ namespace OrctioneerSamlet
             {
                 configuration.RootPath = "ClientApp";
             });
-            services.AddScoped<IUnitOfWork,AuctionUnitOfWork>();
-            services.AddScoped<IItemRepository, ItemRepository>();
-            services.AddScoped<IBidRepository, BidRepository>();
-            services.AddSingleton<ItemEntityController>();
-            services.AddSingleton<BidEntitiesController>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
