@@ -20,19 +20,16 @@ namespace VareDatabase.Controllers
     [ApiController]
     public class BidEntitiesController : Controller
     {
-        private DatabaseLogic _dbLogic;
+        private IBidRepository _bidLogic;
+        private AuctionUnitOfWork unitOfWork;
         private string json;
         private JsonSerializerSettings serializerSettings = new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects };
 
 
-        public BidEntitiesController(VareDataModelContext _context)
+        public BidEntitiesController()
         {
-            var db = new DBContext.VareDataModelContext();
-            IBidRepository repo = new BidRepository(db);
-            IItemRepository itemRepo = new ItemRepository(db);
-            var unit = new AuctionUnitOfWork(db);
-            var dbLogic = new DatabaseLogic(unit, itemRepo, repo);
-            _dbLogic = dbLogic;
+            unitOfWork = new AuctionUnitOfWork();
+            _bidLogic = unitOfWork.BidRepository;
         }
 
         [Authorize]
@@ -42,15 +39,16 @@ namespace VareDatabase.Controllers
             while (User.Identity.Name == null)
             {}
             bid.UserIdBuyer = User.Identity.Name;
-            _dbLogic.CreateBid(bid);
-            _dbLogic.Save();
+            bid.Created = DateTime.Now;
+            _bidLogic.Add(bid);
+            unitOfWork.Commit();
             return Ok(bid);
         }
         [HttpGet]
         [Route("GetBidsFromItem/{id}")]
         public  ActionResult<string> GetBidsFromItem( int id)
         {
-            json = JsonConvert.SerializeObject(_dbLogic.GetBidsFromItem(id), Formatting.Indented, serializerSettings);
+            json = JsonConvert.SerializeObject(_bidLogic.GetBidsFromItem(id), Formatting.Indented, serializerSettings);
             return json;
         }
 
@@ -58,7 +56,7 @@ namespace VareDatabase.Controllers
         [Route("GetBidsFromUser/{id}")]
         public ActionResult<string> GetBidsByUserId(string id)
         {
-            json = JsonConvert.SerializeObject(_dbLogic.GetBidsByUserId(id), Formatting.Indented, serializerSettings);
+            json = JsonConvert.SerializeObject(_bidLogic.GetBidsByUser(id), Formatting.Indented, serializerSettings);
             return json;
         }
 
@@ -66,7 +64,7 @@ namespace VareDatabase.Controllers
         [Route("GetBidsFromUserSorted/{id}")]
         public ActionResult<string> GethighestBidOnItem(int id)
         {
-            json = JsonConvert.SerializeObject(_dbLogic.GetBidsForItemSorted(id), Formatting.Indented, serializerSettings);
+            json = JsonConvert.SerializeObject(_bidLogic.GethighestBidOnItem(id), Formatting.Indented, serializerSettings);
             return json;
         }
 

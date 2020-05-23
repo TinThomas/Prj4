@@ -58,7 +58,7 @@ namespace LoginVue.Controllers
         [HttpPost("Update")]
         public async Task<IActionResult> Update([FromBody] HeaderRequest request)
         {
-            int wait;
+            int wait = 0;
             UsernameEntity user = new UsernameEntity();
             user.UserId = User.Identity.Name;
             if (request.Username != null)
@@ -81,17 +81,27 @@ namespace LoginVue.Controllers
                 wait = await _pass.updatePassword(pass);
             }
 
-            return Ok();
+            if (wait > 0)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
 
         }
 
         [HttpPost("Delete")]
         public async Task<IActionResult> Delete()
         {
-            int wait;
+            int wait = 0;
             wait = await _user.DeleteUser(User.Identity.Name);
             wait = await _pass.DeletePassword(User.Identity.Name);
-            return Ok();
+            if (wait > 0)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
         }
     }
 }

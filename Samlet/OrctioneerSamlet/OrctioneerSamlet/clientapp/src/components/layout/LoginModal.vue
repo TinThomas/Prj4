@@ -1,77 +1,70 @@
 <template>
     <div>
         <button class="btn btn-outline-primary" @click.prevent="show">Login</button>
-        
-        <modal name="modal-login" :width="400" :height="220">
-        <div id="group">
-            <div id="modal-div" class="row">
-                <div class="col-3">
-                    <p>
-                        Username/
-                        Email
-                    </p>
-                </div>
-                <div class="col-6">
+
+        <modal name="modal-login" :width="400" :height="231">
+            <div id="group">
+                <div id="modal-div" class="row">
+                    <div class="col">
+                            <div class="row">
+                    <div class="col-3">
+                        <p>
+                            Username/
+                            Email
+                        </p>
+                    </div>
+                    <div class="col-6">
                         <input type="text"
                                v-model="Username"
                                placeholder="Please enter username or email"
-                               :width="400"
-                               :height="5">
-                    <p> <span class="text-danger">
+                               class="inputs">
+                        <center><span class="text-danger" style="white-space: nowrap">
                         <font color="red" size="1">
                             {{UsernameValidationMsg}}
                         </font>
-                    </span></p>
+                    </span></center>
                     </div>
                 </div>
-            <div id="modal-div2" class="row">
-                <div class="col-3">
-                    <p class="block">Password</p>
-                </div>
-                <div class="col-6">
-                    <input type="password"
-                           v-model="Password"
-                           placeholder="Please enter password"
-                           :width="200"
-                           :height="10">
-                    <p> <span class="text-danger">
-                        <font color="red" size="1">
-                            {{PasswordValidationMsg}}
-                        </font>
-                    </span></p>
                 </div>
             </div>
-            <div id="modal-div3" class="row">
-                <div class="col-3">
+                <div id="modal-div2" class="row">
+                    <div class="col">
+                        <div class="row">
+                      <div class="col-3">
+                        <p class="block">Password</p>
+                    </div>
+                    <div class="col-6">
+                        <input type="password"
+                               v-model="Password"
+                               placeholder="Please enter password"
+                               class="inputs">
+                        <center><span class="text-danger" style="display: inline-block"><font color="red" size="1">{{PasswordValidationMsg}}</font></span></center>
+                        <p></p>
+                    </div>
                 </div>
-                <div class="col">
-                <button id="login-button" class="btn btn-outline-primary" 
-                        v-on:click="sendApplication"
-                        :disabled="sendDisabled">Login</button>
+            </div>
+        </div>
+                <div id="modal-div3" class="row">
+                    <div class="col">
+                        <button id="login-button" class="btn btn-outline-primary"
+                                v-on:click="sendApplication"
+                                :disabled="sendDisabled">Login</button>
+                    </div>
                 </div>
-            </div>    
-            <div id="modal-div4" class="row">
-                <div class="col-3">
-                </div>
-                <div class="col">
-                    <p>No account yet?  
-                        <Signup-modal></Signup-modal></p>
-                </div>
-            </div>  
-        </div>           
+            </div>
         </modal>
     </div>
 </template>
 
 <script>
         import axios from 'axios';
-        import Signup from './SignupModal';
+        import signup from './SignupModal';
     var instance = axios.create({
         baseURL: 'http://localhost:5000/api/',
     })
 export default {
         comments:{
-            'Signup-modal' : Signup
+            'Signup-modal' : signup
         },
     data(){
         return{
@@ -166,7 +159,7 @@ export default {
 
 <style scoped>
 #group{
-    padding: 30px 20px 0px 20px;
+    padding: 30px 20px 20px 20px;
     border: 2px solid cornflowerblue;
 }
 
@@ -179,8 +172,8 @@ export default {
 #login-button{
     margin-top:5px; 
 }
-#inputs{
-    height:200px;
-    width:300px;
+.inputs{
+    height:30px;
+    width:200px;
 }
 </style>

@@ -13,11 +13,15 @@
                 </router-link>
             </div>
             <div class="col-6">
-                <div class="row">
-                    <modal-login id="login-modal" v-show="!loginState"></modal-login>
-                    <modal-signup id="modal-signup" v-show="!loginState"></modal-signup>
+                <div v-if="!loginState" style="float: right" class="row">
+                    <modal-login id="login-modal" style="padding-right: 20px"></modal-login>
+                    <modal-signup id="modal-signup" style="padding-right: 20px"></modal-signup>
                 </div>
-                <signout v-show="loginState"></signout>
+                <div v-if="loginState">
+                    <signout style="float: right; padding-right: 20px"></signout>
+                    <userBtn style="float: right; padding-right: 20px"></userBtn>
+                    <balance style="float: right; padding-right: 20px"></balance>
+                </div>
             </div>
         </div>
     </div>
@@ -27,18 +31,23 @@
 import ModalLogin from './LoginModal.vue'
 import ModalSignup from './SignupModal'
 import Signout from '../Utility/Signout.vue'
+import Userbtn from './userdetailBtn.vue'
+import Balance from './balance.vue'
 
 export default {
     components: {
         'modal-login': ModalLogin,
         'modal-signup': ModalSignup,
-        'signout': Signout
+        'signout': Signout,
+        'userBtn': Userbtn,
+        'balance' : Balance
     },
     computed:{
         loginState(){
-            return this.$store.state.logged
+            return this.$store.state.logged;
         }
-    }
+        
+    },
     
 }
 </script>

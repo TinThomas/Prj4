@@ -19,18 +19,16 @@ namespace VareDatabase.Controllers
     [ApiController]
     public class ItemEntityController : Controller
     {
-        private DatabaseLogic _dbLogic;
         private string json;
+        private AuctionUnitOfWork unitOfWork;
+        private IItemRepository _dbLogic;
 
         private JsonSerializerSettings serializerSettings = new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects };
 
         public ItemEntityController()
         {
-            var db = new DBContext.VareDataModelContext();
-            IItemRepository repo = new ItemRepository(db);
-            var unit = new AuctionUnitOfWork(db);
-            var dbLogic = new DatabaseLogic(unit,repo, null,null);
-            _dbLogic = dbLogic;
+            unitOfWork = new AuctionUnitOfWork();
+            _dbLogic = unitOfWork.ItemRepository;
         }
 
         [HttpGet]
@@ -46,7 +44,7 @@ namespace VareDatabase.Controllers
         [Route("item")]
         public ActionResult<string> GetAllItems()
         {
-            var items = _dbLogic.GetAll();
+            var items = _dbLogic.Get();
             json = JsonConvert.SerializeObject(items, Formatting.Indented, serializerSettings);
             return json;
         }
@@ -87,24 +85,17 @@ namespace VareDatabase.Controllers
         public async Task<IActionResult> CreateEntity([FromBody]ItemEntity item)
         {
             Console.WriteLine("Adding item with title: " + item.Title);
-            _dbLogic.AddItem(item);
-
+            item.DateCreated = DateTime.Now;
+            _dbLogic.Add(item);
+            _dbLogic.GenerateTags(item);
+            unitOfWork.Commit();
             return Ok(item);
         }
-
-        [HttpPut]
-        //Update eller replace
-        public void EditItemEntity(int id, ItemEntity item)
-        {
-            //En eller anden update func MANGLER HER
-            _dbLogic.Save();
-        }
-
         [HttpDelete]
         public async Task<IActionResult> DeleteItem(ItemEntity item)
         { 
             _dbLogic.Delete(item);
-            _dbLogic.Save();
+            unitOfWork.Commit();
             return Ok();
         }
         [HttpPost("CreateImage")]
