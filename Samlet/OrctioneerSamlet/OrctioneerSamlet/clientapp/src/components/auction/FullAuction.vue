@@ -77,21 +77,6 @@
                     </div>
 
                 </div>
-                <!--<div :key="bidComponentKey">
-                    <div v-for="bid in currentBids.slice(0,4)" :key="bid.id">
-                        <div class="row">
-                            <div class="col-4">
-                                {{bid.Bid}} Gold
-                            </div>
-                            <div class="col-4">
-                                {{bid.Created | moment("dddd, MMMM Do YYYY")}}
-                            </div>
-                            <div class="col-4">
-                                {{bid.Created | moment("h:mm:ss a")}}
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
                 <topBids-card :key="bidComponentKey">
                 </topBids-card>
                
@@ -104,8 +89,6 @@
 </template>
 
 <script>
-    //import axios from 'axios';
-    //import moment from 'vue-moment'
     import TopBids from './TopBids.vue'
     export default {
         components: {
@@ -146,17 +129,6 @@
             forceRerenderBids() {
                 this.bidComponentKey += 1;
             },
-            //postBid: function () {
-            //    var ref = this;
-            //    axios.post('http://localhost:5000/api/BidEntities/newBid', {
-            //        Bid: ref.newBid.bid,
-            //        UserIdBuyer: "xd",
-            //        ItemId: ref.id
-            //    }).then(function (response) {
-            //        window.console.log(response);
-            //    });
-            //        ref.bidSubmitted = true
-            //},
             postBid: function() {
                 var payload = {
                     bid: this.newBid.bid,

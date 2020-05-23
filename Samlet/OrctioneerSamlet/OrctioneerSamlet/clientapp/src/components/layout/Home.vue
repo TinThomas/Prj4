@@ -10,7 +10,7 @@
 
 <script>
 
-    import AuctionListing from './../auction/auctionLists/AuctionListing.vue'
+    import AuctionListing from './../auction/AuctionListing.vue'
 
 export default {
     components:{

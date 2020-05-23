@@ -15,7 +15,6 @@
 </template>
 
 <script>
-    //import moment from 'vue-moment'
     export default {
         props:{
             auction: {
@@ -31,7 +30,7 @@
 
         methods: {
             navigateToAuction(path){
-                this.$router.push('/fullAuction2/'+path);
+                this.$router.push('/fullAuction/'+path);
             },
             calcEndDate() {
                 const moment = this.$moment().add(this.endDate, 'days').format();
@@ -50,15 +49,6 @@
             
         },
         computed: {
-            //highestBid() {
-            //    return this.$store.getters.getHighestBid;
-            //},
-            //thisAuction() {
-            //    return this.$store.getters.getAuctionById(1);
-            //}
-            //test() {
-            //    return this.$store.getters.test;
-            //}
             getHighestBid() {
                 return this.$store.getters.getHighestBid(this.auction.Bids);
             }
@@ -67,16 +57,6 @@
         created() {
             this.checkImage();
         }
-
-        //computed: {
-        //    getHighestBid: function (auction) {
-        //        var bids = auction.Bids;
-        //        bids.sort(function (bidA, bidB) {
-        //            return bidB.Bid - bidA.Bid
-        //        })
-        //        return bids[0];
-        //    }
-        //},
     }
 </script>
 

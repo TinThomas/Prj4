@@ -16,7 +16,7 @@
 </template>
 
 <script>
-    import AuctionCard from './../AuctionCard.vue'
+    import AuctionCard from './AuctionCard.vue'
     export default {
         components: {
             'auction-card': AuctionCard
