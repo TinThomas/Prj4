@@ -1,21 +1,22 @@
 ﻿<template>
     <div class="single-auction">
-        <img :src="url">
+        <img :src="url" >
         <h5 class="title-format">{{ auction.Title }}</h5>
         <h5>
-            Bid: <span> {{ getHighestBid(auction) }}</span>
+            
+            Bid: <span> {{ getHighestBid }}</span>
         </h5>
 
         <h5>Ends: {{ auction.ExpirationDate | moment("from") }}</h5>
 
         <button @click="navigateToAuction(auction.ItemId)" class="btn btn-secondary" id="buttonId">See full auction</button>
+
     </div>
 </template>
 
 <script>
     //import moment from 'vue-moment'
-
-    export default{
+    export default {
         props:{
             auction: {
                 type: Object,
@@ -28,7 +29,7 @@
             }
         },
 
-        methods:{
+        methods: {
             navigateToAuction(path){
                 this.$router.push('/fullAuction2/'+path);
             },
@@ -37,22 +38,34 @@
                 window.console.log(this.endDate);
                 this.auction.expirationDate = moment;
             },
-            getHighestBid: function (auction) {
-                if (Array.isArray(auction.Bids) && auction.Bids.length) {
-                    var bids = auction.Bids;
-                    bids.sort(function (bidA, bidB) {
-                        return bidB.Bid - bidA.Bid
-                    })
-                    return bids[0].Bid + " Gold";
+            checkImage() {
+                if (this.auction.Image == null) {
+                    this.url = require("./../../images/missingimage.jpg")
                 }
                 else {
-                    return "No bids";
+                    this.url = require("./../../images/" + this.auction.Image)
                 }
-
+            },
+            
+            
+        },
+        computed: {
+            //highestBid() {
+            //    return this.$store.getters.getHighestBid;
+            //},
+            //thisAuction() {
+            //    return this.$store.getters.getAuctionById(1);
+            //}
+            //test() {
+            //    return this.$store.getters.test;
+            //}
+            getHighestBid() {
+                return this.$store.getters.getHighestBid(this.auction.Bids);
             }
+                        
         },
         created() {
-            this.url = require("./../../images/" + this.auction.Image);
+            this.checkImage();
         }
 
         //computed: {
@@ -70,7 +83,7 @@
 <style scoped>
     .single-auction {
         background: #eeeeee;
-        max-width: 194px;
+        width: 194px;
         padding: 5px;
         margin: 5px;
         box-sizing: border-box;

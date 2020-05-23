@@ -2,12 +2,11 @@
     <div id="full-auction">
         <div class="row">
             <div class="col">
-                <!--<img :src="">-->
-                <img :src="url">
+                <img :src="urlTest">
             </div>
             <div class="col">
-                <h3>{{auctions.Title}}</h3>
-                <p id="description">{{auctions.DescriptionOfItem}}</p>
+                <h3>{{currentAuction.Title}}</h3>
+                <p id="description">{{currentAuction.DescriptionOfItem}}</p>
             </div>
         </div>
         <div class="row">
@@ -15,7 +14,8 @@
                 <h3>Current bid: </h3>
             </div>
             <div class="col-3">
-                <h3 class="auction-text">{{getHighestBid(getHighestBidFirst[0])}}</h3>
+                <h3 class="auction-text">{{currentHighestBid}}</h3>
+
             </div>
         </div>
         <div class="row">
@@ -23,17 +23,46 @@
                 <h3>Ends:</h3>
             </div>
             <div class="col-3">
-                <h3 class="auction-text">{{auctions.ExpirationDate | moment("from") }}</h3>
+                <h3 class="auction-text">{{currentAuction.ExpirationDate | moment("from") }}</h3>
 
             </div>
             <div class="col-6" id="bid-table">
-                <p>Bid must be higher than: {{auctions.BuyOutPrice}} </p>
-                <input type="number" placeholder="Your bid" v-model.lazy="newBid.bid">
-                <button class="btn btn-secondary" @click.prevent="postBid">Make a bid!</button>
-                <div v-show="submitted">
-                    <h3>Your auction has been posted!</h3>
-                </div>
+                <p>Bid must be higher than: {{currentBids[0].Bid}} </p>
+                <div class="row">
+                    <div class="col-4">
+                        How much:
+                    </div>
+                    <div class="col-4">
+                        Your bid:
+                    </div>
+                    <div class="col-4">
 
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-4 bidPrice">
+                        <select v-model="newBid.bid">
+                            <option disabled value="">Your bid</option>
+                            <option>{{currentBids[0].Bid + 50}} Gold</option>
+                            <option>{{currentBids[0].Bid + 100}} Gold</option>
+                            <option>{{currentBids[0].Bid + 150}} Gold</option>
+                            <option>{{currentBids[0].Bid + 200}} Gold</option>
+                            <option>{{currentBids[0].Bid + 250}} Gold</option>
+                            <option>{{currentBids[0].Bid + 300}} Gold</option>
+                        </select>
+                    </div>
+                    <div class="col-4 bidPrice">
+                         <input type="submit" placeholder="Your bid" v-model.lazy="newBid.bid">
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-secondary" @click="postBid">Make bid!</button>
+                    </div>
+
+                </div>
+                <div v-show="bidSubmitted">
+                    <h3>Bid posted!</h3>
+                </div>
             </div>
             <div class="col-6" id="bid-history">
                 <div class="row">
@@ -48,116 +77,118 @@
                     </div>
 
                 </div>
-                <div v-for="bid in getHighestBidFirst" :key="bid.Id">
-                    <div class="row">
-                        <div class="col-4">
-                            {{bid.Bid}}
-                        </div>
-                        <div class="col-4">
-                            {{bid.Created | moment("dddd, MMMM Do YYYY")}}
-                        </div>
-                        <div class="col-4">
-                            {{bid.Created | moment("h:mm:ss a")}}
+                <!--<div :key="bidComponentKey">
+                    <div v-for="bid in currentBids.slice(0,4)" :key="bid.id">
+                        <div class="row">
+                            <div class="col-4">
+                                {{bid.Bid}} Gold
+                            </div>
+                            <div class="col-4">
+                                {{bid.Created | moment("dddd, MMMM Do YYYY")}}
+                            </div>
+                            <div class="col-4">
+                                {{bid.Created | moment("h:mm:ss a")}}
+                            </div>
                         </div>
                     </div>
+                </div>-->
+                <topBids-card :key="bidComponentKey">
+                </topBids-card>
+               
 
-                </div>
             </div>
+            {{currentBids}}
         </div>
 
     </div>    
 </template>
 
 <script>
-    import axios from 'axios';
+    //import axios from 'axios';
     //import moment from 'vue-moment'
-export default {
-    data(){
-        return {
-            id: this.$route.params.id,
-
-            //auctions: [{
-            //    Title: "",
-            //    Bids: [{ Bid: 0 }]
-            //}],
-            newBid: {
-                bid:0,
-                userIdBuyer: "",
-                itemId: 0
-            },
-            bidSubmitted: false,
-            auctions: "",
-            highestBid: "",
-            url: ""
-                //require('./../../images/df457fc9-c541-405c-a707-ff1d20ffa9d5.jpg')
-
-            }
+    import TopBids from './TopBids.vue'
+    export default {
+        components: {
+            'topBids-card': TopBids
         },
-        methods:{
-            //testFunction: function () {
-            //    return this.auctions.filter((auction) => {
-            //        return this.specificAuction = auction.title.match(this.id)
-            //    })
-            //getHighestBid: function () {
-            //    var bids = this.auctions.Bids;
-            //    window.console.log(bids);
-            //    if (Array.isArray(bids) && bids.length) {
-                    
-            //        return bids[0].Bid + " Gold";
-            //    }
-            //    else {
-            //        return "No bids";
-            //    }
+        data(){
+            return {
+                id: this.$route.params.id,
 
-            //}
-            postBid: function () {
-                var ref = this;
-                axios.post('http://localhost:5000/api/BidEntities/newBid', {
-                    Bid: ref.newBid.bid,
-                    UserIdBuyer: "xd",
-                    ItemId: ref.id
-                }).then(function (response) {
-                    window.console.log(response);
-                });
-                    ref.bidSubmitted = true
-             },
-            getHighestBid: function (bid) {
-                if (bid != null) {
-                    return bid.Bid + " Gold";
+                newBid: {
+                    bid:0,
+                    userIdBuyer: "",
+                    itemId: 0
+                },
+
+                bidSubmitted: false,
+                auction: "",
+
+                bidComponentKey: 0,
                 }
-                else {
-                    return " No Bids";
+            },
+        methods:{
+           
+            loadCurrentAuction() {
+                var payload = {
+                    id: this.id
                 }
+
+                this.$store.dispatch('loadCurrentAuction', payload);
+            },
+            loadCurrentBids() {
+                var payload = {
+                    id: this.id
+                }
+
+                this.$store.dispatch('loadCurrentBids', payload);
+            },
+            forceRerenderBids() {
+                this.bidComponentKey += 1;
+            },
+            //postBid: function () {
+            //    var ref = this;
+            //    axios.post('http://localhost:5000/api/BidEntities/newBid', {
+            //        Bid: ref.newBid.bid,
+            //        UserIdBuyer: "xd",
+            //        ItemId: ref.id
+            //    }).then(function (response) {
+            //        window.console.log(response);
+            //    });
+            //        ref.bidSubmitted = true
+            //},
+            postBid: function() {
+                var payload = {
+                    bid: this.newBid.bid,
+                    userIdBuyer: "xd",
+                    itemId: this.id
+                }
+                this.$store.dispatch('postNewBid', payload)
+                this.forceRerenderBids();
             }
+
+            
         },
         computed:{
-            //testFunction: function(){
-            //    return this.auctions.filter((auction)=>{
-            //       return auction.ItemId.match(this.id)
-            //    })
-            //},
-            getHighestBidFirst: function () {
-                var bids = this.auctions.Bids;
-                return bids.sort(function(bidA,bidB) {
-                    return bidB.Bid-bidA.Bid
-                }).splice(0,4)
-                
+
+            currentHighestBid() {
+                return this.$store.getters.getCurrentHighestBid;
             },
+            currentAuction() {
+                return this.$store.state.currentAuction;
+            },
+            urlTest() {
+                return this.$store.state.currentPictureUrl;
+            },
+            currentBids() {
+                return this.$store.state.currentBids;
+            }
+
            
         },
         created() {
-            var ref = this;
-            axios.get('http://localhost:5000/api/ItemEntity/item/' + ref.id).then(function (response) {
-                if (response.status != 200) {
-                    //error
-                }
-                //ref.test = response.data.splice(0, 4);
-                ref.auctions = response.data;
-                ref.url = require("./../../images/" + response.data.Image);
-
-                window.console.log(response.data.Image);
-                window.console.log(ref.auctions);
-            })
+            this.loadCurrentAuction();
+            this.loadCurrentBids();
         }
     }   
 </script>
@@ -189,7 +220,6 @@ export default {
     border: 1px solid black;
     padding-bottom: 10px;
     margin-left:5px;
-
 }
 
 #bid-history {
@@ -203,16 +233,26 @@ export default {
     margin-top:10px;
 }
 
-    img {
-        width: 400px;
-        height: 400px;
-        box-shadow: grey 0 0 10px;
-        border: 1px solid white;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        float: left;
-        object-fit: contain;
-        background-color: #eeeeee;
-    }
+img {
+    width: 400px;
+    height: 400px;
+    box-shadow: grey 0 0 10px;
+    border: 1px solid white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    float: left;
+    object-fit: contain;
+    background-color: #eeeeee;
+}
+
+.btn.btn-secondary {
+    margin-top: 0px;
+    object-position: center;
+    float: left;
+}
+.bidPrice{
+    margin-top: 10px;
+}
+
 
 </style>

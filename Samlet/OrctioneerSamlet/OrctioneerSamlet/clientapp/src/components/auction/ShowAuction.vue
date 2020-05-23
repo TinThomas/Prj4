@@ -2,63 +2,50 @@
     <div id="show-auctions">
         <h1>All auctions</h1>
         <input type="text" v-model="search" placeholder="search auctions">
-        <item-auction :auctions="filteredAuctions"></item-auction>
-        New
-        <item-auction2 :auctions="filteredAuctions2"></item-auction2>
-        {{test}}
+        <!--<item-auction2 :auctions="filterByWord"></item-auction2>-->
+        <div class="row">
+            <auction-card v-for="auc in filterByWord" :key="auc.id" :auction="auc"></auction-card>
+        </div>
     </div>
 </template>
 
 <script>
-    import Auction from './old/Auction.vue'
-    import Auction2 from './Auction2.vue'
-import axios from 'axios';
+    //import Auction2 from './Auction2.vue'
+    import AuctionCard from './AuctionCard.vue'
+//import axios from 'axios';
 export default {
      components:{
-        'item-auction': Auction,
-        'item-auction2': Auction2
+        //'item-auction2': Auction2
+        'auction-card': AuctionCard
     },
     data(){
         return{
-            auctions:[
-                { title: 'Stort sværd', url: require('./../../images/sværd.jpg'), bid: 1234, timeLeft: "1 day"},
-                { title: 'Hjelm og brynje', url: require('./../../images/Hjelm_og_Brynje.jpg'), bid: 1234, timeLeft: "2 day"},
-                { title: 'Faktisk økse', url: require('./../../images/Faktisk_økse.jpg'), bid: 1234, timeLeft: "3 day"},
-                { title: 'Én pil', url: require('./../../images/En_pil.jpg'), bid: 1234, timeLeft: "4 day"},
-            ],
-            search: '',
-            test: []
-            
+            search: '',       
         }
     },
     methods:{
         
         },
     computed:{
-        filteredAuctions: function(){
-            return this.auctions.filter((auction)=>{
-                return auction.title.toLowerCase().match(this.search.toLowerCase()) 
-            })
-        },
-        filteredAuctions2: function () {
-            return this.test.filter((auction) => {
+        filterByWord: function () {
+            return this.auctions.filter((auction) => {
                 return auction.Title.toLowerCase().match(this.search.toLowerCase())
             })
         },
-            
-        },
-        created() {
-            var ref = this;
-            axios.get('http://localhost:5000/api/ItemEntity/item').then(function (response) {
-            if (response.status != 200) {
-                window.console.log(response.status)
+        showSearch: function () {
+            if (this.search === "") {
+                return false;
             }
-                //ref.test = response.data.splice(0, 4);
-                if (ref.test != response.data) {
-                    ref.test = response.data;
-                }
-                
-        })     
+            else {
+                return true;
+            }
+        },
+        auctions() {
+            return this.$store.state.auctions;
+        }
+    },
+    async mounted() {
+            this.$store.dispatch('loadAuctions');
     }
 }
 </script>
@@ -70,10 +57,4 @@ export default {
     margin: 0 auto;
 }
 
-.single-auction{
-    padding: 20px;
-    margin: 20px;
-    box-sizing: border-box;
-    background: #eeeeee;
-}
 </style>

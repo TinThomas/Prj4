@@ -1,117 +1,86 @@
 <template>
-  <div id="add-auction">
+  <div id="add-auction" :key="componentKey">
       <h1>Add a new auction</h1>
-      <form v-if="!submitted">
+      <form v-if="!auctionSubmitted">
           <label>Auction Title</label>
           <input type="text" v-model.lazy="auction.title" required />
           <label>Auction Description</label>
           <textarea v-model.lazy="auction.description"></textarea>
-          <div id="cat-checkbox">
-              <label>Category 1</label>
-              <input type="checkbox" value="cat1" v-model="auction.categories" />
-              <label>Category 2</label>
-              <input type="checkbox" value="cat2" v-model="auction.categories" />
-              <label>Category 3</label>
-              <input type="checkbox" value="cat3" v-model="auction.categories" />
-          </div>
-          <input type="file" @change="onFileChanged" />
+          <input type="file" @change="onNewFileSelected" />
           <label>End date:</label>
           <select v-model="endDate" required>
               <option v-for="day in endDates" :key="day">{{day}}</option>
           </select>
-          <!--<button class="btn btn-secondary"  @click="onUpload">Upload Image</button>-->
-          <button class="btn btn-secondary" @click.prevent="postAuction">Add auction</button>
+          <button class="btn btn-secondary" @click.prevent="postNewAuction">Add auction</button>
       </form>
 
-      <div v-show="submitted">
+      <div v-show="auctionSubmitted">
           <h3>Your auction has been posted!</h3>
-      </div>
-      <div id="preview">
-          <h3>Preview Auction</h3>
-          <p>Auction title {{ auction.title }}</p>
-          <p>Auction content </p>
-          <p>{{ auction.description }}</p>
-          <p>Auction Categories:</p>
-          <ul>
-              <li v-for="cat in auction.categories" :key="cat">{{ cat }}</li>
-          </ul>
-          <p>Auction ends in: {{ auction.expirationDate }} </p>
       </div>
   </div>
 </template>
 
 <script>
 
-import axios from 'axios';
-//import moment from 'vue-moment';
+//import axios from 'axios';
 
 export default {
     
-    data(){
-    return{
-        auction:{
-            title:"",
-            description: "",
-            categories:[],
-            expirationDate:""
+   data(){
+        return {
+            componentKey: 0,
+            auction:{
+                title:"",
+                description: "",
+                expirationDate:""
+            },
+            endDates: [1, 2, 7, 14, 28],
+            endDate: ""
+
+        }
+    },
+    computed: {
+        picture() {
+            return this.$store.state.picturePath;
         },
-        endDates:[1,2,7,14,28],
-        submitted: false,
-        selectedFile: null,
-        endDate: "",
-        picpath: ""
-       
-    }
+        auctionSubmitted() {
+            return this.$store.state.auctionSubmitted;
+        }
+
     },
     methods:{
-        postAuction: function () {
-            var ref = this;
-            this.calcEndDate();
+        forceRerender() {
+            this.componentKey += 1;
+        },
+        postNewAuction() {
+            var payload = {
+                title: this.auction.title,
+                buyOutPrice: 123,
+                description: this.auction.description,
+                expDate: this.calcEndDate(),
+                picturePath: this.picture
+            }
+            this.$store.dispatch('postNewAuction', payload);
+            this.$store.dispatch('updateListing');
+        },
 
-            
-            axios.post('http://localhost:5000/api/ItemEntity/Item',
-                {
-                    Title: ref.auction.title,
-                    BuyOutPrice: 123,
-                    DescriptionOfItem: ref.auction.description,
-                    ExpirationDate: ref.auction.expirationDate,
-                    Image: ref.picpath
-                })
-            //    .then(function (response) {
-            //    console.log(response);
-            //}).catch(function (error) {
-            //    console.log(error);
-            //});
-            this.submitted = true;
-        },
-        onFileChanged(event) {
-            var ref = this;
-            ref.selectedFile = event.target.files[0];
+        onNewFileSelected(event) {
             var formData = new FormData();
-            formData.append('file', ref.selectedFile, ref.selectedFile.name)
-            axios.post('http://localhost:5000/api/ItemEntity/CreateImage', formData)
-                .then(function (response) {
-                    if (response.status != 200) {
-                        window.console.log(response.status)
-                    }
-                    ref.picpath = response.data;
-                }).catch(function (error) {
-                    window.console.log(error)
-                });
+            var payload = {
+                selectedFile: event.target.files[0],
+                formData: formData
+            }
+            this.$store.dispatch('uploadFile', payload);
         },
-        //onUpload() {
-        //    var ref = this;
-        //    var formData = new FormData();
-        //    formData.append('file', ref.selectedFile, ref.selectedFile.name)
-        //    ref.picpath = axios.post('http://localhost:5000/api/ItemEntity/CreateImage', formData);
-        //    window.console.log(ref.picpath);
-        //},
         calcEndDate() {
             const moment = this.$moment().add(this.endDate, 'days').format();
-            window.console.log(this.endDate);
-            this.auction.expirationDate = moment;
+            return moment;
         },
-    },
+
+        },
+        created() {
+            this.forceRerender();
+        }
 }
 </script>
 
@@ -137,11 +106,7 @@ input[type="text"],textarea{
     padding: 8px;
 }
 
-#preview{
-    padding: 10px 20px;
-    border: 1px dotted #ccc;
-    margin: 30px 0;
-}
+
 
 h3{
     margin-top: 10px;
