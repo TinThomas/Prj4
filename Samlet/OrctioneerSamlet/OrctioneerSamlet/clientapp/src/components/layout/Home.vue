@@ -3,8 +3,6 @@
         <auction-listing :key="updateListingKey">
 
         </auction-listing >
-        <!--{{test}}-->
-
     </div>
 </template>
 
@@ -24,7 +22,8 @@ export default {
         }
     },
     created() {
-        this.$store.dispatch('loadAuctions'); 
+        //this.$store.dispatch('loadAuctions'); 
+        //this.$store.dispatch('updateListing');
     }
 }
 </script>

@@ -1,12 +1,12 @@
 ﻿<template>
     <div id="auctionId">
         <h1>Popular auctions:</h1>
-        <div class="row">
-            <auction-card class="single-auction" v-for="auc in popAuctions.slice(0, 4)" :key="auc.id" :auction="auc"></auction-card>
+        <div class="row" >
+            <auction-card v-for="auc in popAuctions.slice(0, 4)" :key="auc.id" :auction="auc"></auction-card>
         </div>
         <h1>New auctions:</h1>
-        <div class="row" >
-            <auction-card class="single-auction" v-for="auc in newAuctions.slice(0, 4)" :key="auc.id" :auction="auc"></auction-card>
+        <div class="row">
+            <auction-card v-for="auc in newAuctions.slice(0, 4)" :key="auc.id" :auction="auc"></auction-card>
         </div>
         <h1>Expiring auctions:</h1>
         <div class="row">
@@ -21,6 +21,14 @@
         components: {
             'auction-card': AuctionCard
         },
+        methods: {
+            loadListings() {
+                this.$store.dispatch('loadPopAuctions');
+                this.$store.dispatch('loadNewAuctions');
+                this.$store.dispatch('loadExpAuctions');
+                
+            }
+        },
         computed: {
             popAuctions() {
                 return this.$store.state.popAuctions;
@@ -33,11 +41,8 @@
             },
         },
         created() {
-            this.$store.dispatch('loadPopAuctions');
-            this.$store.dispatch('loadNewAuctions');
-            this.$store.dispatch('loadExpAuctions');
+            this.loadListings();
         }
-
     }
 </script>
 

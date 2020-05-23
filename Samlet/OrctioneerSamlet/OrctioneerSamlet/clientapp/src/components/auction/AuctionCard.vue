@@ -32,11 +32,6 @@
             navigateToAuction(path){
                 this.$router.push('/fullAuction/'+path);
             },
-            calcEndDate() {
-                const moment = this.$moment().add(this.endDate, 'days').format();
-                window.console.log(this.endDate);
-                this.auction.expirationDate = moment;
-            },
             checkImage() {
                 if (this.auction.Image == null) {
                     this.url = require("./../../images/missingimage.jpg")
@@ -76,8 +71,8 @@
     }
     img {
         object-fit: cover;
-        width: 180px;
-        height: 180px;
+        width: 184px;
+        height: 184px;
         border: 1px solid white;
     }
 </style>

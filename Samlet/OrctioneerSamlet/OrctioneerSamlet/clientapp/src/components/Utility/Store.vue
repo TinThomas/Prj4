@@ -21,6 +21,7 @@
             currentPictureUrl: "",
             currentBids: [],
             bidSubmitted: false,
+            currentBidTableKey: 0,
             
         },
         getters: {
@@ -115,7 +116,9 @@
             },
             BID_SUCCES(state, result) {
                 state.bidSubmitted = result;
+                state.currentBidTableKey += 1;
             },
+
 
 
         },
@@ -145,6 +148,7 @@
                         return aucB.Bids.length - aucA.Bids.length
                     })
                     commit('SAVE_POP_AUCTIONS', popAuctions);
+                    commit('UPDATE_LISTING');
                 })
             },
             async loadNewAuctions({ commit }) {
@@ -156,6 +160,7 @@
                         return new Date(aucB.DateCreated) - new Date(aucA.DateCreated)
                     })
                     commit('SAVE_NEW_AUCTIONS', newAuctions);
+                    commit('UPDATE_LISTING');
                 })
                 
             },
@@ -168,6 +173,7 @@
                         return new Date(aucA.ExpirationDate) - new Date(aucB.ExpirationDate)
                     })
                     commit('SAVE_EXP_AUCTIONS', expAuctions);
+                    commit('UPDATE_LISTING');
                 })
             },
             updateListing(context) {
@@ -208,6 +214,9 @@
                     }).catch(function (error) {
                         window.console.log(error)
                     });
+            },
+            resetUpload({ commit }) {
+                commit('UPLOAD_SUCCES', false);
             },
 
             //Current auction
@@ -265,8 +274,9 @@
                         window.console.log(error)
                     });
             },
-
-
+            resetBidSubmitted({ commit }) {
+                commit('BID_SUCCES', false);
+            },
         }
     });
 </script>

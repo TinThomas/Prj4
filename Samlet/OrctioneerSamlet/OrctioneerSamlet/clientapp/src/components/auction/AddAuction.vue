@@ -77,6 +77,7 @@ export default {
         },
         created() {
             this.forceRerender();
+            this.$store.dispatch('resetUpload');
         }
 }
 </script>
