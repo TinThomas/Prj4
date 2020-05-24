@@ -22,7 +22,7 @@ namespace VareDatabase
                 Title = "Elven Bow BUY NOW",
                 UserIdSeller = 12,
                 DescriptionOfItem = "Powerful bow that is best at the range of 30-50 meters",
-                Image = "Deluxe_bow.jpg",
+                Image = "~/Deluxe_bow.jpg",
                 Tags = new List<TagEntity>
                 { 
                     new TagEntity
@@ -673,7 +673,7 @@ namespace VareDatabase
                 Title = "Round one handed shield made of wood",
                 UserIdSeller = 50,
                 DescriptionOfItem = "Rounded shield made of wood and edge of metal",
-                Image = "Round_Shield_Tree",
+                Image = "Round_Shield_Tree.jpg",
                 Tags = new List<TagEntity>
                 {
                     new TagEntity
