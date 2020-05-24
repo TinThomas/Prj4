@@ -24,9 +24,6 @@
         methods: {
             loadListings() {
                 this.$store.dispatch('loadAuctions');
-                this.$store.dispatch('loadPopAuctions');
-                this.$store.dispatch('loadNewAuctions');
-                this.$store.dispatch('loadExpAuctions');
             }
         },
         computed: {
@@ -51,7 +48,6 @@
                         return auction.Title.toLowerCase().match(this.searchWord.toLowerCase())
                     })
                 }
-
             },
             auctions() {
                 return this.$store.state.auctions;

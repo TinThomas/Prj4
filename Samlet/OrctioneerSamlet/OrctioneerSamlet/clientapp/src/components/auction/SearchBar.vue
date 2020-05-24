@@ -7,7 +7,7 @@
             </div>
             <div class="col-3">
                 <label>Sort by:</label>
-                <select v-model="sortBy" required id="sortSelector">
+                <select v-model="sortBy" required id="sortSelector" @change="onChange($event)">
                     <option v-for="sort in sortOrders" :key="sort.id">{{sort}}</option>
                 </select>
             </div>
@@ -17,19 +17,22 @@
 
 <script>
 export default {
-    data(){
-        return{
-            //search: '',
-            //sortOrders: [
-            //    "Popularity","Newest", "Expiring"
-            //],
-            //sortBy: ""
-        }
-    },
     methods:{
-        //onChange(event) {
-
-        //}
+        onChange(event) {
+            window.console.log(event.target.value);
+            if (event.target.value == "Popularity") {
+                this.$store.dispatch('loadPopAuctions');
+            }
+            if (event.target.value == "Newest") {
+                this.$store.dispatch('loadNewAuctions');
+            }
+            if (event.target.value == "Popularity") {
+                this.$store.dispatch('loadExpAuctions');
+            }
+            else {
+                this.$store.dispatch('loadAuctions');
+            }
+        }
     },
     computed:{
         searchWord: {
