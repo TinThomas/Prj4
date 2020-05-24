@@ -22,12 +22,7 @@
             'auction-card': AuctionCard
         },
         methods: {
-            loadListings() {
-                this.$store.dispatch('loadPopAuctions');
-                this.$store.dispatch('loadNewAuctions');
-                this.$store.dispatch('loadExpAuctions');
-                
-            }
+            
         },
         computed: {
             popAuctions() {
@@ -41,7 +36,7 @@
             },
         },
         created() {
-            this.loadListings();
+            
         }
     }
 </script>

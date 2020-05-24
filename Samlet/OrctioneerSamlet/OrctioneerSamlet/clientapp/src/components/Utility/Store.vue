@@ -12,7 +12,7 @@
             popAuctions: [],
             newAuctions: [],
             expAuctions: [],
-            updateListings: 0,
+            updateListing: 0,
 
             picturePath: "",
             auctionSubmitted: false,

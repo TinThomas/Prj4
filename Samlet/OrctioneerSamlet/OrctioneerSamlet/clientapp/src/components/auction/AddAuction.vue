@@ -69,7 +69,7 @@ export default {
                 picturePath: this.picture
             }
             this.$store.dispatch('postNewAuction', payload);
-            this.$store.dispatch('updateListing');
+            //this.$store.dispatch('updateListing');
         },
 
         onNewFileSelected(event) {
