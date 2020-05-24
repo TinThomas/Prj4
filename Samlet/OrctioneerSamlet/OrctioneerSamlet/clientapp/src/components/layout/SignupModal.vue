@@ -167,7 +167,10 @@
                 signup.userName = this.Username;
                 signup.password = this.Password;
                 signup.email = this.Email;
-                if (ref.validatePassword() && ref.validateEmail()) {
+                var checkPass = ref.validatePassword();
+                var checkEmail = ref.validateEmail();
+                var comparePass = (this.Password === this.CfmPassword);
+                if (checkPass && checkEmail && comparePass) {
                     window.console.log("Sending");
                     instance.post('/Signup/Create', {
                         Username: signup.userName,
@@ -177,13 +180,13 @@
                         .then(function (response) {
                             if (response.status !== 200) {
                                 if (response.data === "User") {
-                                    this.UsernameValidationMsg = "User already exist";
-                                    this.UsernameInputOk = false;
+                                    ref.UsernameValidationMsg = "User already exist";
+                                    ref.UsernameInputOk = false;
                                     return;
                                 }
                                 else {
-                                    this.EmailValidationMsg = "Email already exist";
-                                    this.EmailInputOk = false;
+                                    ref.EmailValidationMsg = "Email already exist";
+                                    ref.EmailInputOk = false;
                                     return;
                                 }
                             }
@@ -196,7 +199,18 @@
                         });
                 }
                 else {
-                    window.console.log("Something went wrong");
+                    if (!checkPass) {
+                        ref.PasswordValidationMsg = "Password er ikke sikkert";
+                        ref.PasswordInputOk = false;
+                    }
+                    if (!checkEmail) {
+                        ref.EmailValidationMsg = "Ugyldig email addresse";
+                        ref.EmailInputOk = false;
+                    }
+                    if (!comparePass) {
+                        ref.CfmPasswordValidationMsg = "Passwords matcher ikke";
+                        ref.CfmPasswordInputOk = false;
+                    }
                 }
 
             },
@@ -204,16 +218,11 @@
 
                 //https://www.w3resource.com/javascript/form/letters-numbers-field.php for inspiration.
                 //and for regexp: https://en.wikipedia.org/wiki/Regular_expression
-                // var pass = this.Password;
-                /* const isLowercase = () => /[a-z]/?.test();
-                 const isUppercase = () => /[A-Z]/?.test();
-                 const isNumber = () => /[0-9]/?.test();
-                 window.console.log(pass);
-                 window.console.log("is upper" + isUppercase(pass));
-                 window.console.log("is number" + isNumber(pass));
-                 window.console.log("is lower" + isLowercase(pass))*/
-                if (this.Password.length >= 8) {
-                    window.console.log("return true");
+                 var pass = this.Password;
+                 const isLowercase = /[a-z]/.test(pass);
+                 const isUppercase = /[A-Z]/.test(pass);
+                 const isNumber = /[0-9]/.test(pass);
+                if (this.Password.length >= 8 && isLowercase && isUppercase && isNumber) {
                     return true;
                 }
                 else {
@@ -223,7 +232,6 @@
             },
             validateEmail: function () {
                 if (this.Email.includes('@') && this.Email.includes('.')) {
-                    window.console.log("return true");
                     return true;
                 }
                 else {

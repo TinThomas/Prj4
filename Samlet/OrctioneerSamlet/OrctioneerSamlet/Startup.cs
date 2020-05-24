@@ -90,7 +90,7 @@ namespace OrctioneerSamlet
             app.UseRouting();
             app.UseSpaStaticFiles();
             app.UseCors(builder =>
-                builder.WithOrigins("http://localhost:5000","http://localhost:5001","http://192.168.0.102:5000/","http://192.168.0.102:5001/")
+                builder.WithOrigins("http://localhost:5000","http://localhost:5001")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials()

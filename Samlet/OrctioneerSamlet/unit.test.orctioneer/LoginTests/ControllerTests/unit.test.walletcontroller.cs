@@ -128,17 +128,15 @@ namespace unit.test.orctioneer
             
             WalletEntity test = new WalletEntity()
             {
-                Amount = 2000
+                Amount = 6000
             };
             //Act
-            _uut.CreateWallet(test);
-            test.Amount = 6000;
             _uut.addMoney(test);
             var result = await _uut.getBalance();
             var okResult = result as OkObjectResult;
             var content = okResult.Value;
             //Assert
-            Xunit.Assert.Equal(8000,content);
+            Xunit.Assert.Equal(12000,content);
         }
 
         [Fact]

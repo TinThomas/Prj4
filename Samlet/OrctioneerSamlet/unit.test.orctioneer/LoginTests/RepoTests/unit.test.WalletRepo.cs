@@ -127,7 +127,61 @@ namespace unit.test.orctioneer.LoginTests.RepoTests
         [InlineData("f2aac55f-1cba-404e-8a2b-b3e65c438190",10000)]
         public async void unit_test_updateWallet(string name, int amount)
         {
-            
+            //Arrange
+            WalletEntity test = new WalletEntity()
+            {
+                Amount = amount,
+                card = new CardEntity()
+                {
+                    CardId = 1,
+                    CardNumber = 20202020202020,
+                    CVVnumber = 200,
+                    ExpireMonth = 10,
+                    ExpireYear = 24
+                },
+                userID = name
+            };
+            //Act
+            var result = await _uut.updateWallet(test);
+            //Assert
+            //forventer 2 da det er 2 DbSets der skal arbejds på. 
+            Xunit.Assert.Equal(2,result);
+        }
+
+        [Fact]
+        public async void unit_test_updateWallet_checkContent()
+        {
+            //Arrange
+            WalletEntity test = new WalletEntity()
+            {
+                Amount = 2000,
+                card = new CardEntity()
+                {
+                    CardId = 1,
+                    CardNumber = 20202020202020,
+                    CVVnumber = 200,
+                    ExpireMonth = 10,
+                    ExpireYear = 24
+                },
+                userID = "f8ac5f4b-d637-4bc4-acd2-cd940663f3ef"
+            };
+
+            //Act
+            var update = await _uut.updateWallet(test);
+            var result = await _uut.getDetails("f8ac5f4b-d637-4bc4-acd2-cd940663f3ef");
+            //Assert
+            Xunit.Assert.Equal(test.card.CardNumber,result.card.CardNumber);
+        }
+
+        [Fact]
+        public async void unit_test_deleteWallet()
+        {
+            //Arrange
+
+            //Act
+            var wait = await _uut.DeleteCard("f8ac5f4b-d637-4bc4-acd2-cd940663f3ef");
+            //Assert
+            Xunit.Assert.Equal(2,wait);
         }
     }
 }
