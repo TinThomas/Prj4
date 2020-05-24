@@ -25,8 +25,8 @@ export default {
             }
             if (event.target.value == "Newest") {
                 this.$store.dispatch('loadNewAuctions');
-            }
-            if (event.target.value == "Popularity") {
+            } 
+            if (event.target.value == "Expiring") {
                 this.$store.dispatch('loadExpAuctions');
             }
             else {

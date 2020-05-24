@@ -23,7 +23,7 @@
         },
         methods: {
             loadListings() {
-                this.$store.dispatch('loadAuctions');
+                this.$store.dispatch('loadPopAuctions');
             }
         },
         computed: {
