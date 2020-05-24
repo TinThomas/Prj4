@@ -1,51 +1,39 @@
 ﻿<template>
-    <div class="row">
-    <nav class="sidenav">
-        <router-link to="/">
-            <a>placeholder</a>
-        </router-link>
-        <router-link to="/">
-            <a>placeholder</a>
-        </router-link>
-        <router-link to="/">
-            <a>placeholder</a>
-        </router-link>
-    </nav>
-    <main>
+    <div id="uDetail">
         <div>
-            <center><h2 style="padding-left: 5px">-Personlig information-</h2></center>
+            <center><h2>-Personlig information-</h2></center>
         </div>
-        <div class="col" style="padding-left: 50px">
+       <center><div class="col">
         <div class="row">
             <label>Navn: </label>
             <label style="padding-left: 5px">{{Name}}</label>
         </div>
             <div class="row">
-                <label>Email:</label>
+                <label>Email: </label>
                 <label style="padding-left: 5px">{{Email}}</label>
             </div>
             <div>
-                <h2 style="padding-left: 5px">-Fakturerings information-</h2>
+                <h2>-Fakturerings information-</h2>
             </div>
             <div class="row">
-                <label>Addresse:</label>
+                <label>Addresse: </label>
                 <label style="padding-left: 5px">{{Address}}</label>
             </div>
             <div class="row">
-                <label>by:</label>
+                <label>by: </label>
                 <label style="padding-left: 5px">{{City}}</label>
             </div>
             <div class="row">
-                <label>Postnummer</label>
+                <label>Postnummer: </label>
                 <label style="padding-left: 5px">{{Zipcode}}</label>
             </div>
-        </div>
-    </main>
+       </div></center>
     </div>
 </template>
 
 <script>
     import axios from 'axios';
+
     export default {
         data(){
             return{
@@ -78,28 +66,9 @@
 </script>
 
 <style scoped>
-    /*From: https://www.w3schools.com/howto/howto_css_fixed_sidebar.asp*/
-.sidenav{
-    height:100%;
-    width:160px;
-    position: page;
-    z-index:1;
-    top:0;
-    left:0;
-    background-color:#eeeeee;
-    overflow-x:hidden;
-    padding-top:20px;
-}
-.sidenav a{
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size:25px;
-    color: cornflowerblue;
-    display:block;
-}
-    
-    .sidenav a:hover{
-        color: white;
-        background: cornflowerblue;
+    #uDetail{
+        max-width: 800px;
+        min-height: 1000px;
+        margin: 0 auto;
     }
 </style>

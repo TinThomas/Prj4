@@ -10,8 +10,8 @@ namespace OrctioneerSamlet
     {
         public static void seedUsers(UserModelContext user, PassModelContext pass, WalletContext wallet)
         {
-            string id1 = Guid.NewGuid().ToString();
-            string id2 = Guid.NewGuid().ToString();
+            string id1 = "f8ac5f4b-d637-4bc4-acd2-cd940663f3ef";
+            string id2 = "f2aac55f-1cba-404e-8a2b-b3e65c438190";
             var m = user.Users.FirstOrDefault();
             if (m == null)
             {
@@ -60,7 +60,7 @@ namespace OrctioneerSamlet
                 pass.SaveChangesAsync();
                 Console.WriteLine("done seeding");
             }
-
+            
             var w = wallet.Users.FirstOrDefault();
             if (w == null)
             {
@@ -83,6 +83,7 @@ namespace OrctioneerSamlet
                         Amount = 5000,
                         card = new CardEntity()
                         {
+                            CardId = 1,
                             CardNumber = 4230420401,
                             CVVnumber = 511,
                             ExpireYear = 32,
@@ -103,13 +104,14 @@ namespace OrctioneerSamlet
                     },
                     FirstName = "Hans",
                     LastName = "Petersen",
-                    userID = id1,
+                    userID = id2,
                     wallet = new WalletEntity()
                     {
-                        userID = id1,
+                        userID = id2,
                         Amount = 10000,
                         card = new CardEntity()
                         {
+                            CardId = 2,
                             CardNumber = 42324242,
                             CVVnumber = 342,
                             ExpireYear = 22,
@@ -119,8 +121,8 @@ namespace OrctioneerSamlet
 
                 };
                 u.Add(_u);
-                var wait = wallet.AddRangeAsync(_u);
-                wallet.SaveChangesAsync();
+                wallet.Users.AddRange(u);
+                var wait = wallet.SaveChangesAsync();
 
             }
         }

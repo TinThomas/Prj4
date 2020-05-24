@@ -5,14 +5,15 @@ import App from './App.vue';
 import VModal from 'vue-js-modal'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import login from './components/login/Login.vue';
-import signup from './components/login/Signup.vue';
 import ShowAuction from './components/auction/ShowAuction.vue';
 import AddAuction from './components/auction/AddAuction.vue';
 import Home from './components/layout/Home.vue';
 import FullAuction from './components/auction/FullAuction.vue'
 import store from './components/Utility/Store'
 import UserDetail from './components/UserProfile/UserDetails'
+import WalletUpdate from './components/UserProfile/UpdateWallet'
+import WalletCreate from './components/UserProfile/CreateWallet'
+import UserUpdate from './components/UserProfile/UpdateUser'
 
 Vue.use(VueRouter);
 Vue.use(VModal);
@@ -20,13 +21,14 @@ Vue.use(VueMoment);
 Vue.use(VueAxios, axios);
 
 const routes = [
-    { path: '/Login', component: login},
-    { path: '/Signup', component: signup },
-    { path: '/', component: Home },
+    { path: '/', name:'Home',component: Home },
     { path: '/search', component: ShowAuction },
     { path: '/addAuction', component: AddAuction },
     { path: '/fullAuction/:id', component: FullAuction },
-    { path: '/UserDetails', component: UserDetail}
+    { path: '/UserDetails', component: UserDetail},
+    {path: '/Wallet', component: WalletUpdate},
+    {path: '/CreateWallet', component: WalletCreate},
+    {path: '/UpdateUser', component: UserUpdate}
 ];
 
 const router = new VueRouter({
