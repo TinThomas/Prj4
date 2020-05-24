@@ -58,10 +58,8 @@ export default {
 
     },
     created() {
-        //this.$store.dispatch('loadAuctions');
-        //this.$store.dispatch('loadPopAuctions');
-        //this.$store.dispatch('loadNewAuctions');
-        //this.$store.dispatch('loadExpAuctions');
+        this.$store.dispatch('loadPopAuctions');
+        this.$store.dispatch('updateSortBy', "Popularity")
     }
 }
 </script>

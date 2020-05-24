@@ -22,9 +22,9 @@
             }
         },
         methods: {
-            loadListings() {
-                this.$store.dispatch('loadPopAuctions');
-            }
+            //loadListings() {
+            //    this.$store.dispatch('loadPopAuctions');
+            //}
         },
         computed: {
             filterByWord: function () {
@@ -69,7 +69,7 @@
             },
         },
         created() {
-            this.loadListings();
+            
         }
     }
 </script>
