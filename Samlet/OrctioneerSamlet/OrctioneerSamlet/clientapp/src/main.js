@@ -8,9 +8,7 @@ import VueAxios from 'vue-axios'
 import ShowAuction from './components/auction/ShowAuction.vue';
 import AddAuction from './components/auction/AddAuction.vue';
 import Home from './components/layout/Home.vue';
-import ItemAuction from './components/auction/old/Auction.vue';
-import FullAuction from './components/auction/old/FullAuction.vue'
-import FullAuction2 from './components/auction/FullAuction2.vue'
+import FullAuction from './components/auction/FullAuction.vue'
 import store from './components/Utility/Store'
 import UserDetail from './components/UserProfile/UserDetails'
 import WalletUpdate from './components/UserProfile/UpdateWallet'
@@ -26,7 +24,6 @@ const routes = [
     { path: '/', name:'Home',component: Home },
     { path: '/search', component: ShowAuction },
     { path: '/addAuction', component: AddAuction },
-    { path: '/itemAuction', component: ItemAuction },
     { path: '/fullAuction/:id', component: FullAuction },
     { path: '/fullAuction2/:id', component: FullAuction2 },
     { path: '/UserDetails', component: UserDetail},

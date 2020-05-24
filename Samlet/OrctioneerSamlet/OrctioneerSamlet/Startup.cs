@@ -15,8 +15,12 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using VareDatabase;
+using VareDatabase.Controllers;
 using VareDatabase.DBContext;
+using VareDatabase.Interfaces;
+using VareDatabase.Interfaces.Auction;
 using VareDatabase.Repo;
+using VareDatabase.Repo.Auction;
 using VueCliMiddleware;
 
 namespace OrctioneerSamlet
