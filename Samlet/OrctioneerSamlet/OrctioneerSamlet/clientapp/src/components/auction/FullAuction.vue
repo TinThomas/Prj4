@@ -9,16 +9,16 @@
                 <p id="description">{{currentAuction.DescriptionOfItem}}</p>
             </div>
         </div>
-        <topBids-card :id="id" :key="bidTableKey">
-        </topBids-card>
+        <bid-card :id="id" :key="bidTableKey">
+        </bid-card>
     </div>
 </template>
 
 <script>
-    import TopBids from './TopBids.vue'
+    import BidCard from './BidCard.vue'
     export default {
         components: {
-            'topBids-card': TopBids
+            'bid-card': BidCard
         },
         data(){
             return {

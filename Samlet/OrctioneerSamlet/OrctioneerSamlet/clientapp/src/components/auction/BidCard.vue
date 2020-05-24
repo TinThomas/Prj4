@@ -85,9 +85,7 @@
                     </div>
                 </div>
             </div>
-            {{currentBids}}
         </div>
-
     </div>
 </template>
 

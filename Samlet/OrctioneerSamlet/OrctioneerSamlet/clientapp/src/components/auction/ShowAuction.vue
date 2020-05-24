@@ -1,39 +1,25 @@
 <template>
     <div id="show-auctions">
-        <h1>All auctions</h1>
-        <input type="text" v-model="search" placeholder="search auctions">
-        <div class="row">
-            <auction-card v-for="auc in filterByWord" :key="auc.id" :auction="auc"></auction-card>
-        </div>
+        <search-bar></search-bar>     
+        <sorted-auctions :key="updateSortedKey"></sorted-auctions>
     </div>
 </template>
 
 <script>
-    import AuctionCard from './AuctionCard.vue'
+    import SortedAuctions from './SortedAuctionListing.vue'
+    import SearchBar from './SearchBar.vue'
 export default {
      components:{
-        'auction-card': AuctionCard
+        'sorted-auctions': SortedAuctions,
+         'search-bar': SearchBar
     },
-    data(){
-        return{
-            search: '',       
-        }
-    },
-    methods:{
-        
-        },
     computed:{
-        filterByWord: function () {
-            return this.auctions.filter((auction) => {
-                return auction.Title.toLowerCase().match(this.search.toLowerCase())
-            })
-        },
-        auctions() {
-            return this.$store.state.auctions;
+        updateSortedKey() {
+            return this.$store.state.UpdateSortedAuctions;
         }
     },
-    async mounted() {
-            this.$store.dispatch('loadAuctions');
+    created() {
+        this.$store.dispatch('updateSortBy',"Popularity")
     }
 }
 </script>
@@ -43,6 +29,9 @@ export default {
     max-width: 800px;
     min-height: 1000px;
     margin: 0 auto;
+}
+#sortSelector{
+    margin-left: 5px;
 }
 
 </style>

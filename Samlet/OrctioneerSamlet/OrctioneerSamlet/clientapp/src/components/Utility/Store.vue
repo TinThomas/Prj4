@@ -22,6 +22,13 @@
             currentBids: [],
             bidSubmitted: false,
             currentBidTableKey: 0,
+
+            search: '',
+            sortOrders: [
+                "Popularity", "Newest", "Expiring"
+            ],
+            sortBy: "",
+            UpdateSortedAuctions: 0
             
         },
         getters: {
@@ -118,6 +125,19 @@
                 state.bidSubmitted = result;
                 state.currentBidTableKey += 1;
             },
+
+            //Search
+            UPDATE_SEARCH_WORD(state, word) {
+                state.search = word;
+                state.UpdateSortedAuctions += 1;
+            },
+            //UPDATE_SORT_ORDER(state, order) {
+            //    state.sortOrders = order;
+            //},
+            UPDATE_SORT_BY(state, sort) {
+                state.sortBy = sort;
+                state.UpdateSortedAuctions += 1;
+            }
 
 
 
@@ -277,6 +297,17 @@
             resetBidSubmitted({ commit }) {
                 commit('BID_SUCCES', false);
             },
+
+            //Search
+            updateSearchWord({ commit }, word) {
+                commit('UPDATE_SEARCH_WORD', word)
+            },
+            //updateSortOrder({ commit }, order) {
+            //    commit('UPDATE_SORT_ORDER', order)
+            //},
+            updateSortBy({ commit }, sort) {
+                commit('UPDATE_SORT_BY', sort)
+            }
         }
     });
 </script>
