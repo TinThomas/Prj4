@@ -25,7 +25,6 @@ const routes = [
     { path: '/search', component: ShowAuction },
     { path: '/addAuction', component: AddAuction },
     { path: '/fullAuction/:id', component: FullAuction },
-    { path: '/fullAuction2/:id', component: FullAuction2 },
     { path: '/UserDetails', component: UserDetail},
     {path: '/Wallet', component: WalletUpdate},
     {path: '/CreateWallet', component: WalletCreate},
