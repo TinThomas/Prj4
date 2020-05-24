@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Security.Principal;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OrctioneerSamlet.Interfaces.Login;
@@ -19,14 +21,14 @@ namespace OrctioneerSamlet.Controllers
         {
             _wallet = new WalletRepository(db);
         }
-        
+
         [HttpGet("getBalance")]
         public async Task<IActionResult> getBalance()
         {
             var balance = await _wallet.getAmount(User.Identity.Name);
             return Ok(balance);
         }
-        
+
         [HttpGet("getWallet")]
         public async Task<IActionResult> getWallet()
         {
@@ -52,7 +54,19 @@ namespace OrctioneerSamlet.Controllers
             return BadRequest();
         }
 
-        [HttpPost("Update")]
+        [HttpPost("addMoney")]
+        public async Task<IActionResult> addMoney([FromBody]WalletEntity toAdd)
+        {
+            int wait = await _wallet.setAmount(User.Identity.Name, toAdd.Amount);
+            if (wait > 0)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
+        [HttpPost("UpdateWallet")]
         public async Task<IActionResult> UpdateWallet([FromBody] WalletEntity wallet)
         {
             wallet.userID = User.Identity.Name;
@@ -61,7 +75,7 @@ namespace OrctioneerSamlet.Controllers
             {
                 return Ok();
             }
-
+            
             return BadRequest();
         }
 

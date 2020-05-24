@@ -10,14 +10,11 @@ namespace OrctioneerSamlet.Models.Login
         public int id { get; set; }
         [AllowNull]
         public int CardId { get; set; }
-        [AllowNull]
-        public long CardNumber { get; set; }
-        [AllowNull]
-        public int ExpireMonth { get; set; }
-        [AllowNull]
-        public int ExpireYear { get; set; }
-        [AllowNull]
-        public int CVVnumber { get; set; }
-        
+
+        [AllowNull] public long CardNumber { get; set; } = 0;
+        [AllowNull] public int ExpireMonth { get; set; } = 0;
+        [AllowNull] public int ExpireYear { get; set; } = 0;
+        [AllowNull] public int CVVnumber { get; set; } = 0;
+
     }
 }

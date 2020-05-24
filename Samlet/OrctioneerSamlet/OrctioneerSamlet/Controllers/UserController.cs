@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Text.Json;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OrctioneerSamlet.Interfaces.Login;
@@ -58,16 +60,48 @@ namespace OrctioneerSamlet.Controllers
         public async Task<IActionResult> getUsername()
         {
             var user = await _user.getThisUser(User.Identity.Name);
+            if (user != null)
+            {
+                return Ok(user.FirstName);
+            }
 
-            return Ok(user.FirstName);
+            return BadRequest();
         }
 
         [Authorize]
         [HttpPost("UpdateUser")]
         public async Task<IActionResult> updateUser([FromBody] UserEntity user)
         {
+            var myUser = await _user.getThisUser(User.Identity.Name);
+            if (myUser == null)
+            {
+                user.userID = User.Identity.Name;
+                var create = await _user.addUser(user);
+                if (create > 0)
+                {
+                    return Ok();
+                }
+            }
+            else
+            {
+                myUser.FirstName = user.FirstName;
+                myUser.LastName = user.LastName;
+                myUser.Address = user.Address;
+                var wait = await _user.updateUser(myUser);
+                if (wait > 0)
+                {
+                    return Ok();
+                }
+            }
+            return BadRequest();
+        }
+
+        [Authorize]
+        [HttpPost("Create")]
+        public async Task<IActionResult> CreateUser([FromBody] UserEntity user)
+        {
             user.userID = User.Identity.Name;
-            int wait = await _user.updateUser(user);
+            var wait = await _user.addUser(user);
             if (wait > 0)
             {
                 return Ok();

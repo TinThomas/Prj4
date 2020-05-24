@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
@@ -22,7 +23,7 @@ namespace VareDatabase.Repo
             var query = await (from i in db.Passwords
                 where i.UserId == pass.UserId
                 select i).FirstOrDefaultAsync();
-            if (query.Password == pass.Password)
+            if (query != null  && query.Password == pass.Password)
             {
                 return true;
             }
@@ -42,7 +43,7 @@ namespace VareDatabase.Repo
                 where i.UserId == password.UserId
                 select i).FirstOrDefault();
             query.Password = password.Password;
-            db.Passwords.Update(password);
+            db.Passwords.Update(query);
             return await db.SaveChangesAsync();
         }
 

@@ -52,7 +52,7 @@ namespace LoginVue.Controllers
                 }
             }
 
-            return BadRequest();
+            return BadRequest("User");
         }
 
         [HttpPost("Update")]
@@ -90,13 +90,13 @@ namespace LoginVue.Controllers
 
         }
 
-        [HttpPost("Delete")]
+        [HttpDelete]
         public async Task<IActionResult> Delete()
         {
-            int wait = 0;
-            wait = await _user.DeleteUser(User.Identity.Name);
-            wait = await _pass.DeletePassword(User.Identity.Name);
-            if (wait > 0)
+            string id = User.Identity.Name;
+            var deletePassword = await _pass.DeletePassword(id);
+            var deleteUser = await _user.DeleteUser(id);
+            if (deletePassword > 0 && deleteUser > 0)
             {
                 return Ok();
             }
