@@ -3,6 +3,18 @@
         <h1>All auctions</h1>
         <input type="text" v-model="search" placeholder="search auctions">
         <item-auction :auctions="filteredAuctions"></item-auction>
+
+        <select v-model="newBid">
+            <option disabled value="">your bid</option>
+            <option>{{currentBid + 50}}</option>
+            <option>{{currentBid + 100}}</option>
+            <option>{{currentBid + 150}}</option>
+            <option>{{currentBid + 200}}</option>
+            <option>{{currentBid + 250}}</option>
+            <option>{{currentBid + 300}}</option>
+        </select>
+        <span>Selected: {{ newBid }}</span>
+
     </div>
 </template>
 
@@ -21,18 +33,22 @@ export default {
             {title: 'Faktisk økse', url: require('./../images/Faktisk_økse.jpg'), bid: 1234, timeLeft: "3 day"},
             {title: 'Én pil', url: require('./../images/En_pil.jpg'), bid: 1234, timeLeft: "4 day"},
             ],
-            search: ''
+            search: '',
+            currentBid: 50,
+            newBid: 0,
+            
         }
     },
     methods:{
         
         },
-        computed:{
-            filteredAuctions: function(){
-                return this.auctions.filter((auction)=>{
-                   return auction.title.toLowerCase().match(this.search.toLowerCase()) 
-                })
-            },
+
+    computed:{
+        filteredAuctions: function(){
+            return this.auctions.filter((auction)=>{
+                return auction.title.toLowerCase().match(this.search.toLowerCase()) 
+            })
+        },
             
     }
 }

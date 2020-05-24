@@ -25,11 +25,10 @@ namespace VareDatabase.Controllers
 
         private JsonSerializerSettings serializerSettings = new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects };
 
-        public ItemEntityController(AuctionUnitOfWork uow)
+        public ItemEntityController()
         {
-            unitOfWork = uow;
-            uow = new AuctionUnitOfWork();
-            _dbLogic = uow.ItemRepository;
+            unitOfWork = new AuctionUnitOfWork();
+            _dbLogic = unitOfWork.ItemRepository;
         }
 
         [HttpGet]
