@@ -6,12 +6,23 @@
           <input type="text" v-model.lazy="auction.title" required />
           <label>Auction Description</label>
           <textarea v-model.lazy="auction.description"></textarea>
-          <input type="file" @change="onNewFileSelected" />
-          <label>End date:</label>
-          <select v-model="endDate" required>
-              <option v-for="day in endDates" :key="day">{{day}}</option>
-          </select>
-          <button class="btn btn-secondary" @click.prevent="postNewAuction">Add auction</button>
+          <div class="row" id="fileSection">
+              <div class="col">
+                  <input type="file" @change="onNewFileSelected" />
+              </div>
+              <div class="col">
+                  <p>
+                      End in:
+                      <select v-model="endDate" required>
+                          <option v-for="day in endDates" :key="day">{{day}}</option>
+                      </select>
+                      days
+                  </p>
+              </div>
+              <div class="col">
+                  <button class="btn btn-secondary" @click.prevent="postNewAuction">Add auction</button>
+              </div>
+          </div>
       </form>
 
       <div v-show="auctionSubmitted">
@@ -117,5 +128,8 @@ h3{
 
 #cat-checkbox label{
     display: inline-block;
+}
+#fileSection{
+    margin-top: 20px;
 }
 </style>
