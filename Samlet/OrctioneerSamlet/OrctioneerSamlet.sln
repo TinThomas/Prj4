@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrctioneerSamlet", "OrctioneerSamlet\OrctioneerSamlet.csproj", "{3E7351A6-6EE2-4039-8AC7-6FA47019D449}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "unit.test.orctioneer", "unit.test.orctioneer\unit.test.orctioneer.csproj", "{74F2EB33-BA85-4123-BE8E-049172EA9C28}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3E7351A6-6EE2-4039-8AC7-6FA47019D449}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E7351A6-6EE2-4039-8AC7-6FA47019D449}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E7351A6-6EE2-4039-8AC7-6FA47019D449}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74F2EB33-BA85-4123-BE8E-049172EA9C28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74F2EB33-BA85-4123-BE8E-049172EA9C28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74F2EB33-BA85-4123-BE8E-049172EA9C28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74F2EB33-BA85-4123-BE8E-049172EA9C28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

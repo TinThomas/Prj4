@@ -1,6 +1,6 @@
 ﻿<template>
     <div>
-        <p>Balance {{amount}}</p>
+        <p>Balance: {{amount}} Gold</p>
     </div>
 </template>
 

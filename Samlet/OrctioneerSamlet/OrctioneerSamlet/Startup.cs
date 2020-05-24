@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -80,13 +82,14 @@ namespace OrctioneerSamlet
                 app.UseDeveloperExceptionPage();
             }
 
+
             app.UseRouting();
             app.UseSpaStaticFiles();
-
             app.UseCors(builder =>
-                builder.AllowAnyOrigin()
+                builder.WithOrigins("http://localhost:5000","http://localhost:5001")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
+                    .AllowCredentials()
             );
 
             app.UseAuthentication();

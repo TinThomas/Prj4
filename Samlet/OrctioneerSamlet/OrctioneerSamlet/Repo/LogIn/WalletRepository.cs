@@ -38,8 +38,15 @@ namespace VareDatabase.Repo
         public async Task<WalletEntity> getDetails(string id)
         {
             return await (from i in db.Wallets
+                join c in db.Cards on i.card.id equals c.id
                 where i.userID == id
-                select i).FirstOrDefaultAsync();
+                select new WalletEntity()
+                {
+                    Amount = i.Amount,
+                    card = c,
+                    id = i.id,
+                    userID = i.userID
+                }).FirstOrDefaultAsync();
         }
 
         public async Task<int> addWallet(WalletEntity wallet)
@@ -53,6 +60,10 @@ namespace VareDatabase.Repo
             var query = (from i in db.Wallets
                 where i.userID == wallet.userID
                 select i).FirstOrDefault();
+            if (query == null)
+            {
+                return 0;
+            }
             query.card = wallet.card;
             query.Amount = query.Amount;
             db.Update(query);
@@ -63,11 +74,20 @@ namespace VareDatabase.Repo
         public async Task<int> DeleteCard(string id)
         {
             var query = (from i in db.Wallets
+                join c in db.Cards on i.card.id equals c.id
                 where i.userID == id
-                select i).FirstOrDefault();
+                select new WalletEntity()
+                {
+                    Amount = i.Amount,
+                    card = c,
+                    id = i.id,
+                    userID = i.userID
+                }).FirstOrDefault();
             if (query != null)
             {
                 db.Remove(query);
+                query.card = null;
+                db.Add(query);
             }
             return await db.SaveChangesAsync();
         }

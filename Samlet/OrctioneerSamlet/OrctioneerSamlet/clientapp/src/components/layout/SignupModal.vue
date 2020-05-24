@@ -85,6 +85,9 @@
                                 v-on:click="sendApplication"
                                 :disabled="sendDisabled">Signup</button>
                     </div>
+                    <div>
+                        <center><span style="display: inline-block; background: springgreen">{{succes}}</span></center>
+                    </div>
                 </div>
             </div>
         </modal>
@@ -111,7 +114,8 @@
                 PasswordValidationMsg: '',
                 CfmPassword: '',
                 CfmPasswordInputOk: false,
-                CfmPasswordValidationMsg: ''
+                CfmPasswordValidationMsg: '',
+                succes: ''
             }
         },
         watch: {
@@ -175,15 +179,15 @@
                                 if (response.data === "User") {
                                     this.UsernameValidationMsg = "User already exist";
                                     this.UsernameInputOk = false;
+                                    return;
                                 }
                                 else {
                                     this.EmailValidationMsg = "Email already exist";
                                     this.EmailInputOk = false;
+                                    return;
                                 }
-
-                                return;
                             }
-
+                            ref.succes = "Kontoen er oprettet";
                         })
                         .catch(function (err) {
                             var message = 'Fetch Error: ' + err;

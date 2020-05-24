@@ -9,13 +9,10 @@ namespace OrctioneerSamlet.Models.Login
         [Key]
         public int id { get; set; }
 
-        public string userID { get; set; }
-        [AllowNull]
-        public string FirstName { get; set; }
-        [AllowNull]
-        public string LastName { get; set; }
-        [AllowNull]
-        public AddressEntity Address { get; set; }
+        public string userID { get; set; } = "";
+        [AllowNull] public string FirstName { get; set; } = "";
+        [AllowNull] public string LastName { get; set; } = "";
+        [AllowNull] public AddressEntity Address { get; set; }
         [AllowNull]
         public WalletEntity wallet { get; set; }
         
