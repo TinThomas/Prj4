@@ -18,9 +18,10 @@ export default {
         },
     methods: {
         loadListings() {
-            this.$store.dispatch('loadPopAuctions');
-            this.$store.dispatch('loadNewAuctions');
-            this.$store.dispatch('loadExpAuctions');
+            this.$store.dispatch('loadAuctions');
+            //this.$store.dispatch('loadPopAuctions');
+            //this.$store.dispatch('loadNewAuctions');
+            //this.$store.dispatch('loadExpAuctions');
 
         }
     },

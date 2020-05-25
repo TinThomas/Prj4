@@ -53,13 +53,13 @@
                 return this.$store.state.auctions;
             },
             popAuctions() {
-                return this.$store.state.popAuctions;
+                return this.$store.getters.getPopularAuctions(20);
             },
             newAuctions() {
-                return this.$store.state.newAuctions;
+                return this.$store.getters.getNewAuctions(20);
             },
             expAuctions() {
-                return this.$store.state.expAuctions;
+                return this.$store.getters.getExpAuctions(20);
             },
             searchWord() {
                 return this.$store.state.search;

@@ -19,7 +19,7 @@ export default {
         }
     },
     created() {
-        
+        this.$store.dispatch('loadAuctions');
     }
 }
 </script>
