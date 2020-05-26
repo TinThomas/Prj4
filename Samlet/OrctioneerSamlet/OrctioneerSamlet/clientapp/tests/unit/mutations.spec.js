@@ -1,5 +1,5 @@
-import {  createLocalVue } from '@vue/test-utils'
-import Vuex from 'vuex'
+//import {  createLocalVue } from '@vue/test-utils'
+//import Vuex from 'vuex'
 import mutations from './../../src/components/Utility/mutations'
 import mockData from './mockData'
 
@@ -10,8 +10,8 @@ import mockData from './mockData'
 //    actions: mockActions
 //})
 
-const localVue = createLocalVue();
-localVue.use(Vuex);
+//const localVue = createLocalVue();
+//localVue.use(Vuex);
 
 //Action lists
 test('correctly save Auctions', () => {
@@ -20,7 +20,7 @@ test('correctly save Auctions', () => {
     }
     //Assign mock data
     const auctions = mockData.AUCTIONS;
-    //Call with state object and payload
+    //Act: Call with state object and payload
     mutations.SAVE_AUCTIONS(state, auctions)
     //Assert state value updated
     expect(state.auctions).toBe(auctions)

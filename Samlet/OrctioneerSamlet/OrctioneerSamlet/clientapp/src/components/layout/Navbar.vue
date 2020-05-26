@@ -5,10 +5,10 @@
                 <router-link to="/">
                     <button type="button" class="btn btn-secondary">Home</button>
                 </router-link>
-                <router-link to="/search">
+                <router-link to="/Search">
                     <Button type="button" class="btn btn-secondary">Search</Button>
                 </router-link>
-                <router-link to="/addAuction">
+                <router-link to="/AddAuction">
                     <Button type="button" class="btn btn-secondary">New Auction</Button>
                 </router-link>
             </div>

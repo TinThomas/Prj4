@@ -6,8 +6,8 @@
 </template>
 
 <script>
-    import SortedAuctions from './SortedAuctionListing.vue'
-    import SearchBar from './SearchBar.vue'
+    import SortedAuctions from './../auction/SortedAuctionListing.vue'
+    import SearchBar from './../auction/SearchBar.vue'
 export default {
      components:{
         'sorted-auctions': SortedAuctions,

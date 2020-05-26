@@ -5,7 +5,7 @@ import App from './App.vue';
 import VModal from 'vue-js-modal'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import ShowAuction from './components/auction/ShowAuction.vue';
+import SearchAuctions from './components/layout/SearchAuctions.vue';
 import AddAuction from './components/auction/AddAuction.vue';
 import Home from './components/layout/Home.vue';
 import FullAuction from './components/auction/FullAuction.vue'
@@ -22,9 +22,9 @@ Vue.use(VueAxios, axios);
 
 const routes = [
     { path: '/', name:'Home',component: Home },
-    { path: '/search', component: ShowAuction },
-    { path: '/addAuction', component: AddAuction },
-    { path: '/fullAuction/:id', component: FullAuction },
+    { path: '/Search', component: SearchAuctions },
+    { path: '/AddAuction', component: AddAuction },
+    { path: '/FullAuction/:id', component: FullAuction },
     { path: '/UserDetails', component: UserDetail},
     {path: '/Wallet', component: WalletUpdate},
     {path: '/CreateWallet', component: WalletCreate},
