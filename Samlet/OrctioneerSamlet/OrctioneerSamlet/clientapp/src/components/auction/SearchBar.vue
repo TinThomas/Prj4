@@ -20,18 +20,7 @@ export default {
     methods:{
         onChange(event) {
             window.console.log(event.target.value);
-            if (event.target.value == "Popularity") {
-                this.$store.dispatch('loadPopAuctions');
-            }
-            if (event.target.value == "Newest") {
-                this.$store.dispatch('loadNewAuctions');
-            } 
-            if (event.target.value == "Expiring") {
-                this.$store.dispatch('loadExpAuctions');
-            }
-            else {
-                this.$store.dispatch('loadAuctions');
-            }
+            this.$store.dispatch('loadAuctions');
         }
     },
     computed:{
@@ -58,7 +47,6 @@ export default {
 
     },
     created() {
-        this.$store.dispatch('loadPopAuctions');
         this.$store.dispatch('updateSortBy', "Popularity")
     }
 }

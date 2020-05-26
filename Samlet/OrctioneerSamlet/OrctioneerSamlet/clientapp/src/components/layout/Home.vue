@@ -1,8 +1,8 @@
 <template>
     <div id="home">   
         <auction-listing :key="updateListingKey">
-
-        </auction-listing >
+            <!---->
+        </auction-listing>
     </div>
 </template>
 
@@ -15,6 +15,15 @@ export default {
 
         'auction-listing': AuctionListing,
 
+        },
+    methods: {
+        loadListings() {
+            this.$store.dispatch('loadAuctions');
+            //this.$store.dispatch('loadPopAuctions');
+            //this.$store.dispatch('loadNewAuctions');
+            //this.$store.dispatch('loadExpAuctions');
+
+        }
     },
     computed: {
         updateListingKey() {
@@ -24,6 +33,7 @@ export default {
     created() {
         //this.$store.dispatch('loadAuctions'); 
         //this.$store.dispatch('updateListing');
+        this.loadListings();
     }
 }
 </script>
