@@ -8,7 +8,7 @@
           <textarea v-model.lazy="auction.description"></textarea>
           <div class="row" id="fileSection">
               <div class="col">
-                  <input type="file" @change="onNewFileSelected" />
+                  <input type="file" @change="onNewFileSelected" required/>
               </div>
               <div class="col">
                   <p>
@@ -69,7 +69,6 @@ export default {
                 picturePath: this.picture
             }
             this.$store.dispatch('postNewAuction', payload);
-            this.$store.dispatch('updateListing');
         },
 
         onNewFileSelected(event) {

@@ -123,7 +123,6 @@
                 itemId: this.id
             }
             this.$store.dispatch('postNewBid', payload)
-            //this.forceRerenderBids();
         }
         },
         computed: {

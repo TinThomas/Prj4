@@ -30,7 +30,7 @@
 
         methods: {
             navigateToAuction(path){
-                this.$router.push('/fullAuction/'+path);
+                this.$router.push('/FullAuction/'+path);
             },
             checkImage() {
                 if (this.auction.Image == null) {

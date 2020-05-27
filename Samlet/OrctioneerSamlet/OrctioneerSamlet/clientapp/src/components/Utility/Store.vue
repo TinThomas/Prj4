@@ -1,7 +1,12 @@
 ﻿<script>
     import Vue from "vue";
     import Vuex from "vuex";
-    import axios from 'axios';
+    
+
+    import getters from './getters'
+    import mutations from './mutations'
+    import actions from './actions'
+    
     
     Vue.use(Vuex);
     export default new Vuex.Store({
@@ -9,10 +14,10 @@
             logged: false,
 
             auctions: [],
-            popAuctions: [],
-            newAuctions: [],
-            expAuctions: [],
-            updateListings: 0,
+            //popAuctions: [],
+            //newAuctions: [],
+            //expAuctions: [],
+            updateListing: 0,
 
             picturePath: "",
             auctionSubmitted: false,
@@ -31,283 +36,285 @@
             UpdateSortedAuctions: 0
             
         },
-        getters: {
-            getAuctionById: (state) => (id) => {
-                return state.auctions.find(auction => auction.ItemId === id)
-            },
-            getPopularAuctions: (state) => {
-                var auctions = state.auctions;
-                if (auctions != null) {
-                    return auctions.sort(function (aucA, aucB) {
-                        return aucB.Bids.length - aucA.Bids.length
-                    })
-                }
-                else {
-                    return "error";
-                }
-            },
-            getNewAuctions: (state) => {
-                var auctions = state.auctions.slice();
-                if (auctions != null) {
-                    return auctions.sort(function (aucA, aucB) {
-                        return new Date(aucB.DateCreated) - new Date(aucA.DateCreated)
-                    })
-                }
-            },
-            getExpAuctions: (state) => {
-                var auctions = state.auctions.slice();
-                if (auctions != null) {
-                    return auctions.sort(function (aucA, aucB) {
-                        return new Date(aucA.ExpirationDate) - new Date(aucB.ExpirationDate)
-                    })
-                }
-            },
-            getHighestBid: () => (bids) => {
-                if (Array.isArray(bids) && bids.length) {
-                    bids.sort(function (bidA, bidB) {
-                        return bidB.Bid - bidA.Bid
-                    })
-                    return bids[0].Bid + " Gold";
-                }
-                else {
-                    return "No bids";
-                }
-            },
-            getCurrentHighestBid: (state) => {
-                if (Array.isArray(state.currentBids) && state.currentBids.length) {
-                    return state.currentBids[0].Bid + " Gold";
-                }
-                else {
-                    return "No bids";
-                }
-            }
-        },
-        mutations:{
-            login: state => state.logged = true,
-            logout: state => state.logged = false,
+        getters,
+        mutations,
+        actions,
+        //getters: {
+        //    getAuctionById: (state) => (id) => {
+        //        return state.auctions.find(auction => auction.ItemId === id)
+        //    },
+        //    getPopularAuctions: (state) => {
+        //        var auctions = state.auctions;
+        //        if (auctions != null) {
+        //            return auctions.sort(function (aucA, aucB) {
+        //                return aucB.Bids.length - aucA.Bids.length
+        //            })
+        //        }
+        //        else {
+        //            return "error";
+        //        }
+        //    },
+        //    getNewAuctions: (state) => {
+        //        var auctions = state.auctions.slice();
+        //        if (auctions != null) {
+        //            return auctions.sort(function (aucA, aucB) {
+        //                return new Date(aucB.DateCreated) - new Date(aucA.DateCreated)
+        //            })
+        //        }
+        //    },
+        //    getExpAuctions: (state) => {
+        //        var auctions = state.auctions.slice();
+        //        if (auctions != null) {
+        //            return auctions.sort(function (aucA, aucB) {
+        //                return new Date(aucA.ExpirationDate) - new Date(aucB.ExpirationDate)
+        //            })
+        //        }
+        //    },
+        //    getHighestBid: () => (bids) => {
+        //        if (Array.isArray(bids) && bids.length) {
+        //            bids.sort(function (bidA, bidB) {
+        //                return bidB.Bid - bidA.Bid
+        //            })
+        //            return bids[0].Bid + " Gold";
+        //        }
+        //        else {
+        //            return "No bids";
+        //        }
+        //    },
+        //    getCurrentHighestBid: (state) => {
+        //        if (Array.isArray(state.currentBids) && state.currentBids.length) {
+        //            return state.currentBids[0].Bid + " Gold";
+        //        }
+        //        else {
+        //            return "No bids";
+        //        }
+        //    }
+        //},
 
-            //Auctions lists
-            SAVE_AUCTIONS(state, auctions) {
-                state.auctions = auctions;
-            },
-            SAVE_POP_AUCTIONS(state, auctions) {
-                state.popAuctions = auctions;
-            },
-            SAVE_NEW_AUCTIONS(state, auctions) {
-                state.newAuctions = auctions;
-            },
-            SAVE_EXP_AUCTIONS(state, auctions) {
-                state.expAuctions = auctions;
-            },
-            UPDATE_LISTING(state) {
-                state.updateListing += 1;
-            },
+        //mutations:{
+        //    login: state => state.logged = true,
+        //    logout: state => state.logged = false,
 
-            //Add Auction
-            SAVE_NEW_PICTURE(state, picture) {
-                state.picturePath = picture;
-            },
-            UPLOAD_SUCCES(state, result) {
-                state.auctionSubmitted = result;
-            },
+        //    //Auctions lists
+        //    SAVE_AUCTIONS(state, auctions) {
+        //        state.auctions = auctions;
+        //    },
+        //    SAVE_POP_AUCTIONS(state, auctions) {
+        //        state.popAuctions = auctions;
+        //    },
+        //    SAVE_NEW_AUCTIONS(state, auctions) {
+        //        state.newAuctions = auctions;
+        //    },
+        //    SAVE_EXP_AUCTIONS(state, auctions) {
+        //        state.expAuctions = auctions;
+        //    },
+        //    UPDATE_LISTING(state) {
+        //        state.updateListing += 1;
+        //    },
 
-            // Current auction
-            SAVE_CURRENT_AUCTION(state, auction) {
-                state.currentAuction = auction;
-            },
-            SAVE_CURRENT_PICTURE_URL(state, url) {
-                state.currentPictureUrl = url;
-            },
-            SAVE_CURRENT_BIDS(state, bids) {
-                state.currentBids = bids;
-            },
-            BID_SUCCES(state, result) {
-                state.bidSubmitted = result;
-                state.currentBidTableKey += 1;
-            },
+        //    //Add Auction
+        //    SAVE_NEW_PICTURE(state, picture) {
+        //        state.picturePath = picture;
+        //    },
+        //    UPLOAD_SUCCES(state, result) {
+        //        state.auctionSubmitted = result;
+        //    },
 
-            //Search
-            UPDATE_SEARCH_WORD(state, word) {
-                state.search = word;
-                state.UpdateSortedAuctions += 1;
-            },
-            //UPDATE_SORT_ORDER(state, order) {
-            //    state.sortOrders = order;
-            //},
-            UPDATE_SORT_BY(state, sort) {
-                state.sortBy = sort;
-                state.UpdateSortedAuctions += 1;
-            }
+        //    // Current auction
+        //    SAVE_CURRENT_AUCTION(state, auction) {
+        //        state.currentAuction = auction;
+        //    },
+        //    SAVE_CURRENT_PICTURE_URL(state, url) {
+        //        state.currentPictureUrl = url;
+        //    },
+        //    SAVE_CURRENT_BIDS(state, bids) {
+        //        state.currentBids = bids;
+        //    },
+        //    BID_SUCCES(state, result) {
+        //        state.bidSubmitted = result;
+        //        state.currentBidTableKey += 1;
+        //    },
 
+        //    //Search
+        //    UPDATE_SEARCH_WORD(state, word) {
+        //        state.search = word;
+        //        state.UpdateSortedAuctions += 1;
+        //    },
+        //    //UPDATE_SORT_ORDER(state, order) {
+        //    //    state.sortOrders = order;
+        //    //},
+        //    UPDATE_SORT_BY(state, sort) {
+        //        state.sortBy = sort;
+        //        state.UpdateSortedAuctions += 1;
+        //    }
 
+        //},
+        //actions:{
+        //    login (context){
+        //        context.commit('login');
+        //    },
+        //    logout (context){
+        //        context.commit('logout');
+        //    },
 
-        },
-        actions:{
-            login (context){
-                context.commit('login');
-            },
-            logout (context){
-                context.commit('logout');
-            },
-
-            //Auction lists
-            async loadAuctions({ commit }) {
-                await axios.get('http://localhost:5000/api/ItemEntity/item').then(function (response) {
-                    if (response.status != 200) {
-                        window.console.log(response.status)
-                    }
-                    commit('SAVE_AUCTIONS', response.data);
-                })
-            },
-            async loadPopAuctions({ commit }) {
-                await axios.get('http://localhost:5000/api/ItemEntity/item/pop').then(function (response) {
-                    if (response.status != 200) {
-                        window.console.log(response.status)
-                    }
-                    var popAuctions = response.data.sort(function (aucA, aucB) {
-                        return aucB.Bids.length - aucA.Bids.length
-                    })
-                    commit('SAVE_POP_AUCTIONS', popAuctions);
-                    commit('UPDATE_LISTING');
-                })
-            },
-            async loadNewAuctions({ commit }) {
-                await axios.get('http://localhost:5000/api/ItemEntity/item/').then(function (response) {
-                    if (response.status != 200) {
-                        window.console.log(response.status)
-                    }
-                    var newAuctions = response.data.sort(function (aucA, aucB) {
-                        return new Date(aucB.DateCreated) - new Date(aucA.DateCreated)
-                    })
-                    commit('SAVE_NEW_AUCTIONS', newAuctions);
-                    commit('UPDATE_LISTING');
-                })
+        //    //Auction lists
+        //    async loadAuctions({ commit }) {
+        //        await axios.get('http://localhost:5000/api/ItemEntity/item').then(function (response) {
+        //            if (response.status != 200) {
+        //                window.console.log(response.status)
+        //            }
+        //            commit('SAVE_AUCTIONS', response.data);
+        //        })
+        //    },
+        //    async loadPopAuctions({ commit }) {
+        //        await axios.get('http://localhost:5000/api/ItemEntity/item/pop').then(function (response) {
+        //            if (response.status != 200) {
+        //                window.console.log(response.status)
+        //            }
+        //            var popAuctions = response.data.sort(function (aucA, aucB) {
+        //                return aucB.Bids.length - aucA.Bids.length
+        //            })
+        //            commit('SAVE_POP_AUCTIONS', popAuctions);
+        //            commit('UPDATE_LISTING');
+        //        })
+        //    },
+        //    async loadNewAuctions({ commit }) {
+        //        await axios.get('http://localhost:5000/api/ItemEntity/item/').then(function (response) {
+        //            if (response.status != 200) {
+        //                window.console.log(response.status)
+        //            }
+        //            var newAuctions = response.data.sort(function (aucA, aucB) {
+        //                return new Date(aucB.DateCreated) - new Date(aucA.DateCreated)
+        //            })
+        //            commit('SAVE_NEW_AUCTIONS', newAuctions);
+        //            commit('UPDATE_LISTING');
+        //        })
                 
-            },
-            async loadExpAuctions({ commit }) {
-                await axios.get('http://localhost:5000/api/ItemEntity/item/').then(function (response) {
-                    if (response.status != 200) {
-                        window.console.log(response.status)
-                    }
-                    var expAuctions = response.data.sort(function (aucA, aucB) {
-                        return new Date(aucA.ExpirationDate) - new Date(aucB.ExpirationDate)
-                    })
-                    commit('SAVE_EXP_AUCTIONS', expAuctions);
-                    commit('UPDATE_LISTING');
-                })
-            },
-            updateListing(context) {
-                context.commit('UPDATE_LISTING');
-            },
+        //    },
+        //    async loadExpAuctions({ commit }) {
+        //        await axios.get('http://localhost:5000/api/ItemEntity/item/').then(function (response) {
+        //            if (response.status != 200) {
+        //                window.console.log(response.status)
+        //            }
+        //            var expAuctions = response.data.sort(function (aucA, aucB) {
+        //                return new Date(aucA.ExpirationDate) - new Date(aucB.ExpirationDate)
+        //            })
+        //            commit('SAVE_EXP_AUCTIONS', expAuctions);
+        //            commit('UPDATE_LISTING');
+        //        })
+        //    },
+        //    updateListing(context) {
+        //        context.commit('UPDATE_LISTING');
+        //    },
 
-            //Add auction
-            async uploadFile({ commit }, payload) {
-                payload.formData.append('file', payload.selectedFile, payload.selectedFile.name)
-                await axios.post('http://localhost:5000/api/ItemEntity/CreateImage', payload.formData)
-                    .then(function (response) {
-                        if (response.status != 200) {
-                            window.console.log(response.status)
-                        }
+        //    //Add auction
+        //    async uploadFile({ commit }, payload) {
+        //        payload.formData.append('file', payload.selectedFile, payload.selectedFile.name)
+        //        await axios.post('http://localhost:5000/api/ItemEntity/CreateImage', payload.formData)
+        //            .then(function (response) {
+        //                if (response.status != 200) {
+        //                    window.console.log(response.status)
+        //                }
 
-                        commit('SAVE_NEW_PICTURE', response.data)
+        //                commit('SAVE_NEW_PICTURE', response.data)
 
-                    }).catch(function (error) {
-                        window.console.log(error)
-                    });
-            },
-            async postNewAuction({ commit }, {title, buyOutPrice, description, expDate, picturePath }) {
-                await axios.post('http://localhost:5000/api/ItemEntity/Item',
-                    {
-                        Title: title,
-                        BuyOutPrice: buyOutPrice,
-                        DescriptionOfItem: description,
-                        ExpirationDate: expDate,
-                        Image: picturePath
-                    }).then(function (response) {
-                        if (response.status != 200) {
-                            window.console.log(response.status)
-                            commit('UPLOAD_SUCCES', false)
-                        }
-                        else {
-                            commit('UPLOAD_SUCCES', true)
-                        } 
-                    }).catch(function (error) {
-                        window.console.log(error)
-                    });
-            },
-            resetUpload({ commit }) {
-                commit('UPLOAD_SUCCES', false);
-            },
+        //            }).catch(function (error) {
+        //                window.console.log(error)
+        //            });
+        //    },
+        //    async postNewAuction({ commit }, {title, buyOutPrice, description, expDate, picturePath }) {
+        //        await axios.post('http://localhost:5000/api/ItemEntity/Item',
+        //            {
+        //                Title: title,
+        //                BuyOutPrice: buyOutPrice,
+        //                DescriptionOfItem: description,
+        //                ExpirationDate: expDate,
+        //                Image: picturePath
+        //            }).then(function (response) {
+        //                if (response.status != 200) {
+        //                    window.console.log(response.status)
+        //                    commit('UPLOAD_SUCCES', false)
+        //                }
+        //                else {
+        //                    commit('UPLOAD_SUCCES', true)
+        //                } 
+        //            }).catch(function (error) {
+        //                window.console.log(error)
+        //            });
+        //    },
+        //    resetUpload({ commit }) {
+        //        commit('UPLOAD_SUCCES', false);
+        //    },
 
-            //Current auction
-            async loadCurrentAuction({ commit }, payload) {
-                await axios.get('http://localhost:5000/api/ItemEntity/item/' + payload.id).then(function (response) {
-                    if (response.status != 200) {
-                        window.console.log(response.status)
-                    }
+        //    //Current auction
+        //    async loadCurrentAuction({ commit }, payload) {
+        //        await axios.get('http://localhost:5000/api/ItemEntity/item/' + payload.id).then(function (response) {
+        //            if (response.status != 200) {
+        //                window.console.log(response.status)
+        //            }
                   
-                    commit('SAVE_CURRENT_AUCTION', response.data);
+        //            commit('SAVE_CURRENT_AUCTION', response.data);
                    
 
-                    if (response.data.Image == null) {
-                        commit('SAVE_CURRENT_PICTURE_URL', require("./../../images/missingimage.jpg"));
-                    }
-                    else {
-                        commit('SAVE_CURRENT_PICTURE_URL', require("./../../images/" + response.data.Image));
-                    }
-                })
-            },
+        //            if (response.data.Image == null) {
+        //                commit('SAVE_CURRENT_PICTURE_URL', require("./../../images/missingimage.jpg"));
+        //            }
+        //            else {
+        //                commit('SAVE_CURRENT_PICTURE_URL', require("./../../images/" + response.data.Image));
+        //            }
+        //        })
+        //    },
 
-            async loadCurrentBids({ commit }, payload) {
-                await axios.get('http://localhost:5000/api/BidEntities/GetBidsFromItem/' + payload.id).then(function (response) {
-                    if (response.status != 200) {
-                        window.console.log(response.status)
-                    }
-                    var bids = response.data;
-                    if (Array.isArray(bids) && bids.length) {
-                        bids.sort(function (bidA, bidB) {
-                            return bidB.Bid - bidA.Bid
-                        })
-                    }
-                    else {
-                        bids = [{Bid: 0}]
-                    }
-                    commit('SAVE_CURRENT_BIDS', bids);
-                })
-            },
+        //    async loadCurrentBids({ commit }, payload) {
+        //        await axios.get('http://localhost:5000/api/BidEntities/GetBidsFromItem/' + payload.id).then(function (response) {
+        //            if (response.status != 200) {
+        //                window.console.log(response.status)
+        //            }
+        //            var bids = response.data;
+        //            if (Array.isArray(bids) && bids.length) {
+        //                bids.sort(function (bidA, bidB) {
+        //                    return bidB.Bid - bidA.Bid
+        //                })
+        //            }
+        //            else {
+        //                bids = [{Bid: 0}]
+        //            }
+        //            commit('SAVE_CURRENT_BIDS', bids);
+        //        })
+        //    },
 
-            async postNewBid({ commit }, {bid, userIdBuyer, itemId}) {
-                await axios.post('http://localhost:5000/api/BidEntities/newBid',
-                    {
-                        Bid: bid,
-                        UserIdBuyer: userIdBuyer,
-                        itemId: itemId
-                    }).then(function (response) {
-                        if (response.status != 200) {
-                            window.console.log(response.status)
-                            commit('BID_SUCCES', false)
-                        }
-                        else {
-                            commit('BID_SUCCES', true)
-                        }
-                    }).catch(function (error) {
-                        window.console.log(error)
-                    });
-            },
-            resetBidSubmitted({ commit }) {
-                commit('BID_SUCCES', false);
-            },
+        //    async postNewBid({ commit }, {bid, userIdBuyer, itemId}) {
+        //        await axios.post('http://localhost:5000/api/BidEntities/newBid',
+        //            {
+        //                Bid: bid,
+        //                UserIdBuyer: userIdBuyer,
+        //                itemId: itemId
+        //            }).then(function (response) {
+        //                if (response.status != 200) {
+        //                    window.console.log(response.status)
+        //                    commit('BID_SUCCES', false)
+        //                }
+        //                else {
+        //                    commit('BID_SUCCES', true)
+        //                }
+        //            }).catch(function (error) {
+        //                window.console.log(error)
+        //            });
+        //    },
+        //    resetBidSubmitted({ commit }) {
+        //        commit('BID_SUCCES', false);
+        //    },
 
-            //Search
-            updateSearchWord({ commit }, word) {
-                commit('UPDATE_SEARCH_WORD', word)
-            },
-            //updateSortOrder({ commit }, order) {
-            //    commit('UPDATE_SORT_ORDER', order)
-            //},
-            updateSortBy({ commit }, sort) {
-                commit('UPDATE_SORT_BY', sort)
-            }
-        }
+        //    //Search
+        //    updateSearchWord({ commit }, word) {
+        //        commit('UPDATE_SEARCH_WORD', word)
+        //    },
+        //    //updateSortOrder({ commit }, order) {
+        //    //    commit('UPDATE_SORT_ORDER', order)
+        //    //},
+        //    updateSortBy({ commit }, sort) {
+        //        commit('UPDATE_SORT_BY', sort)
+        //    }
+        //}
     });
 </script>

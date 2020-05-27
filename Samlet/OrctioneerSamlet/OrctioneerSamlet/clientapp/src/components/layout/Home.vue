@@ -1,29 +1,24 @@
 <template>
     <div id="home">   
         <auction-listing :key="updateListingKey">
-
-        </auction-listing >
+        </auction-listing>
     </div>
 </template>
 
 <script>
-
-    import AuctionListing from './../auction/AuctionListing.vue'
+import AuctionListing from './../auction/AuctionListing.vue'
 
 export default {
     components:{
-
         'auction-listing': AuctionListing,
-
-    },
+        },
     computed: {
         updateListingKey() {
             return this.$store.state.updateListing;
         }
     },
     created() {
-        //this.$store.dispatch('loadAuctions'); 
-        //this.$store.dispatch('updateListing');
+        this.$store.dispatch('loadAuctions');
     }
 }
 </script>

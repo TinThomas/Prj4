@@ -2,15 +2,15 @@
     <div id="auctionId">
         <h1>Popular auctions:</h1>
         <div class="row" >
-            <auction-card v-for="auc in popAuctions.slice(0, 4)" :key="auc.id" :auction="auc"></auction-card>
+            <auction-card v-for="auc in popAuctions" :key="auc.id" :auction="auc"></auction-card>
         </div>
         <h1>New auctions:</h1>
         <div class="row">
-            <auction-card v-for="auc in newAuctions.slice(0, 4)" :key="auc.id" :auction="auc"></auction-card>
+            <auction-card v-for="auc in newAuctions" :key="auc.id" :auction="auc"></auction-card>
         </div>
         <h1>Expiring auctions:</h1>
         <div class="row">
-            <auction-card v-for="auc in expAuctions.slice(0, 4)" :key="auc.id" :auction="auc"></auction-card>
+            <auction-card v-for="auc in expAuctions" :key="auc.id" :auction="auc"></auction-card>
         </div>
     </div>
 </template>
@@ -22,26 +22,21 @@
             'auction-card': AuctionCard
         },
         methods: {
-            loadListings() {
-                this.$store.dispatch('loadPopAuctions');
-                this.$store.dispatch('loadNewAuctions');
-                this.$store.dispatch('loadExpAuctions');
-                
-            }
+            
         },
         computed: {
             popAuctions() {
-                return this.$store.state.popAuctions;
+                return this.$store.getters.getPopularAuctions(4);
             },
             newAuctions() {
-                return this.$store.state.newAuctions;
+                return this.$store.getters.getNewAuctions(4);
             },
             expAuctions() {
-                return this.$store.state.expAuctions;
+                return this.$store.getters.getExpAuctions(4);
             },
         },
         created() {
-            this.loadListings();
+            
         }
     }
 </script>

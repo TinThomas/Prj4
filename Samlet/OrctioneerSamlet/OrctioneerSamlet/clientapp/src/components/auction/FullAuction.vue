@@ -49,6 +49,7 @@
         },
         created() {
             this.loadCurrentAuction();
+
         }
     }   
 </script>
