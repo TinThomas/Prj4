@@ -46,13 +46,13 @@ namespace OrctioneerSamlet
                 var my = new PasswordEntity()
                 {
                     UserId = id1,
-                    Password = "Password1"
+                    Password = BCrypt.Net.BCrypt.HashPassword("Password1",11)
                 };
                 myPasswords.Add(my);
                 my = new PasswordEntity()
                 {
                     UserId = id2,
-                    Password = "TestPass1"
+                    Password = BCrypt.Net.BCrypt.HashPassword("TestKode1",11)
                 };
                 myPasswords.Add(my);
 
