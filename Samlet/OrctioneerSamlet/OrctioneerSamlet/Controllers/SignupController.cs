@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OrctioneerSamlet.Interfaces.Login;
-using OrctioneerSamlet.Models;
+using BCrypt.Net;
 using OrctioneerSamlet.Models.Login;
 using VareDatabase.DBContext;
 using VareDatabase.Repo;
@@ -44,7 +44,7 @@ namespace LoginVue.Controllers
                     PasswordEntity pass = new PasswordEntity()
                     {
                         UserId = id,
-                        Password = request.Password
+                        Password = BCrypt.Net.BCrypt.HashPassword(request.Password,11)
                     };
 
                     int wait = await _pass.CreatePassword(pass);

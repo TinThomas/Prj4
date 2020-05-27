@@ -63,6 +63,8 @@ namespace unit.test.orctioneer.LoginTests.RepoTests
         [Theory]
         [InlineData("f8ac5f4b-d637-4bc4-acd2-cd940663f3ef",1000,6000)]
         [InlineData("f2aac55f-1cba-404e-8a2b-b3e65c438190",4000,14000)]
+        [InlineData("f8ac5f4b-d637-4bc4-acd2-cd940663f3ef",-1000,4000)]
+        [InlineData("f2aac55f-1cba-404e-8a2b-b3e65c438190",-4000,6000)]
         public async void unit_test_setAmount(string name, int amount,int total)
         {
             //Arrange
@@ -172,16 +174,6 @@ namespace unit.test.orctioneer.LoginTests.RepoTests
             //Assert
             Xunit.Assert.Equal(test.card.CardNumber,result.card.CardNumber);
         }
-
-        [Fact]
-        public async void unit_test_deleteWallet()
-        {
-            //Arrange
-
-            //Act
-            var wait = await _uut.DeleteCard("f8ac5f4b-d637-4bc4-acd2-cd940663f3ef");
-            //Assert
-            Xunit.Assert.Equal(2,wait);
-        }
+        
     }
 }

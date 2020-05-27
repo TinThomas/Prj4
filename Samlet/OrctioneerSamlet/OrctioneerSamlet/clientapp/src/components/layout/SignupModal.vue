@@ -218,7 +218,6 @@
 
                 //https://www.w3resource.com/javascript/form/letters-numbers-field.php for inspiration.
                 //and for regexp: https://en.wikipedia.org/wiki/Regular_expression
-                 var pass = this.Password;
                  const isLowercase = /[a-z]/.test(pass);
                  const isUppercase = /[A-Z]/.test(pass);
                  const isNumber = /[0-9]/.test(pass);

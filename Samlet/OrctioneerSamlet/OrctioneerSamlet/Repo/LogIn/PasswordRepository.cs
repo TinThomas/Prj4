@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using OrctioneerSamlet.Interfaces.Login;
 using OrctioneerSamlet.Models.Login;
 using VareDatabase.DBContext;
@@ -23,7 +24,7 @@ namespace VareDatabase.Repo
             var query = await (from i in db.Passwords
                 where i.UserId == pass.UserId
                 select i).FirstOrDefaultAsync();
-            if (query != null  && query.Password == pass.Password)
+            if (query != null  && BCrypt.Net.BCrypt.Verify(pass.Password,query.Password))
             {
                 return true;
             }

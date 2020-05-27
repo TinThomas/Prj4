@@ -185,7 +185,7 @@ namespace unit.test.orctioneer
 
         [Theory]
         [InlineData("Admin", "Password1")]
-        [InlineData("TestUser1", "TestPass1")]
+        [InlineData("TestUser1", "TestKode1")]
         public async void unit_test_PostPassword_Success(string username, string pass)
         {
             //Arrange
@@ -219,7 +219,7 @@ namespace unit.test.orctioneer
         
         [Theory]
         [InlineData("Admin", "Password1")]
-        [InlineData("TestUser1", "TestPass1")]
+        [InlineData("TestUser1", "TestKode1")]
         public async void unit_test_PostPassword_Success_Content(string username, string pass)
         {
             //Arrange
