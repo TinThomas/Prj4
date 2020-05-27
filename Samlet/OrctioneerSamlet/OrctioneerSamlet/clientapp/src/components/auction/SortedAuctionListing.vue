@@ -12,20 +12,6 @@
         components: {
             'auction-card': AuctionCard
         },
-        data() {
-            return {
-                //search: '',
-                //sortOrders: [
-                //    "Popularity", "Newest", "Expiring"
-                //],
-                //sortBy: ""
-            }
-        },
-        methods: {
-            //loadListings() {
-            //    this.$store.dispatch('loadPopAuctions');
-            //}
-        },
         computed: {
             filterByWord: function () {
                 if (this.sortBy == "Popularity") {
@@ -68,9 +54,6 @@
                 return this.$store.state.sortBy;    
             },
         },
-        created() {
-            
-        }
     }
 </script>
 

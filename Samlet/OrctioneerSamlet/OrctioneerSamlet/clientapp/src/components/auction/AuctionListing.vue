@@ -2,15 +2,15 @@
     <div id="auctionId">
         <h1>Popular auctions:</h1>
         <div class="row" >
-            <auction-card v-for="auc in popAuctions.slice(0, 4)" :key="auc.id" :auction="auc"></auction-card>
+            <auction-card v-for="auc in popAuctions" :key="auc.id" :auction="auc"></auction-card>
         </div>
         <h1>New auctions:</h1>
         <div class="row">
-            <auction-card v-for="auc in newAuctions.slice(0, 4)" :key="auc.id" :auction="auc"></auction-card>
+            <auction-card v-for="auc in newAuctions" :key="auc.id" :auction="auc"></auction-card>
         </div>
         <h1>Expiring auctions:</h1>
         <div class="row">
-            <auction-card v-for="auc in expAuctions.slice(0, 4)" :key="auc.id" :auction="auc"></auction-card>
+            <auction-card v-for="auc in expAuctions" :key="auc.id" :auction="auc"></auction-card>
         </div>
     </div>
 </template>

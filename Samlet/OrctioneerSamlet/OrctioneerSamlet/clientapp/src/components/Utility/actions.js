@@ -11,7 +11,7 @@ export default {
 
     //Auction lists
     async loadAuctions({ commit }) {
-        return api.fetchAuctions().then(function (response) {
+         await api.fetchAuctions().then(function (response) {
             if (response.status != 200) {
                 window.console.log(response.status)
             }
@@ -19,43 +19,7 @@ export default {
             commit('UPDATE_LISTING');
         })
     },
-    //async loadPopAuctions({ commit }) {
-    //    await axios.get('http://localhost:5000/api/ItemEntity/item/pop').then(function (response) {
-    //        if (response.status != 200) {
-    //            window.console.log(response.status)
-    //        }
-    //        //var popAuctions = response.data.sort(function (aucA, aucB) {
-    //        //    return aucB.Bids.length - aucA.Bids.length
-    //        //})
-    //        commit('SAVE_POP_AUCTIONS', response.data);
-    //        commit('UPDATE_LISTING');
-    //    })
-    //},
-    //async loadNewAuctions({ commit }) {
-    //    await axios.get('http://localhost:5000/api/ItemEntity/item/').then(function (response) {
-    //        if (response.status != 200) {
-    //            window.console.log(response.status)
-    //        }
-    //        var newAuctions = response.data.sort(function (aucA, aucB) {
-    //            return new Date(aucB.DateCreated) - new Date(aucA.DateCreated)
-    //        })
-    //        commit('SAVE_NEW_AUCTIONS', newAuctions);
-    //        commit('UPDATE_LISTING');
-    //    })
-
-    //},
-    //async loadExpAuctions({ commit }) {
-    //    await axios.get('http://localhost:5000/api/ItemEntity/item/').then(function (response) {
-    //        if (response.status != 200) {
-    //            window.console.log(response.status)
-    //        }
-    //        var expAuctions = response.data.sort(function (aucA, aucB) {
-    //            return new Date(aucA.ExpirationDate) - new Date(aucB.ExpirationDate)
-    //        })
-    //        commit('SAVE_EXP_AUCTIONS', expAuctions);
-    //        commit('UPDATE_LISTING');
-    //    })
-    //},
+   
     updateListing(context) {
         context.commit('UPDATE_LISTING');
     },

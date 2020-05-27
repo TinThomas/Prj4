@@ -1,17 +1,6 @@
-//import {  createLocalVue } from '@vue/test-utils'
-//import Vuex from 'vuex'
 import mutations from './../../src/components/Utility/mutations'
 import mockData from './mockData'
 
-
-
-//const store = new Vuex.Store({
-//    state: {},
-//    actions: mockActions
-//})
-
-//const localVue = createLocalVue();
-//localVue.use(Vuex);
 
 //Action lists
 test('correctly save Auctions', () => {

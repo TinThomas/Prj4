@@ -56,9 +56,6 @@
         state.search = word;
         state.UpdateSortedAuctions += 1;
     },
-    //UPDATE_SORT_ORDER(state, order) {
-    //    state.sortOrders = order;
-    //},
     UPDATE_SORT_BY(state, sort) {
         state.sortBy = sort;
         state.UpdateSortedAuctions += 1;

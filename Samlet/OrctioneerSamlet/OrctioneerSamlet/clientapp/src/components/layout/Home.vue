@@ -1,39 +1,24 @@
 <template>
     <div id="home">   
         <auction-listing :key="updateListingKey">
-            <!---->
         </auction-listing>
     </div>
 </template>
 
 <script>
-
-    import AuctionListing from './../auction/AuctionListing.vue'
+import AuctionListing from './../auction/AuctionListing.vue'
 
 export default {
     components:{
-
         'auction-listing': AuctionListing,
-
         },
-    methods: {
-        loadListings() {
-            this.$store.dispatch('loadAuctions');
-            //this.$store.dispatch('loadPopAuctions');
-            //this.$store.dispatch('loadNewAuctions');
-            //this.$store.dispatch('loadExpAuctions');
-
-        }
-    },
     computed: {
         updateListingKey() {
             return this.$store.state.updateListing;
         }
     },
     created() {
-        //this.$store.dispatch('loadAuctions'); 
-        //this.$store.dispatch('updateListing');
-        this.loadListings();
+        this.$store.dispatch('loadAuctions');
     }
 }
 </script>

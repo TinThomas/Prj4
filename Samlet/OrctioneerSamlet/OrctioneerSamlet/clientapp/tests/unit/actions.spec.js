@@ -11,7 +11,6 @@ jest.mock('./../../src/components/Utility/api')
 
 //Auction lists
 test('loadAuction commits data returned by api method', async () => {
-    api.fetchAuctions.mockClear()
     const response = {
         data: [1, 2, 3],
         status: 200
@@ -78,7 +77,7 @@ test('postNewAuction commits true', async () => {
 
     await actions.postNewAuction({ commit }, payload);
     expect(commit).toHaveBeenCalledWith('UPLOAD_SUCCES', true);
-    //Dunno om den mangler at tjekke hvad body egentlig er
+    //mangler at tjekke hvad body egentlig er
 })
 
 test('postNewAuction commits false', async () => {
@@ -101,7 +100,7 @@ test('postNewAuction commits false', async () => {
 
     await actions.postNewAuction({ commit }, payload);
     expect(commit).toHaveBeenCalledWith('UPLOAD_SUCCES', false);
-    //Dunno om den mangler at tjekke hvad body egentlig er
+    //mangler at tjekke hvad body egentlig er
 })
 
 //Add bid
@@ -123,7 +122,7 @@ test('postNewBid commits true', async () => {
 
     await actions.postNewBid({ commit }, payload);
     expect(commit).toHaveBeenCalledWith('BID_SUCCES', true);
-    //Dunno om den mangler at tjekke hvad body egentlig er
+    // mangler at tjekke hvad body egentlig er
 })
 
 test('postNewBid commits true', async () => {
@@ -144,7 +143,7 @@ test('postNewBid commits true', async () => {
 
     await actions.postNewBid({ commit }, payload);
     expect(commit).toHaveBeenCalledWith('BID_SUCCES', false);
-    //Dunno om den mangler at tjekke hvad body egentlig er
+    //mangler at tjekke hvad body egentlig er
 })
 
 //Current auction

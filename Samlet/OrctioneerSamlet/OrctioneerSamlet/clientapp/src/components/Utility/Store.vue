@@ -14,9 +14,9 @@
             logged: false,
 
             auctions: [],
-            popAuctions: [],
-            newAuctions: [],
-            expAuctions: [],
+            //popAuctions: [],
+            //newAuctions: [],
+            //expAuctions: [],
             updateListing: 0,
 
             picturePath: "",
